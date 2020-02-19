@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 //routes
 app.get('/', function(request,response){
-    response.redirect('/mainPage.html');
+    response.redirect('/demoPage.html');
 });
 app.get('/demoPage', function(request,response){
     response.redirect('/demoPage.html');
