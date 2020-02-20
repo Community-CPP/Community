@@ -1,22 +1,18 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    
     <link rel="stylesheet" href="index.css"/>
 </head>
 
 <body>
     <div>
-    <div class="topnav">
-        <span style="font-size:40px;color:#ddd;cursor:pointer" onclick="openNav()">&#9776; </span>
-        <!-- <a class="active" href="#home">Home</a> -->
-        <a href="login.html" style="float: right;">Login</a>
-        <a href="signUp.html" style="float: right;">Sign Up</a>
-        
-        <!-- <a href="#about">About</a> -->
-        
+      <div class="topnav">
+        <span class="topnavspan" onclick="openNav()"> &#9776; </span>
+        <a class="topnavlink" href="login.html">Login</a>
+        <a class="topnavlink" href="signUp.html">Sign Up</a>
       </div>
-    <div id="mySidenav" class="sidenav">
+      <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="#">About</a>
         <a href="#">Services</a>
@@ -25,7 +21,6 @@
       </div>
     </div>
 </body>
-
 
 <script>
   function openNav() {
@@ -36,4 +31,5 @@
     document.getElementById("mySidenav").style.width = "0";
   }
   </script>
+
 </html> 

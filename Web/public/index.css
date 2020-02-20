@@ -71,3 +71,13 @@ body {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
   }
+
+  .topnavspan {
+    font-size:40px;
+    color:#ddd;
+    cursor:pointer
+  }
+
+  .topnavlink {
+    float: right;
+  }
