@@ -22,6 +22,7 @@ body {
     padding: 14px 16px;
     text-decoration: none;
     font-size: 20px;
+    float: right;
   }
   
   .topnav a:hover {
@@ -29,6 +30,11 @@ body {
     color: black;
   }
   
+  .topnav span {
+    font-size:40px;
+    color:#ddd;
+    cursor:pointer
+  }
 
   .sidenav {
    
@@ -72,12 +78,4 @@ body {
     .sidenav a {font-size: 18px;}
   }
 
-  .topnavspan {
-    font-size:40px;
-    color:#ddd;
-    cursor:pointer
-  }
-
-  .topnavlink {
-    float: right;
-  }
+  
