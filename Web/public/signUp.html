@@ -1,27 +1,51 @@
-
 <!DOCTYPE html>
-<html>
-<head>
-  <title>SignUp</title>
-  <link rel="stylesheet" href="loginStyle.css"/>
-
-<body>
-    <div id="first"></div>
-    <div class="signUpbox">
+    <html lang="en">
+    <head>
+      <title>Login</title>
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="loginStyle.css"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+    
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+          
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+          </button>
+          <a class="navbar-brand" href="index.html">Community</a>
+        </div>
+     
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="login.html"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+      
+    <div class="container">
+        <div class="signUpbox">
        
-        <h1>Community</h1>
-        <h1></h1>
-        <form action="/login.html" method="get">
-            <input type="text" activationCode="activationCode" placeholder = "Community Activation Code"/>
-            <input type="text" firstName="firstName" placeholder = "First Name"/>
-            <input type="text" lastName="lastName" placeholder="Last Name"/>
-            <input type ="text" name ="email" placeholder="Email"/>
-            <input type ="text" name ="password" placeholder="Password"/>
-            <input type ="text" name ="passwordChecker" placeholder="Re-Enter Password"/>
-            <input type="submit" value="Sign Up">
-            
-        </form>
+            <h1>Community</h1>
+            <form action="/login.html" method="get">
+                <input type="text" activationCode="activationCode" placeholder = "Community Activation Code"/>
+                <input type="text" firstName="firstName" placeholder = "First Name"/>
+                <input type="text" lastName="lastName" placeholder="Last Name"/>
+                <input type ="text" name ="email" placeholder="Email"/>
+                <input type ="text" name ="password" placeholder="Password"/>
+                <input type ="text" name ="passwordChecker" placeholder="Re-Enter Password"/>
+                <input type="submit" value="Sign Up">
+                
+            </form>
+        </div>
     </div>
-</body>
-</head>
-</html>
+    
+    </body>
+    </html>

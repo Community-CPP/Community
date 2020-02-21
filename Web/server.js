@@ -9,10 +9,34 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 //routes
 app.get('/', function(request,response){
-    response.redirect('/demoPage.html');
+    response.redirect('/index.html');
 });
-app.get('/demoPage', function(request,response){
-    response.redirect('/demoPage.html');
+app.get('/index', function(request,response){
+    response.redirect('/index.html');
+});
+app.get('/about', function(request,response){
+    response.redirect('/about.html');
+});
+app.get('/payments', function(request,response){
+    response.redirect('/payments.html');
+});
+app.get('/contactManagement', function(request,response){
+    response.redirect('/contactManagement.html');
+});
+app.get('/services', function(request,response){
+    response.redirect('/services.html');
+});
+app.get('/profile', function(request,response){
+    response.redirect('/profile.html');
+});
+app.get('/maintenance', function(request,response){
+    response.redirect('/maintenance.html');
+});
+app.get('/history', function(request,response){
+    response.redirect('/history.html');
+});
+app.get('/contact', function(request,response){
+    response.redirect('/contact.html');
 });
 app.get('/signUp', function(request,response){
     response.redirect('/signUp.html');
