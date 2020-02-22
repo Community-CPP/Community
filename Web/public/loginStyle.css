@@ -4,7 +4,7 @@ body{
     padding: 0;
     max-width: 100%;
     height: 100%;
-    opacity: 0.70;
+    opacity: 0.60;
     background-image: url("/image/pic1.jpg"); 
     background-repeat: no-repeat;
     
@@ -12,8 +12,9 @@ body{
     
 }
 .loginbox{
-    width: 320px;
-    height: 440px;
+    border-radius: 20px;
+    width: calc(20%);
+    height: calc(45%);
     background: black;
     color: #fff;
     top: 50%;
@@ -25,6 +26,7 @@ body{
     
 }
 .signUpbox{
+    border-radius: 20px;
     width: 320px;
     height: 600px;
     background: black;
@@ -92,10 +94,10 @@ h1{
 {
     border: none;
     outline: none;
-    height: 40px;
+    height: 60%;
     background: #fb2525;
     color: #fff;
-    font-size: 18px;
+    font-size: calc(180%);
     border-radius: 20px;
 }
 .signUpbox input[type="submit"]
@@ -123,8 +125,8 @@ h1{
 
 .loginbox a{
     text-decoration: none;
-    font-size: 14px;
-    line-height: 20px;
+    font-size: calc(100%);
+    line-height: calc(100%);;
     color:#ffc107;
     
 }
