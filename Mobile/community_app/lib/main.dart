@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'Login.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Community Home Page'),
+      home: Login(),      //pointed to login page instead of initial homepage
     );
   }
 }
