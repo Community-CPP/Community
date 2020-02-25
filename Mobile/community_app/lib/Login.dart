@@ -1,5 +1,7 @@
+import 'package:community_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:community_app/Dashboard.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -38,7 +40,12 @@ class _LoginState extends State<Login> {
                       decoration: InputDecoration(labelText: "Password")),
                       SizedBox(height: 20.0),
                   RaisedButton(
-                    child: Text("LOGIN")
+                    child: Text("LOGIN"),
+                    color: Colors.lightBlue,
+                    onPressed: () {
+                      Navigator.push(context, new MaterialPageRoute(
+                        builder: (BuildContext context) => Dashboard()));
+                    }
                 )]),
     ))));
   }
