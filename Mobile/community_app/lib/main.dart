@@ -1,3 +1,4 @@
+import 'package:community_app/Dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'Login.dart';
@@ -98,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              //style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),
