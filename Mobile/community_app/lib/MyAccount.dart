@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class Payment extends StatefulWidget{
+class MyAccount extends StatefulWidget{
   @override
-  _Payment createState() => new _Payment();
+  _MyAccount createState() => new _MyAccount();
 }
 
-class _Payment extends State<Payment>{
+class _MyAccount extends State<MyAccount>{
   @override
   Widget build(BuildContext context){
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('Make a payment'),
+        title: new Text('My Account'),
         backgroundColor: Colors.black54,
       ),
     );

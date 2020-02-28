@@ -16,7 +16,8 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Login Page"),
+        title: Text("Login"),
+        backgroundColor: Colors.black54,
       ),
       body: Center(
         child: Container(
@@ -41,7 +42,8 @@ class _LoginState extends State<Login> {
                       SizedBox(height: 20.0),
                   RaisedButton(
                     child: Text("LOGIN"),
-                    color: Colors.lightBlue,
+                    textColor: Colors.white,
+                    color: Colors.black54,
                     onPressed: () {
                       Navigator.push(context, new MaterialPageRoute(
                         builder: (BuildContext context) => Dashboard()));

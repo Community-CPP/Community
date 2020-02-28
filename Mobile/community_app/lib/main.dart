@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false, //REMOVES DEBUG
       title: 'Community',
       theme: ThemeData(
         // This is the theme of your application.
