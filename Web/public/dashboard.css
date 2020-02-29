@@ -2,6 +2,39 @@
     opacity: .9;
 }
 
+.dropdown-menu {
+    position: relative;
+  display: inline-block;
+}
+
+.dropdown-item {
+    z-index: 1;
+    position: relative;
+}
+
 .card {
     opacity: .9;
+    text-align: center;
+}
+
+.card-block-link .card {
+    height: 17rem;
+    width: 17rem;
+    position: relative;
+    z-index: -1;
+    
+}
+
+a:hover {
+    color: red;
+}
+
+.card-body .display-5 {
+    text-align: center;
+}
+
+.card-body .bi {
+    text-align: center;
+    height: 5rem;
+    width: 9em;
 }

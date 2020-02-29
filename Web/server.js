@@ -1,13 +1,16 @@
 var express = require('express');
 var app = express();
 var sqlite3 = require('sqlite3');
-var db = new sqlite3.Database('db/comments.db');
+var db = new sqlite3.Database('db/database.db');
 var bodyParser = require('body-parser');
 
 app.use(express.static(__dirname + '/public')); 
 app.use(bodyParser.urlencoded({extended: false}));
 
 //routes
+app.get('/dashboard.html', function(request,response){
+    response.redirect('/dashboard.html');
+});
 app.get('/', function(request,response){
     response.redirect('/index.html');
 });
@@ -48,7 +51,7 @@ app.get('/communityPage', function(request,response){
     response.redirect('/communityPage.html');
 });
 
-app.get('/comments',function(request,response){
+app.get('/database',function(request,response){
     console.log('GET request received at /comments');
     db.all('SELECT * FROM comments',function(err,rows){
         if (err){
@@ -59,7 +62,7 @@ app.get('/comments',function(request,response){
     });
 
 });
-app.post('/comments',function(request,response){
+app.post('/database',function(request,response){
     console.log('POST request received at /comments');
     db.run('INSERT INTO comments VALUES(?,?)',[request.body.name, request.body.comment], function(err){
         if(err){
