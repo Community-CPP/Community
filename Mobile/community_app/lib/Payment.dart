@@ -13,6 +13,29 @@ class _Payment extends State<Payment>{
         title: new Text('Make a payment'),
         backgroundColor: Colors.black54,
       ),
+        body: ListView(
+            children: <Widget>[
+              ListTile(
+                leading: Icon(Icons.map),
+                title: Text('One-time payment'),
+              ),
+              new Divider(
+                color: Colors.black,
+                height: 5.0,
+              ),
+              ListTile(
+                  leading: Icon(Icons.map),
+                  title: Text('use my card')
+              ),
+              new Divider(
+                color: Colors.black,
+                height: 5.0,
+              ),
+              ListTile(
+                  leading: Icon(Icons.map),
+                  title: Text('in-progress...API')
+              )
+            ])
     );
   }
 }
