@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 class ScheduleMaintenance extends StatefulWidget{
   @override
@@ -8,6 +9,8 @@ class ScheduleMaintenance extends StatefulWidget{
 class _ScheduleMaintenance extends State<ScheduleMaintenance>{
   int selectedRadio;
   int selectedRadioTile;
+
+  DateTime _dateTime;
 
   @override
   void initState(){
@@ -33,7 +36,6 @@ class _ScheduleMaintenance extends State<ScheduleMaintenance>{
         backgroundColor: Colors.black54,
       ),
       body: Column(
-
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           RadioListTile(
@@ -91,6 +93,29 @@ class _ScheduleMaintenance extends State<ScheduleMaintenance>{
             selected: false,
             activeColor: Colors.black,
           ),
+          TextField(
+            decoration: new InputDecoration(
+              hintText: "Comment",
+              hintStyle: TextStyle(fontSize: 12.0, color: Colors.black54),
+            ),
+          ),
+          Text(_dateTime == null ? 'Nothing has been picked yet': _dateTime.toString()),
+          RaisedButton(
+            child: Text('Pick a date'),
+            onPressed: (){
+              showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(2016),
+                  lastDate: DateTime(2022)
+              ).then((date){
+                    setState((){
+                      _dateTime = date;
+                    });
+              }
+              );
+            },
+          )
         ]
       )
 
