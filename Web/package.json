@@ -13,8 +13,8 @@
     "body": "^5.1.0",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "firebase-admin": "^8.9.2",
     "jquery": "^3.4.1",
-    "parser": "^0.1.4",
-    "sqlite3": "https://github.com/mapbox/node-sqlite3/tarball/master"
+    "parser": "^0.1.4"
   }
 }

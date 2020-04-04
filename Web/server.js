@@ -1,20 +1,40 @@
 var express = require('express');
 var app = express();
-var sqlite3 = require('sqlite3');
-var db = new sqlite3.Database('db/database.db');
 var bodyParser = require('body-parser');
+var admin = require('firebase-admin'); 
+
+var serviceAccount = require('./community-91b9d-firebase-adminsdk-1f3ly-805d889055.json');
+
+var firebaseAdmin = admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: 'https://community-91b9d.firebaseio.com'
+})
+
 
 app.use(express.static(__dirname + '/public')); 
 app.use(bodyParser.urlencoded({extended: false}));
 
+// authentication middelware
+function isAuthenticated(request, response, next) {
+    // check if user is logged in
+
+    //if they are, attach them to the request obj
+
+    // if they are not, send to login page
+
+    // with error saying login 
+
+}
 //routes
-app.get('/dashboard.html', function(request,response){
+app.get('/dashboard', function(request,response){
     response.redirect('/dashboard.html');
 });
-app.get('/', function(request,response){
-    response.redirect('/index.html');
+
+app.get('/log-in', function(request,response){
+    response.redirect('/log-in.html');
 });
-app.get('/index', function(request,response){
+
+app.get('/', function(request,response){
     response.redirect('/index.html');
 });
 app.get('/about', function(request,response){
