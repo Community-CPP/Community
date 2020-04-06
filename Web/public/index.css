@@ -1,81 +1,18 @@
 body {
-    margin: 0;
-    padding: 0;
-    max-width: 100%;
-    height: 100%;
-    opacity: 0.70;
-    background-image: url('/image/pic1.jpg'); 
-    background-repeat: no-repeat;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  .topnav {
-    float: center;
-    overflow: hidden;
-    background-color: #333;
-  }
-  
-  .topnav a {
-    
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 20px;
-    float: right;
-  }
-  
-  .topnav a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  .topnav span {
-    font-size:40px;
-    color:#ddd;
-    cursor:pointer
-  }
-
-  .sidenav {
-   
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-    
-  }
-  
-  .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-  }
-  
-  .sidenav a:hover {
-    color: #f1f1f1;
-    
-  }
-  
-  .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-  }
-  
-  @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-  }
-
-  
+  background: url('image/pic1.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.dropdown-toggle::after {
+  display: none;
+}
+.jumboContainer {
+  padding-top: 30px;
+}
+.jumbotron {
+  opacity: .90;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+  border-radius: 20px;
+}
