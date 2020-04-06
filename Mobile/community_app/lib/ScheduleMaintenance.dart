@@ -11,6 +11,22 @@ class _ScheduleMaintenance extends State<ScheduleMaintenance>{
   int selectedRadioTile;
 
   DateTime _dateTime;
+  TimeOfDay _time = new TimeOfDay.now();
+
+  Future<Null> selectTime(BuildContext context) async{
+    final TimeOfDay picked = await showTimePicker(
+      context: context,
+      initialTime: _time,
+    );
+
+    if(picked != null && picked != _time){
+      print('Time selected: ${_time.toString()}');
+      setState(() {
+        _time = picked;
+      });
+    }
+  }
+
 
   @override
   void initState(){
@@ -115,6 +131,17 @@ class _ScheduleMaintenance extends State<ScheduleMaintenance>{
               }
               );
             },
+          ),
+          new Text(''),
+          new Text('Time selected: ${_time.toString()}'),
+          new RaisedButton(
+            child: new Text('Select Time'),
+            onPressed: (){selectTime(context);},
+          ),
+          new Text(''),
+          new RaisedButton(
+              child: new Text('Submit'),
+            onPressed: (){},
           )
         ]
       )
