@@ -8,19 +8,26 @@ body {
     background-size: cover;
     background-position: center;
   }
+  .bi {
+      padding-right: 5px;
+  }
 
+.userInfo {
+    opacity: .5;
+}
+.userInfo:hover {
+    opacity: .75;
+}
  .title {
      color: white;
      text-align: center;
  } 
 .navbar {
-    opacity: .95;
     z-index: 1;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 }
 
-.navbar .nav-link:hover {
-    opacity: 1;
-}
+
 
 .dropdown-menu {
     position: relative;
@@ -42,42 +49,25 @@ body {
     padding-left: 70px;
     padding-right: 70px;
     border-radius: 20px;
-    opacity: .95;
-}
-
-.communityBoard .carousel .carousel-inner .carousel-item:hover {
-    opacity: 1;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
-
-    
 }
-
 .cardRow {
     z-index: -1;
-    padding-top: 50px;
+    padding-top: 100px;
     padding-bottom: 50px;
     padding-left: 70px;
     padding-right: 70px;
 }
 
 .cardBtn {
-    padding-top: 10px;
-    opacity: .95;
     text-align: center;
     border-radius: 20px;
-}
-
-.cardBtn:hover {
-    opacity: 1;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
-
 }
-
-
 .cardBtn .btnBody {
     padding: 10px;
 }
 
 .cardBtn .btnBody .bi {
-    height: 150px;
+    height: 100px;
 }
