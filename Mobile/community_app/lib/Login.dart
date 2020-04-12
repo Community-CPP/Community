@@ -17,17 +17,23 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Login"),
+        title: Text("Community"),
         backgroundColor: Colors.black54,
       ),
       body: Center(
         child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("images/cityView.jpg"),
+              fit: BoxFit.cover
+            )
+          ),
             padding: EdgeInsets.all(20.0),
             child: Form(
                 child: Column(children: <Widget>[
                   SizedBox(height: 20.0),
                   Text(
-                    'Login Information',
+                    'Welcome',
                     style: TextStyle(fontSize: 20),
                   ),
                   SizedBox(height: 20.0),
