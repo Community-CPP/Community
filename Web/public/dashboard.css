@@ -1,16 +1,22 @@
 body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('/image/pic1.jpg'); 
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-  }
-  .bi {
-      padding-right: 5px;
-  }
+    background: url(image/pic1.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.nav .dropdown-toggle::after {
+    display: none;
+}
+.tabbedContainer {
+    border-radius: 10px;
+}
+.containerTabs {
+    padding: 10px;
+}
+.bi {
+    padding-right: 5px; 
+}
 
 .userInfo {
     opacity: .5;
@@ -26,9 +32,9 @@ body {
     z-index: 1;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 }
-
-
-
+.dashDrawer{
+    padding-top: 100px;
+}
 .dropdown-menu {
     position: relative;
     display: inline-block;
