@@ -1,30 +1,30 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var admin = require('firebase-admin'); 
+// var admin = require('firebase-admin'); 
 
-var serviceAccount = require('./community-91b9d-firebase-adminsdk-1f3ly-805d889055.json');
+//var serviceAccount = require('./community-91b9d-firebase-adminsdk-1f3ly-805d889055.json');
 
-var firebaseAdmin = admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: 'https://community-91b9d.firebaseio.com'
-})
+// var firebaseAdmin = admin.initializeApp({
+//     credential: admin.credential.cert(serviceAccount),
+//     databaseURL: 'https://community-91b9d.firebaseio.com'
+// })
 
 
 app.use(express.static(__dirname + '/public')); 
 app.use(bodyParser.urlencoded({extended: false}));
 
-// authentication middelware
-function isAuthenticated(request, response, next) {
-    // check if user is logged in
+// // authentication middelware
+// function isAuthenticated(request, response, next) {
+//     // check if user is logged in
 
-    //if they are, attach them to the request obj
+//     //if they are, attach them to the request obj
 
-    // if they are not, send to login page
+//     // if they are not, send to login page
 
-    // with error saying login 
+//     // with error saying login 
 
-}
+// }
 //routes
 app.get('/dashboard', function(request,response){
     response.redirect('/dashboard.html');
