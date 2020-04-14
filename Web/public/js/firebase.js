@@ -1,16 +1,5 @@
 // web app's Firebase configuration goes here
 
-var firebaseConfig = {
-  apiKey: "AIzaSyAZErRY5kpVpD7C_sOtvj2waXVvu18Xd4Q",
-  authDomain: "senpro-community.firebaseapp.com",
-  databaseURL: "https://senpro-community.firebaseio.com",
-  projectId: "senpro-community",
-  storageBucket: "senpro-community.appspot.com",
-  messagingSenderId: "319397189900",
-  appId: "1:319397189900:web:f548fcb0d7f588728d9129"
-};
-
-
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
@@ -137,10 +126,8 @@ window.onload = async function() {
     var document;
     await db.collection("communities").doc(commUID).get().then(function(doc) {
       if (doc.exists) {
-
-
+        showCommunityInfo(doc.data);
       } else {
-
         console.log("No such document!");
       }
     }).catch(function(error) {
@@ -149,6 +136,24 @@ window.onload = async function() {
     return document;
   }
 
+  function showCommunityInfo(map) {
+    var name = document.getElementById('communityName');
+    var addr = document.getElementById('communityAddr');
+    var vacancies = document.getElementById('communityVacancy');
+  
+    var nameTitle = document.getElementById('communityNameTitle');
+    var addrTitle = document.getElementById('communityAddrTitle');
+    var vacanciesTitle = document.getElementById('communityVacancyTitle');
+  
+    nameTitle.innerHTML = "Name";
+    addrTitle.innerHTML = "Address";
+    vacanciesTitle.innerHTML = "Vacancies";
+  
+  
+    name.innerHTML = map['name'];
+    addr.innerHTML = map['street']+", "+map['city']+", "+map['zip'];
+    vacancies.innerHTML = (map['capacity']-map['tenants'].length);
+  }
 
   async function showCommunity(communityList) {
     var comms = "";
