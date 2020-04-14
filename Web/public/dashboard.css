@@ -122,7 +122,9 @@ body {
 .card::-webkit-scrollbar {
   width: 0px;
 }
-.button.linkBtn {
+
+.linkBtn {
   background:none;
   border:none;
+  color: white;
 }
