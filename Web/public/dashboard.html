@@ -60,7 +60,7 @@
             clip-rule="evenodd" />
         </svg>
         Log Out
-    </div>
+      </div>
 
     </div>
   </nav>
@@ -72,6 +72,7 @@
     <div class="col">
       <div class="row cardRow">
         <div class="card w-100 tallcard1 text-white">
+
           <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between" >My Community<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">+</button></h5>
            
           <div class="card-body">
@@ -133,7 +134,7 @@
         <div class="card w-100 shortcard3 text-white">
           <h5 class="header bg-dark text-white card-title p-1">Private Messages</h5>
           <div class="card-body">
-            
+
           </div>
         </div>
       </div>
@@ -156,8 +157,6 @@
       alert('clicked');
     }
   </script>
-
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color:white">
   <div class="modal-dialog " role="document" >
@@ -212,19 +211,17 @@
               <label class="errorLabel" id="passwordError" hidden='true'></label>
               <br/>
             </div>
-            
+            <hr />
+            <label class="errorLabel" id="signinError" hidden="true"></label>
           </div>
-          <hr/>
-          <label class="errorLabel" id="signinError" hidden="true"></label>
         </div>
-      </div>
-      <div class="modal-footer">
-       
-        <button type="button" class="btn btn-primary" onclick="submitForm();return false;">Add Community</button>
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-primary" onclick="submitForm();return false;">Add Community</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 </body>
 

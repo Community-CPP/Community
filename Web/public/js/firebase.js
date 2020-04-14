@@ -148,18 +148,19 @@ function showCommunityInfo(map) {
 
 
   name.innerHTML = map['name'];
-  addr.innerHTML = map['street']+", "+map['city']+", "+map['zip'];
-  vacancies.innerHTML = (map['capacity']-map['tenants'].length);
+  addr.innerHTML = map['street'] + ", " + map['city'] + ", " + map['zip'];
+  vacancies.innerHTML = (map['capacity'] - map['tenants'].length);
 }
 
 async function showCommunity(communityList) {
-  var comms = "";
+  var comms = "<div class=\"buttonContainer\">";
   var thisComm = "";
   for (i = 0; i < communityList.length; i++) {
     await db.collection("communities").doc(communityList[i]).get().then(function(doc) {
       if (doc.exists) {
-        comms += "<li>" + doc.data()['name'] + "</li>";
-        console.log("COMM NAME = " + doc.data()['name']);
+        comms += "<li><button id=\"btn"+ i +"\" onClick=\"btnInfo(this.id)\" class=\"linkBtn\" value="+ communityList[i] +">" + doc.data()['name'] + "</button></li>";
+        // console.log("COMM NAME = " + doc.data()['name']);
+        // console.log(communityList[i]);
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -168,6 +169,21 @@ async function showCommunity(communityList) {
       console.log("Error getting document:", error);
     });
   }
+  comms += "</div>";
   var commListSection = document.getElementById("commList");
   commListSection.innerHTML = comms;
+}
+
+async function btnInfo(id) {
+      var commUID = document.getElementById(id).value;
+      console.log("Showing UID = " + commUID);
+      await db.collection("communities").doc(commUID).get().then(function(doc) {
+        if (doc.exists) {
+          showCommunityInfo(doc.data());
+        } else {
+          console.log("No such document!");
+        }
+      }).catch(function(error) {
+        console.log("Error getting document:", error);
+      });
 }
