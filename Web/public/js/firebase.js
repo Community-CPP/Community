@@ -148,18 +148,19 @@ function showCommunityInfo(map) {
 
 
   name.innerHTML = map['name'];
-  addr.innerHTML = map['street']+", "+map['city']+", "+map['zip'];
-  vacancies.innerHTML = (map['capacity']-map['tenants'].length);
+  addr.innerHTML = map['street'] + ", " + map['city'] + ", " + map['zip'];
+  vacancies.innerHTML = (map['capacity'] - map['tenants'].length);
 }
 
 async function showCommunity(communityList) {
-  var comms = "";
+  var comms = "<div class=\"buttonContainer\">";
   var thisComm = "";
   for (i = 0; i < communityList.length; i++) {
     await db.collection("communities").doc(communityList[i]).get().then(function(doc) {
       if (doc.exists) {
-        comms += "<li>" + doc.data()['name'] + "</li>";
+        comms += "<li><button onClick=\"btnInfo()\" class=\"linkBtn\" id=\"linkBtn\" value="+ communityList[i] +">" + doc.data()['name'] + "</button></li>";
         console.log("COMM NAME = " + doc.data()['name']);
+        console.log(communityList[i]);
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -168,6 +169,63 @@ async function showCommunity(communityList) {
       console.log("Error getting document:", error);
     });
   }
+  comms += "</div>";
   var commListSection = document.getElementById("commList");
   commListSection.innerHTML = comms;
 }
+
+async function btnInfo() {
+
+    // var buttons = document.getElementsByClassName("buttonContainer");
+    // for (var i = 0; i < buttons.length; i++) {
+    //   buttons[i].addEventListener("click", function() {
+    //     console.log();
+    //   })
+    // }
+
+    // var btnContainer = document.getElementsByClassName("buttonContainer");
+    // btnContainer[0].addEventListener("click", function() {
+    //   console.log();
+    // });
+
+      var commUID = document.getElementById("linkBtn").value;
+      await db.collection("communities").doc(commUID).get().then(function(doc) {
+        if (doc.exists) {
+          showCommunityInfo(doc.data());
+          console.log(doc.data);
+        } else {
+          console.log("No such document!");
+        }
+      }).catch(function(error) {
+        console.log("Error getting document:", error);
+      });
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// sda

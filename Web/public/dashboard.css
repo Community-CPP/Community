@@ -31,7 +31,7 @@ body {
   opacity: .75;
 }
 .logOutEnd {
-  
+
   opacity: .5;
 }
 
@@ -121,4 +121,8 @@ body {
 
 .card::-webkit-scrollbar {
   width: 0px;
+}
+.button.linkBtn {
+  background:none;
+  border:none;
 }

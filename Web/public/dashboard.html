@@ -60,7 +60,7 @@
             clip-rule="evenodd" />
         </svg>
         Log Out
-    </div>
+      </div>
 
     </div>
   </nav>
@@ -72,13 +72,11 @@
     <div class="col">
       <div class="row cardRow">
         <div class="card w-100 tallcard1 text-white">
-          <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between" >Header<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">+</button></h5>
-            <a href="#" class="card-subtitle card-link"> Add Community </a></h5>
+          <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Header<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">+</button></h5>
           <div class="card-body">
-            <ul id="commList">
-              <!-- LIST OF COMMUNINTIES -->
-            </ul>
-
+              <ul id="commList">
+                <!-- LIST OF COMMUNINTIES -->
+              </ul>
           </div>
         </div>
       </div>
@@ -133,7 +131,7 @@
         <div class="card w-100 shortcard3 text-white">
           <h5 class="header bg-dark text-white card-title p-1">Header</h5>
           <div class="card-body">
-            
+
           </div>
         </div>
       </div>
@@ -158,73 +156,73 @@
   </script>
 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color:white">
-  <div class="modal-dialog " role="document" >
-    <div class="modal-content bg-dark" >
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add New Community</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="container formContainer">
-        <div class="formWrapper bg-dark text-white">
-          <div class="row align-middle justify-content-center align-items-center">
-            <div class="col">
-              <label for="name">Name</label>
-              <input type="name" class="form-control" id="firstName">
-              <label class="errorLabel" id="errorFirst" hidden='true'></label>
-              <br/>
-            </div>
-            <div class="col">
-              <label for="name">Tenants</label>
-              <input type="name" class="form-control" id="lastName">
-              <label class="errorLabel" id="errorLast" hidden='true'></label>
-              <br/>
-            </div>
-          </div>
-          <div class="row align-middle justify-content-center align-items-center">
-            <div class="col">
-              <label for="email">Units</label>
-              <input type="email" class="form-control" id="emailForm">
-              <label class="errorLabel" id="emailError" hidden='true'></label>
-              <br/>
-            </div>
-            <div class="col">
-              <label for="password">Street</label>
-              <input type="password" class="form-control" id="passwordForm">
-              <label class="errorLabel" id="passwordError" hidden='true'></label>
-              <br/>
-            </div>
-            
-          </div>
-          <div class="row align-middle justify-content-center align-items-center">
-            <div class="col">
-              <label for="email">City</label>
-              <input type="email" class="form-control" id="emailForm">
-              <label class="errorLabel" id="emailError" hidden='true'></label>
-              <br/>
-            </div>
-            <div class="col">
-              <label for="password">Zip</label>
-              <input type="password" class="form-control" id="passwordForm">
-              <label class="errorLabel" id="passwordError" hidden='true'></label>
-              <br/>
-            </div>
-            
-          </div>
-          <hr/>
-          <label class="errorLabel" id="signinError" hidden="true"></label>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color:white">
+    <div class="modal-dialog " role="document">
+      <div class="modal-content bg-dark">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add New Community</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-      </div>
-      <div class="modal-footer">
-       
-        <button type="button" class="btn btn-primary" onclick="submitForm();return false;">Add Community</button>
+        <div class="container formContainer">
+          <div class="formWrapper bg-dark text-white">
+            <div class="row align-middle justify-content-center align-items-center">
+              <div class="col">
+                <label for="name">Name</label>
+                <input type="name" class="form-control" id="firstName">
+                <label class="errorLabel" id="errorFirst" hidden='true'></label>
+                <br />
+              </div>
+              <div class="col">
+                <label for="name">Tenants</label>
+                <input type="name" class="form-control" id="lastName">
+                <label class="errorLabel" id="errorLast" hidden='true'></label>
+                <br />
+              </div>
+            </div>
+            <div class="row align-middle justify-content-center align-items-center">
+              <div class="col">
+                <label for="email">Units</label>
+                <input type="email" class="form-control" id="emailForm">
+                <label class="errorLabel" id="emailError" hidden='true'></label>
+                <br />
+              </div>
+              <div class="col">
+                <label for="password">Street</label>
+                <input type="password" class="form-control" id="passwordForm">
+                <label class="errorLabel" id="passwordError" hidden='true'></label>
+                <br />
+              </div>
+
+            </div>
+            <div class="row align-middle justify-content-center align-items-center">
+              <div class="col">
+                <label for="email">City</label>
+                <input type="email" class="form-control" id="emailForm">
+                <label class="errorLabel" id="emailError" hidden='true'></label>
+                <br />
+              </div>
+              <div class="col">
+                <label for="password">Zip</label>
+                <input type="password" class="form-control" id="passwordForm">
+                <label class="errorLabel" id="passwordError" hidden='true'></label>
+                <br />
+              </div>
+
+            </div>
+            <hr />
+            <label class="errorLabel" id="signinError" hidden="true"></label>
+          </div>
+        </div>
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-primary" onclick="submitForm();return false;">Add Community</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 </body>
 
