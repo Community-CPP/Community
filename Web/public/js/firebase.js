@@ -158,9 +158,9 @@ async function showCommunity(communityList) {
   for (i = 0; i < communityList.length; i++) {
     await db.collection("communities").doc(communityList[i]).get().then(function(doc) {
       if (doc.exists) {
-        comms += "<li><button onClick=\"btnInfo()\" class=\"linkBtn\" id=\"linkBtn\" value="+ communityList[i] +">" + doc.data()['name'] + "</button></li>";
-        console.log("COMM NAME = " + doc.data()['name']);
-        console.log(communityList[i]);
+        comms += "<li><button id=\"btn"+ i +"\" onClick=\"btnInfo(this.id)\" class=\"linkBtn\" value="+ communityList[i] +">" + doc.data()['name'] + "</button></li>";
+        // console.log("COMM NAME = " + doc.data()['name']);
+        // console.log(communityList[i]);
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -174,58 +174,16 @@ async function showCommunity(communityList) {
   commListSection.innerHTML = comms;
 }
 
-async function btnInfo() {
-
-    // var buttons = document.getElementsByClassName("buttonContainer");
-    // for (var i = 0; i < buttons.length; i++) {
-    //   buttons[i].addEventListener("click", function() {
-    //     console.log();
-    //   })
-    // }
-
-    // var btnContainer = document.getElementsByClassName("buttonContainer");
-    // btnContainer[0].addEventListener("click", function() {
-    //   console.log();
-    // });
-
-      var commUID = document.getElementById("linkBtn").value;
+async function btnInfo(id) {
+      var commUID = document.getElementById(id).value;
+      console.log("Showing UID = " + commUID);
       await db.collection("communities").doc(commUID).get().then(function(doc) {
         if (doc.exists) {
           showCommunityInfo(doc.data());
-          console.log(doc.data);
         } else {
           console.log("No such document!");
         }
       }).catch(function(error) {
         console.log("Error getting document:", error);
       });
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// sda
