@@ -1,5 +1,6 @@
 // web app's Firebase configuration goes here
 
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
@@ -46,7 +47,8 @@ async function addUserToDB(uid, firstName, lastName, userCategory, userEmail) {
       first: firstName,
       last: lastName,
       category: userCategory,
-      email: userEmail
+      email: userEmail,
+      communities: [],
     })
     .then(function(docRef) {
       window.location.pathname = 'dashboard';
@@ -99,19 +101,13 @@ window.onload = async function() {
 
   async function getCommunities() {
     var user = firebase.auth().currentUser;
-    // console.log(user.uid);
     var communities = [];
     if (user) {
       await db.collection("users").doc(user.uid).get().then(function(doc) {
         if (doc.exists) {
           communities = doc.data()['communities'];
-          // console.log(communities);
           getCommunityData(communities[0]);
           showCommunity(communities);
-          // getCommunityData(communities[0]).then(function(map) {console.log(map.data())});
-          // getCommunityData(communities[0]);
-          // console.log(maps);
-          // console.log(getCommunityData(communities[0]).then(val => {val}));
         } else {
           // doc.data() will be undefined in this case
           console.log("No such document!");
@@ -126,7 +122,8 @@ window.onload = async function() {
     var document;
     await db.collection("communities").doc(commUID).get().then(function(doc) {
       if (doc.exists) {
-        showCommunityInfo(doc.data);
+        showCommunityInfo(doc.data());
+        console.log(doc.data);
       } else {
         console.log("No such document!");
       }
@@ -145,9 +142,9 @@ window.onload = async function() {
     var addrTitle = document.getElementById('communityAddrTitle');
     var vacanciesTitle = document.getElementById('communityVacancyTitle');
   
-    nameTitle.innerHTML = "Name";
-    addrTitle.innerHTML = "Address";
-    vacanciesTitle.innerHTML = "Vacancies";
+    nameTitle.innerHTML = "Name:";
+    addrTitle.innerHTML = "Address:";
+    vacanciesTitle.innerHTML = "Vacancies:";
   
   
     name.innerHTML = map['name'];
