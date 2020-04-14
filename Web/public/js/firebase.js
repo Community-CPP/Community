@@ -1,5 +1,15 @@
 // web app's Firebase configuration goes here
 
+var firebaseConfig = {
+  apiKey: "AIzaSyAZErRY5kpVpD7C_sOtvj2waXVvu18Xd4Q",
+  authDomain: "senpro-community.firebaseapp.com",
+  databaseURL: "https://senpro-community.firebaseio.com",
+  projectId: "senpro-community",
+  storageBucket: "senpro-community.appspot.com",
+  messagingSenderId: "319397189900",
+  appId: "1:319397189900:web:f548fcb0d7f588728d9129"
+};
+
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -99,47 +109,68 @@ window.onload = async function() {
   }
 
   async function getCommunities() {
-    // var user = firebase.auth().currentUser;
+    var user = firebase.auth().currentUser;
     // console.log(user.uid);
-
-
-    await firebase.auth().onAuthStateChanged(async function(user) {
-      var communities = [];
-      if (user) {
-        await db.collection("users").doc(user.uid).get().then(function(doc) {
-          if (doc.exists) {
-            communities = doc.data()['communities'];
-            // getCommunityData(communities[0]).then(function(map) {console.log(map.data())});
-            getCommunityData(communities[0]);
-            // console.log(maps);
-            // console.log(getCommunityData(communities[0]).then(val => {val}));
-          } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-          }
-        }).catch(function(error) {
-          console.log("Error getting document:", error);
-        });
-      }
-
-    });
+    var communities = [];
+    if (user) {
+      await db.collection("users").doc(user.uid).get().then(function(doc) {
+        if (doc.exists) {
+          communities = doc.data()['communities'];
+          // console.log(communities);
+          getCommunityData(communities[0]);
+          showCommunity(communities);
+          // getCommunityData(communities[0]).then(function(map) {console.log(map.data())});
+          // getCommunityData(communities[0]);
+          // console.log(maps);
+          // console.log(getCommunityData(communities[0]).then(val => {val}));
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      }).catch(function(error) {
+        console.log("Error getting document:", error);
+      });
+    }
   }
 
   async function getCommunityData(commUID) {
-    var documents;
+    var document;
     await db.collection("communities").doc(commUID).get().then(function(doc) {
       if (doc.exists) {
-        documents = doc.data();
-        // console.log(documents);
+
+
       } else {
-        // doc.data() will be undefined in this case
+
         console.log("No such document!");
       }
     }).catch(function(error) {
       console.log("Error getting document:", error);
     });
-    return documents;
+    return document;
   }
+
+
+  async function showCommunity(communityList) {
+    var comms = "";
+    var thisComm = "";
+    for (i = 0; i < communityList.length; i++) {
+      await db.collection("communities").doc(communityList[i]).get().then(function(doc) {
+        if (doc.exists) {
+          comms += "<li>" + doc.data()['name'] + "</li>";
+          console.log("COMM NAME = " + doc.data()['name']);
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      }).catch(function(error) {
+        console.log("Error getting document:", error);
+      });
+    }
+    var commListSection = document.getElementById("commList");
+    commListSection.innerHTML = comms;
+
+  }
+
 
 
 
