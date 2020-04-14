@@ -1,6 +1,5 @@
 // web app's Firebase configuration goes here
 
-
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
@@ -98,87 +97,77 @@ window.onload = async function() {
   } catch (error) {
     this.console.log(error);
   }
+};
 
-  async function getCommunities() {
-    var user = firebase.auth().currentUser;
-    var communities = [];
-    if (user) {
-      await db.collection("users").doc(user.uid).get().then(function(doc) {
-        if (doc.exists) {
-          communities = doc.data()['communities'];
-          getCommunityData(communities[0]);
-          showCommunity(communities);
-        } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
-        }
-      }).catch(function(error) {
-        console.log("Error getting document:", error);
-      });
-    }
-  }
-
-  async function getCommunityData(commUID) {
-    var document;
-    await db.collection("communities").doc(commUID).get().then(function(doc) {
+async function getCommunities() {
+  var user = firebase.auth().currentUser;
+  var communities = [];
+  if (user) {
+    await db.collection("users").doc(user.uid).get().then(function(doc) {
       if (doc.exists) {
-        showCommunityInfo(doc.data());
-        console.log(doc.data);
+        communities = doc.data()['communities'];
+        getCommunityData(communities[0]);
+        showCommunity(communities);
       } else {
+        // doc.data() will be undefined in this case
         console.log("No such document!");
       }
     }).catch(function(error) {
       console.log("Error getting document:", error);
     });
-    return document;
   }
+}
 
-  function showCommunityInfo(map) {
-    var name = document.getElementById('communityName');
-    var addr = document.getElementById('communityAddr');
-    var vacancies = document.getElementById('communityVacancy');
-  
-    var nameTitle = document.getElementById('communityNameTitle');
-    var addrTitle = document.getElementById('communityAddrTitle');
-    var vacanciesTitle = document.getElementById('communityVacancyTitle');
-  
-    nameTitle.innerHTML = "Name:";
-    addrTitle.innerHTML = "Address:";
-    vacanciesTitle.innerHTML = "Vacancies:";
-  
-  
-    name.innerHTML = map['name'];
-    addr.innerHTML = map['street']+", "+map['city']+", "+map['zip'];
-    vacancies.innerHTML = (map['capacity']-map['tenants'].length);
-  }
-
-  async function showCommunity(communityList) {
-    var comms = "";
-    var thisComm = "";
-    for (i = 0; i < communityList.length; i++) {
-      await db.collection("communities").doc(communityList[i]).get().then(function(doc) {
-        if (doc.exists) {
-          comms += "<li>" + doc.data()['name'] + "</li>";
-          console.log("COMM NAME = " + doc.data()['name']);
-        } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
-        }
-      }).catch(function(error) {
-        console.log("Error getting document:", error);
-      });
+async function getCommunityData(commUID) {
+  var document;
+  await db.collection("communities").doc(commUID).get().then(function(doc) {
+    if (doc.exists) {
+      showCommunityInfo(doc.data());
+      console.log(doc.data);
+    } else {
+      console.log("No such document!");
     }
-    var commListSection = document.getElementById("commList");
-    commListSection.innerHTML = comms;
+  }).catch(function(error) {
+    console.log("Error getting document:", error);
+  });
+  return document;
+}
 
+function showCommunityInfo(map) {
+  var name = document.getElementById('communityName');
+  var addr = document.getElementById('communityAddr');
+  var vacancies = document.getElementById('communityVacancy');
+
+  var nameTitle = document.getElementById('communityNameTitle');
+  var addrTitle = document.getElementById('communityAddrTitle');
+  var vacanciesTitle = document.getElementById('communityVacancyTitle');
+
+  nameTitle.innerHTML = "Name:";
+  addrTitle.innerHTML = "Address:";
+  vacanciesTitle.innerHTML = "Vacancies:";
+
+
+  name.innerHTML = map['name'];
+  addr.innerHTML = map['street']+", "+map['city']+", "+map['zip'];
+  vacancies.innerHTML = (map['capacity']-map['tenants'].length);
+}
+
+async function showCommunity(communityList) {
+  var comms = "";
+  var thisComm = "";
+  for (i = 0; i < communityList.length; i++) {
+    await db.collection("communities").doc(communityList[i]).get().then(function(doc) {
+      if (doc.exists) {
+        comms += "<li>" + doc.data()['name'] + "</li>";
+        console.log("COMM NAME = " + doc.data()['name']);
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    }).catch(function(error) {
+      console.log("Error getting document:", error);
+    });
   }
-
-
-
-
-
-
-
-
-
-};
+  var commListSection = document.getElementById("commList");
+  commListSection.innerHTML = comms;
+}
