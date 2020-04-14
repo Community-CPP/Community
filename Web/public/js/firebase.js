@@ -3,6 +3,7 @@
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+
 /////////ATHENTICATION//////////
 
 // sign out
@@ -90,7 +91,7 @@ window.onload = async function() {
       } else {
         console.log("Logged out");
         if (window.location.pathname === "/dashboard.html")
-          window.location.pathname = "login";
+          window.location.pathname = "/";
       }
     });
 
