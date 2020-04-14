@@ -24,10 +24,20 @@ body {
 
 .userInfo {
   opacity: .5;
+  padding-right: 10px;
 }
 
 .userInfo:hover {
   opacity: .75;
+}
+.logOutEnd {
+  
+  opacity: .5;
+}
+
+.logOutEnd:hover {
+  opacity: .75;
+  cursor:pointer;
 }
 
 .title {
