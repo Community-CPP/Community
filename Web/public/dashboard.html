@@ -1,3 +1,25 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+
+@hengalvin
+Community-CPP
+/
+Community
+3
+2
+1
+Code Issues 0 Pull requests 1 Actions Projects 1 Wiki Security Insights Settings
+Community/Web/public/dashboard.html
+@milushyanev milushyanev fixed the Modal id's
+6bb46d7 30 minutes ago
+@pedro12133@milushyanev@hengalvin
+231 lines (204 sloc) 10.4 KB
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,18 +94,20 @@
     <div class="col">
       <div class="row cardRow">
         <div class="card w-100 tallcard1 text-white">
-          <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Header<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">+</button></h5>
+          <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">My Community<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">+</button></h5>
+
           <div class="card-body">
-              <ul id="commList">
-                <!-- LIST OF COMMUNINTIES -->
-              </ul>
+            <ul id="commList">
+              <!-- LIST OF COMMUNINTIES -->
+            </ul>
+
           </div>
         </div>
       </div>
 
       <div class="row cardRow">
         <div class="card w-100 shortcard1 text-white">
-          <h5 class="header bg-dark text-white card-title p-1">Header</h5>
+          <h5 class="header bg-dark text-white card-title p-1">Rent</h5>
           <div class="card-body">
           </div>
         </div>
@@ -109,7 +133,7 @@
 
       <div class="row cardRow">
         <div class="card w-100 tallcard2 text-white ">
-          <h5 class="header bg-dark text-white card-title p-1">Header</h5>
+          <h5 class="header bg-dark text-white card-title p-1">Maintenance</h5>
           <div class="card-body">
 
           </div>
@@ -120,7 +144,7 @@
     <div class="col">
       <div class="row cardRow">
         <div class="card w-100 tallcard3 text-white">
-          <h5 class="header bg-dark text-white card-title p-1">Header</h5>
+          <h5 class="header bg-dark text-white card-title p-1">Public Messages</h5>
           <div class="card-body">
 
           </div>
@@ -129,7 +153,7 @@
 
       <div class="row cardRow">
         <div class="card w-100 shortcard3 text-white">
-          <h5 class="header bg-dark text-white card-title p-1">Header</h5>
+          <h5 class="header bg-dark text-white card-title p-1">Private Messages</h5>
           <div class="card-body">
 
           </div>
@@ -170,28 +194,28 @@
           <div class="formWrapper bg-dark text-white">
             <div class="row align-middle justify-content-center align-items-center">
               <div class="col">
-                <label for="name">Name</label>
-                <input type="name" class="form-control" id="firstName">
+                <label for="name">Name of Community</label>
+                <input type="name" class="form-control" id="name">
                 <label class="errorLabel" id="errorFirst" hidden='true'></label>
                 <br />
               </div>
               <div class="col">
-                <label for="name">Tenants</label>
-                <input type="name" class="form-control" id="lastName">
+                <label for="tenants"> Number of Tenants</label>
+                <input type="tenants" class="form-control" id="tenants">
                 <label class="errorLabel" id="errorLast" hidden='true'></label>
                 <br />
               </div>
             </div>
             <div class="row align-middle justify-content-center align-items-center">
               <div class="col">
-                <label for="email">Units</label>
-                <input type="email" class="form-control" id="emailForm">
+                <label for="units">Number of Units</label>
+                <input type="units" class="form-control" id="units">
                 <label class="errorLabel" id="emailError" hidden='true'></label>
                 <br />
               </div>
               <div class="col">
-                <label for="password">Street</label>
-                <input type="password" class="form-control" id="passwordForm">
+                <label for="street">Street</label>
+                <input type="street" class="form-control" id="street">
                 <label class="errorLabel" id="passwordError" hidden='true'></label>
                 <br />
               </div>
@@ -199,14 +223,14 @@
             </div>
             <div class="row align-middle justify-content-center align-items-center">
               <div class="col">
-                <label for="email">City</label>
-                <input type="email" class="form-control" id="emailForm">
+                <label for="city">City</label>
+                <input type="city" class="form-control" id="city">
                 <label class="errorLabel" id="emailError" hidden='true'></label>
                 <br />
               </div>
               <div class="col">
-                <label for="password">Zip</label>
-                <input type="password" class="form-control" id="passwordForm">
+                <label for="zip">Zip</label>
+                <input type="zip" class="form-control" id="zip">
                 <label class="errorLabel" id="passwordError" hidden='true'></label>
                 <br />
               </div>
