@@ -1,5 +1,6 @@
 // web app's Firebase configuration goes here
 
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
@@ -187,4 +188,64 @@ async function btnInfo(id) {
       }).catch(function(error) {
         console.log("Error getting document:", error);
       });
+}
+
+
+// function to create new community
+async function submitCreateForm() {
+  var name = document.getElementById('communityNameField').value;
+  var capacity = document.getElementById('comunnityUnits').value;
+  var street = document.getElementById('communityStreet').value;
+  var city = document.getElementById('communityCity').value;
+  var zip = document.getElementById('communityZip').value;
+  document.getElementById('createError').hidden = true;
+  
+  if(name != "" && capacity != "" && street != ""
+    && city != "" && zip != "") {
+      await db.collection("communities").add({
+        capacity: capacity,
+        city: city,
+        street: street,
+        zip: zip,
+        name: name,
+        tenants: [],
+      })
+      .then(function(docRef) {
+        console.log(docRef.id);
+        addCommunityToAdmin(docRef.id);
+      })
+      .catch(function(error) {
+        // error adding user
+      });
+    }
+    else {
+      document.getElementById('createError').hidden = false;
+      document.getElementById('createError').innerHTML = "Please fill in all fields.";
+    }  
+}
+
+async function addCommunityToAdmin(communityID) {
+  var user = firebase.auth().currentUser;
+  var communities;
+  await db.collection("users").doc(user.uid).get().then(function(doc) {
+    if (doc.exists) {
+      communities = doc.data()['communities'];
+      communities.push(communityID);
+      db.collection("users").doc(user.uid).update({
+        communities: communities,
+      })
+      .then(function(val) {
+        window.location.pathname = 'dashboard';
+      })
+      .catch(function(error) {
+        console.log("Error updating user communities:", error);
+      });
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such user");
+    }
+  }).catch(function(error) {
+    console.log("Error getting user data:", error);
+  });
+
 }

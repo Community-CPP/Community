@@ -45,7 +45,7 @@
           </div>
         </li>
       </ul>
-      <div class="userInfo text-white" onclick="openUserSettings()">
+      <div class="userInfo text-white" >
         <svg id="profileIcon" class="profileIcon bi bi-person-square" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M14 1H2a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1V2a1 1 0 00-1-1zM2 0a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V2a2 2 0 00-2-2H2z" clip-rule="evenodd" />
           <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
@@ -119,6 +119,7 @@
         </div>
       </div>
     </div>
+    
 
     <div class="col">
       <div class="row cardRow">
@@ -141,23 +142,7 @@
     </div>
   </div>
 
-
-  <!-- The core Firebase JS SDK -->
-  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
-  <script src="js/firebase.js"></script>
-
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-  <script type="text/javascript">
-    function openUserSettings() {
-      alert('clicked');
-    }
-  </script>
-<!-- Modal -->
+<!-- Create Community Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color:white">
   <div class="modal-dialog " role="document" >
     <div class="modal-content bg-dark" >
@@ -172,56 +157,66 @@
           <div class="row align-middle justify-content-center align-items-center">
             <div class="col">
               <label for="name">Name of Community</label>
-              <input type="name" class="form-control" id="name">
-              <label class="errorLabel" id="errorFirst" hidden='true'></label>
-              <br/>
-            </div>
-            <div class="col">
-              <label for="tenants"> Number of Tenants</label>
-              <input type="tenants" class="form-control" id="tenants">
-              <label class="errorLabel" id="errorLast" hidden='true'></label>
+              <input type="text"class="form-control" id="communityNameField">
+              <label class="errorLabel" id="communityNameFeildError" hidden='true'></label>
               <br/>
             </div>
           </div>
           <div class="row align-middle justify-content-center align-items-center">
             <div class="col">
               <label for="units">Number of Units</label>
-              <input type="units" class="form-control" id="units">
-              <label class="errorLabel" id="emailError" hidden='true'></label>
+              <input type="number" class="form-control" id="comunnityUnits">
+              <label class="errorLabel" id="comunnityUnitsFeildError" hidden='true'></label>
               <br/>
             </div>
             <div class="col">
               <label for="street">Street</label>
-              <input type="street" class="form-control" id="street">
-              <label class="errorLabel" id="passwordError" hidden='true'></label>
+              <input type="text" class="form-control" id="communityStreet">
+              <label class="errorLabel" id="communityStreetFeildError" hidden='true'></label>
               <br/>
             </div>
-
           </div>
           <div class="row align-middle justify-content-center align-items-center">
             <div class="col">
               <label for="city">City</label>
-              <input type="city" class="form-control" id="city">
-              <label class="errorLabel" id="emailError" hidden='true'></label>
+              <input type="text" class="form-control" id="communityCity">
+              <label class="errorLabel" id="communityCityError" hidden='true'></label>
               <br/>
             </div>
             <div class="col">
               <label for="zip">Zip</label>
-              <input type="zip" class="form-control" id="zip">
-              <label class="errorLabel" id="passwordError" hidden='true'></label>
+              <input type="text" class="form-control" id="communityZip">
+              <label class="errorLabel" id="communityZipError" hidden='true'></label>
               <br/>
             </div>
             <hr />
-            <label class="errorLabel" id="signinError" hidden="true"></label>
           </div>
+          <div class="row d-flex justify-content-center text-danger">
+            <label class="errorLabel" id="createError" hidden="true"></label>
+          </div>
+
         </div>
         <div class="modal-footer">
-
-          <button type="button" class="btn btn-primary" onclick="submitForm();return false;">Add Community</button>
+          <button type="button" class="btn btn-primary" onclick="submitCreateForm();return false;">Add Community</button>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- The core Firebase JS SDK -->
+  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
+  <script src="js/firebase.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  <script type="text/javascript">
+    
+
+  </script>
 
 </body>
 
