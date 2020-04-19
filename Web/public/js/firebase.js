@@ -255,15 +255,28 @@ async function generateToken() {
   var date = ""+ new Date();
 
   await db.collection("users").doc(user.uid)
-  .collection("tokens").doc(token).set({
-    date: date,
-  })
-  .then(function(docRef) {
-    window.location.pathname = 'dashboard';
-  })
-  .catch(function(error) {
-    // error adding user
+  .collection("tokens").doc(token).get().then(async function(doc) {
+    if (doc.exists) {
+      // if generated token exists, regenerate
+      generateToken();
+    } 
+    else {
+      // else save token
+      await db.collection("users").doc(user.uid)
+        .collection("tokens").doc(token).set({
+          date: date,
+        })
+        .then(function(docRef) {
+          window.location.pathname = 'dashboard';
+        })
+        .catch(function(error) {
+          // error adding user
+        }
+      );
+    }
   });
+
+  
 
 
 }
