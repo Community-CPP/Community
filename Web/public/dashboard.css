@@ -128,3 +128,8 @@ body {
   border:none;
   color: white;
 }
+
+.tokenLinks:hover {
+  cursor: pointer;
+  opacity: .5;
+}

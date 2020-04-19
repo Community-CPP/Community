@@ -109,6 +109,7 @@ async function getCommunities() {
         communities = doc.data()['communities'];
         getCommunityData(communities[0]);
         showCommunity(communities);
+        showTokens();
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -265,8 +266,19 @@ async function generateToken() {
       await db.collection("users").doc(user.uid)
         .collection("tokens").doc(token).set({
           date: date,
+          inuse: false,
         })
-        .then(function(docRef) {
+        .then( async function(docRef) {
+          var tokenList;
+          // get token IDs
+          await db.collection('users').doc(user.uid).get().then(async function(doc) {
+            tokenList = doc.data()['tokenIDs'];
+            tokenList.push(token);
+            await db.collection('users').doc(user.uid).update({
+              tokenIDs:tokenList,
+            });
+          });
+
           window.location.pathname = 'dashboard';
         })
         .catch(function(error) {
@@ -275,8 +287,58 @@ async function generateToken() {
       );
     }
   });
+}
 
-  
+async function showTokens() {
+  var user = firebase.auth().currentUser;
+  var tokenContainer = document.getElementById('tokensContainer');
+  var tokenIDs;
+
+  tokenContainer.innerHTML = "";
+
+  // get token ids
+  await db.collection('users').doc(user.uid).get().then(function(doc){
+    tokenIDs = doc.data()['tokenIDs'];
+  });
+  console.log(tokenIDs.length);
+
+  // check length
+  if(tokenIDs.length < 1) {
+    tokenContainer.innerHTML += "No active tokens.";
+  }
+  else {
+    var code = "";
+    // get token data by id
+    for(var i = 0; i < tokenIDs.length; i++) {
+      code += "<div class=\"d-flex justify-content-between w-100\"> "+
+                  "<a data-toggle=\"tooltip\" data-placement=\"top\" title=\"toggle use\" class=\"nav-link tokenLinks\" onclick=\"toggleToken('"+tokenIDs[i]+"')\">"+tokenIDs[i]+"</a>";
+      await db.collection('users').doc(user.uid).collection("tokens").doc(tokenIDs[i]).get().then(function(doc){
+        if(doc.data()['inuse'])
+          code += "<div class=\"col w-100\">in use</div>";
+        else
+          code += "<div class=\"col w-100\">not in use</div>";
+      });
+      code += "</div><hr class=\"bg-light\"/>";
+      tokenContainer.innerHTML = code;
+    }
+  }
+}
+
+async function toggleToken(tokenID) {
+
+  var user = firebase.auth().currentUser;
+  var inuse;
+  // get current inuse
+  await db.collection('users').doc(user.uid).collection('tokens').doc(tokenID).get().then(function(doc){
+    inuse = doc.data()['inuse'];
+  });
 
 
+  // toggle inuse
+  await db.collection('users').doc(user.uid).collection('tokens').doc(tokenID).update({
+    inuse:!inuse,
+  }).then(function(doc) {
+    // then reload dash
+    window.location.pathname = 'dashboard';
+  });
 }
