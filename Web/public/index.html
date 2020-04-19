@@ -15,15 +15,12 @@
     <body>
         
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-
             <a class="navbar-brand" href="">Community</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-  
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">    
                             <svg class="bi bi-info-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -46,29 +43,17 @@
         <section class="messageSection">
             <div class="container jumboContainer">
                 <div class="jumbotron bg-dark text-white">
-                    
                     <h1 class="display-4">Welcome to Community</h1>
                     <hr class="my-4">
                     <p>Renters everywhere have had an experience where it was cumbersome to pay rent, schedule maintenance appointments, or simply communicate with management or other tenants. We believe this is unacceptable in modern day, high tech society where everybody has a computer in their pocket. We ultimately aim to make communication between tenant and management as easy and fast as possible by providing a fully featured application where tenants can schedule maintenance appointments, pay rent, and communicate with other tenants and management. Moreover, this application will allow management to more easily manage rental properties and tenants.</p>
                     <hr/> 
                     <button class="btn btn-primary float-right " data-toggle="modal" data-target="#exampleModal">Sign Up</button> 
                     <button class="btn btn-primary float-right " data-toggle="modal" data-target="#exampleModal1">Log In</button> 
-                    
                 </div>
-                 
             </div>
         </section>
-
-        <!-- The core Firebase JS SDK -->
-        <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
-        <script src="js/firebase.js"></script>
         
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-        
+        <!-- Sign Up Modal-->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color:white">
             <div class="modal-dialog " role="document" >
               <div class="modal-content bg-dark" >
@@ -126,7 +111,7 @@
                       </div>
                       <br/>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="submitForm1();return false;">Sign Up</button>
+                        <button type="button" class="btn btn-primary" onclick="submitSignUpForm();return false;">Sign Up</button>
                         <div class="form-group" id="errorCont" hidden="true">
                           <hr/>
                           <div class="container signInErrorLabelContainer">
@@ -142,6 +127,8 @@
               </div>
             </div>
           </div>
+
+          <!-- Login Modal-->
           <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color:white">
             <div class="modal-dialog " role="document" >
               <div class="modal-content bg-dark" >
@@ -157,31 +144,32 @@
                         <form>
                           <div class="form-group">
                             <label for="email">Email address</label>
-                            <input type="email" class="form-control" id="emailForm" aria-describedby="emailHelp">
+                            <input type="email" class="form-control" id="emailForm0" aria-describedby="emailHelp">
                           </div>
-                          <label class="errorLabel" id="emailError" hidden='true'></label>
+                          <label class="errorLabel" id="emailError0" hidden='true'></label>
                           <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="passwordForm">
+                            <input type="password" class="form-control" id="passwordForm0">
                           </div>
-                          <label class="errorLabel" id="passwordError" hidden='true'></label>
+                          <label class="errorLabel" id="passwordError0" hidden='true'></label>
                           <hr>
                         </form>
                       </div>
                     </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" onclick="submitForm();return false;">Log In</button>
-                  <div class="form-group" id="errorCont" hidden="true">
+                  <button type="button" class="btn btn-primary" onclick="submitSignInForm();return false;">Log In</button>
+                  <div class="form-group" id="errorCont0" hidden="true">
                     <hr/>
                     <div class="container signInErrorLabelContainer">
-                      <label class="errorLabel" id="signinError"></label>
+                      <label class="errorLabel" id="signinError0"></label>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- The core Firebase JS SDK -->
+
+          <!-- Firebase JS SDK -->
         <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
@@ -195,15 +183,15 @@
         <!-- custom scripts -->
         <script type="text/javascript">
           
-          function submitForm() {
+          function submitSignInForm() {
 
             // get elements
-            var email = document.getElementById('emailForm').value;
-            var password = document.getElementById('passwordForm').value;
-            var emailErrorLabel = document.getElementById('emailError');
-            var passwordErrorLabel = document.getElementById('passwordError');
-            var signinErrorLabel = document.getElementById('signinError');
-            var signInErrorContainer = document.getElementById('errorCont');
+            var email = document.getElementById('emailForm0').value;
+            var password = document.getElementById('passwordForm0').value;
+            var emailErrorLabel = document.getElementById('emailError0');
+            var passwordErrorLabel = document.getElementById('passwordError0');
+            var signinErrorLabel = document.getElementById('signinError0');
+            var signInErrorContainer = document.getElementById('errorCont0');
 
             //hide labels
             emailErrorLabel.hidden = true;
@@ -222,7 +210,6 @@
               passwordErrorLabel.hidden = false;
             }
 
-
             // if form is not empty, attempt to sign in
             if(emailErrorLabel.hidden && passwordErrorLabel.hidden)
               {
@@ -237,7 +224,9 @@
                 });
               }
           }
-          function submitForm1() {
+
+
+          function submitSignUpForm() {
   
             // get elements
             var firstName = document.getElementById('firstName').value;
@@ -252,7 +241,6 @@
             var signinErrorLabel = document.getElementById('signinError');
             var firstErrorLabel = document.getElementById('errorFirst');
             var lastErrorLabel = document.getElementById('errorLast');
-
 
             //hide labels
             signinErrorLabel.hidden = true;
@@ -293,8 +281,7 @@
             }
 
             // if forn is not empty, attempt to sign in
-            if(emailErrorLabel.hidden && passwordErrorLabel.hidden && toggleErrorLabel.hidden)
-                {
+            if(emailErrorLabel.hidden && passwordErrorLabel.hidden && toggleErrorLabel.hidden) {
                 var promise = createNewUser(email,password);
                 promise.catch(function(e){
                     // failed sign up handling
@@ -306,10 +293,8 @@
                     if(creatIsToggled) category = "admin";
                     initializeNewUserData(firstName,lastName,category);
                 }
+              }
             }
-        }
-          
-            
           </script>
     </body>
 </html>
