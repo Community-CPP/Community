@@ -1,6 +1,5 @@
 // web app's Firebase configuration goes here
 
-
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
@@ -247,5 +246,24 @@ async function addCommunityToAdmin(communityID) {
   }).catch(function(error) {
     console.log("Error getting user data:", error);
   });
+
+}
+
+async function generateToken() {
+  var user = firebase.auth().currentUser;
+  var token = Math.random().toString(36).substring(2, 6) + Math.random().toString(36).substring(2, 6);
+  var date = ""+ new Date();
+
+  await db.collection("users").doc(user.uid)
+  .collection("tokens").doc(token).set({
+    date: date,
+  })
+  .then(function(docRef) {
+    window.location.pathname = 'dashboard';
+  })
+  .catch(function(error) {
+    // error adding user
+  });
+
 
 }
