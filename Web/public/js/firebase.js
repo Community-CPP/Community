@@ -1,4 +1,5 @@
 // web app's Firebase configuration goes here
+var currentCommunityID;
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -61,6 +62,7 @@ async function addUserToDB(uid, firstName, lastName, userCategory, userEmail) {
 
 // on window load, check login state
 window.onload = async function() {
+
   try {
     await firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -109,7 +111,6 @@ async function getCommunities() {
         communities = doc.data()['communities'];
         getCommunityData(communities[0]);
         showCommunity(communities);
-        showTokens();
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -121,10 +122,12 @@ async function getCommunities() {
 }
 
 async function getCommunityData(commUID) {
-  var document;
+  console.log("current community: "+commUID);
+
   await db.collection("communities").doc(commUID).get().then(function(doc) {
     if (doc.exists) {
       showCommunityInfo(doc.data());
+      showTokens(commUID);
       console.log(doc.data);
     } else {
       console.log("No such document!");
@@ -132,7 +135,6 @@ async function getCommunityData(commUID) {
   }).catch(function(error) {
     console.log("Error getting document:", error);
   });
-  return document;
 }
 
 function showCommunityInfo(map) {
@@ -178,16 +180,17 @@ async function showCommunity(communityList) {
 
 async function btnInfo(id) {
       var commUID = document.getElementById(id).value;
-      console.log("Showing UID = " + commUID);
-      await db.collection("communities").doc(commUID).get().then(function(doc) {
-        if (doc.exists) {
-          showCommunityInfo(doc.data());
-        } else {
-          console.log("No such document!");
-        }
-      }).catch(function(error) {
-        console.log("Error getting document:", error);
-      });
+      getCommunityData(commUID);
+      // console.log("Showing UID = " + commUID);
+      // await db.collection("communities").doc(commUID).get().then(function(doc) {
+      //   if (doc.exists) {
+      //     showCommunityInfo(doc.data());
+      //   } else {
+      //     console.log("No such document!");
+      //   }
+      // }).catch(function(error) {
+      //   console.log("Error getting document:", error);
+      // });
 }
 
 
@@ -209,6 +212,7 @@ async function submitCreateForm() {
         zip: zip,
         name: name,
         tenants: [],
+        tokenIDs:[],
       })
       .then(function(docRef) {
         console.log(docRef.id);
@@ -250,57 +254,71 @@ async function addCommunityToAdmin(communityID) {
 
 }
 
-async function generateToken() {
-  var user = firebase.auth().currentUser;
+async function generateToken(commUID) {
   var token = Math.random().toString(36).substring(2, 6) + Math.random().toString(36).substring(2, 6);
   var date = ""+ new Date();
 
-  await db.collection("users").doc(user.uid)
-  .collection("tokens").doc(token).get().then(async function(doc) {
+  await db.collection("tokens").doc(token).get().then(async function(doc) {
     if (doc.exists) {
       // if generated token exists, regenerate
       generateToken();
     } 
     else {
-      // else save token
-      await db.collection("users").doc(user.uid)
-        .collection("tokens").doc(token).set({
-          date: date,
-          inuse: false,
-        })
-        .then( async function(docRef) {
-          var tokenList;
-          // get token IDs
-          await db.collection('users').doc(user.uid).get().then(async function(doc) {
-            tokenList = doc.data()['tokenIDs'];
-            tokenList.push(token);
-            await db.collection('users').doc(user.uid).update({
-              tokenIDs:tokenList,
-            });
-          });
-
-          window.location.pathname = 'dashboard';
+      var tokenIDs = [];
+      // get current list
+      await db.collection("communities").doc(commUID).get().then(function(doc){
+          if(doc.data()['tokenIDs'].length > 0) {
+            tokenIDs = doc.data()['tokenIDs'];
+          }
         })
         .catch(function(error) {
-          // error adding user
+          // error
+        }
+      );
+
+      //push new token
+      tokenIDs.push(token);
+
+      // update community token ids
+      await db.collection("communities").doc(commUID).update({
+        tokenIDs:tokenIDs
+      })
+      .catch(function(error) {
+        // error 
+        }
+      );
+
+      // update tokens db
+      await db.collection("tokens").doc(token).set({
+        community: commUID,
+        time: date,
+        inuse: false,
+      })
+      .catch(function(error) {
+        // error 
         }
       );
     }
   });
 }
 
-async function showTokens() {
+ async function showTokens(commUID) {
+  //set add token button to current community
+  document.getElementById('addTokenBtn').onclick = function(){
+    generateToken(commUID)
+  };
   var user = firebase.auth().currentUser;
   var tokenContainer = document.getElementById('tokensContainer');
   var tokenIDs;
 
+  //clear current list
   tokenContainer.innerHTML = "";
 
   // get token ids
-  await db.collection('users').doc(user.uid).get().then(function(doc){
+  await db.collection('communities').doc(commUID).get().then(function(doc){
     tokenIDs = doc.data()['tokenIDs'];
   });
-  console.log(tokenIDs.length);
+  console.log(tokenIDs);
 
   // check length
   if(tokenIDs.length < 1) {
@@ -312,7 +330,7 @@ async function showTokens() {
     for(var i = 0; i < tokenIDs.length; i++) {
       code += "<div class=\"d-flex justify-content-between w-100\"> "+
                   "<a data-toggle=\"tooltip\" data-placement=\"top\" title=\"toggle use\" class=\"nav-link tokenLinks\" onclick=\"toggleToken('"+tokenIDs[i]+"')\">"+tokenIDs[i]+"</a>";
-      await db.collection('users').doc(user.uid).collection("tokens").doc(tokenIDs[i]).get().then(function(doc){
+      await db.collection('tokens').doc(tokenIDs[i]).get().then(function(doc){
         if(doc.data()['inuse'])
           code += "<div class=\"col w-100\">in use</div>";
         else
@@ -328,14 +346,14 @@ async function toggleToken(tokenID) {
 
   var user = firebase.auth().currentUser;
   var inuse;
+
   // get current inuse
-  await db.collection('users').doc(user.uid).collection('tokens').doc(tokenID).get().then(function(doc){
+  await db.collection('tokens').doc(tokenID).get().then(function(doc){
     inuse = doc.data()['inuse'];
   });
 
-
   // toggle inuse
-  await db.collection('users').doc(user.uid).collection('tokens').doc(tokenID).update({
+  await db.collection('tokens').doc(tokenID).update({
     inuse:!inuse,
   }).then(function(doc) {
     // then reload dash
