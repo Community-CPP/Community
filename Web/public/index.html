@@ -48,7 +48,7 @@
                     <p>Renters everywhere have had an experience where it was cumbersome to pay rent, schedule maintenance appointments, or simply communicate with management or other tenants. We believe this is unacceptable in modern day, high tech society where everybody has a computer in their pocket. We ultimately aim to make communication between tenant and management as easy and fast as possible by providing a fully featured application where tenants can schedule maintenance appointments, pay rent, and communicate with other tenants and management. Moreover, this application will allow management to more easily manage rental properties and tenants.</p>
                     <hr/> 
                     <button class="btn btn-primary float-right " data-toggle="modal" data-target="#exampleModal">Sign Up</button> 
-                    <button class="btn btn-primary float-right " data-toggle="modal" data-target="#exampleModal1">Log In</button> 
+                    <button class="btn btn-primary float-right " onclick="goToDashIfLoggedIn()" data-toggle="modal" data-target="#exampleModal1">Log In</button> 
                 </div>
             </div>
         </section>
@@ -182,9 +182,18 @@
         
         <!-- custom scripts -->
         <script type="text/javascript">
-          
-          function submitSignInForm() {
 
+          async function goToDashIfLoggedIn() {
+            await firebase.auth().onAuthStateChanged(function(user) {
+              if(user){
+                window.location.pathname = 'dashboard';
+            }
+              else {
+              }
+            });
+          }
+
+          async function submitSignInForm() {
             // get elements
             var email = document.getElementById('emailForm0').value;
             var password = document.getElementById('passwordForm0').value;
@@ -200,19 +209,18 @@
 
             // email error handling
             if(email === '') {
-              emailErrorLabel.innerHTML = "Please enter an email"
+              emailErrorLabel.innerHTML = "Please enter an email";
               emailErrorLabel.hidden = false;
             }
 
             // password error handling
             if(password === '') {
-              passwordErrorLabel.innerHTML = "Please enter a password"
+              passwordErrorLabel.innerHTML = "Please enter a password";
               passwordErrorLabel.hidden = false;
             }
 
             // if form is not empty, attempt to sign in
-            if(emailErrorLabel.hidden && passwordErrorLabel.hidden)
-              {
+            if(emailErrorLabel.hidden && passwordErrorLabel.hidden) {
                 var promise = signIn(email,password);
                 promise.then(function () {
                   window.location.pathname = 'dashboard';
@@ -222,9 +230,9 @@
                   signinErrorLabel.innerHTML = error.message;
                   signInErrorContainer.hidden = false;
                 });
-              }
+            }
           }
-
+          
 
           function submitSignUpForm() {
   

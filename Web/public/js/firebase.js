@@ -1,5 +1,4 @@
 // web app's Firebase configuration goes here
-var currentCommunityID;
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -59,17 +58,11 @@ async function addUserToDB(uid, firstName, lastName, userCategory, userEmail) {
     });
 }
 
-
 // on window load, check login state
 window.onload = async function() {
-
   try {
     await firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        if (window.location.pathname === "/login.html") {
-          window.location.pathname = 'dashboard';
-        }
-
         // on dashboard load
         if (window.location.pathname === "/dashboard.html") {
           document.getElementsByTagName('body')[0].hidden = false;
