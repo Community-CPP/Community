@@ -79,11 +79,6 @@ window.onload = async function() {
         }).catch(function(error) {
           console.log("Error getting document: ", error);
         });
-        
-        if(localStorage.getItem("userCategory") == "tenant" && 
-          window.location.pathname === "/userDash.html") {
-            document.getElementsByTagName('body')[0].hidden = false;
-        }
 
         // on dashboard load
         if (localStorage.getItem("userCategory") == "admin" && 

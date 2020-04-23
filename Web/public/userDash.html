@@ -264,7 +264,21 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
   <script type="text/javascript">
-    
+    window.onload = async function() {
+      if(localStorage.getItem("userCategory") == "tenant") {
+        // set user name in navabr
+      var navText = document.getElementById('userName');
+      navText.innerHTML = localStorage.getItem("first") + " " + localStorage.getItem('last');
+      document.getElementsByTagName('body')[0].hidden = false;
+
+      //render widgets
+
+      }
+      else if(localStorage.getItem("userCategory") == "admin")
+        window.location.pathname = "dashboard";
+      else
+        window.location.pathname = "/";
+    }
 
   </script>
 
