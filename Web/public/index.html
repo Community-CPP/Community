@@ -183,14 +183,40 @@
         <!-- custom scripts -->
         <script type="text/javascript">
 
-          async function goToDashIfLoggedIn() {
+          // fires as soon as page loads
+          window.onload = async function () {
+
+            //check if user is signed in
             await firebase.auth().onAuthStateChanged(function(user) {
-              if(user){
-                window.location.pathname = 'dashboard';
-            }
-              else {
+              if(user) {
+                db.collection("users").doc(user.uid).get().then(function(doc) {
+                  if (doc.exists) {
+                    localStorage.setItem("userIsSignedIn","1");
+                    localStorage.setItem("userFirst", doc.data()['first']);
+                    localStorage.setItem("userLast", doc.data()['last']);
+                    localStorage.setItem("userCategory",doc.data()['category']);
+                    localStorage.setItem("userUID", user.uid);
+                  } else {
+                    console.log("No such document!");
+                  }
+                }).catch(function(error) {
+                  console.log("Error getting document: ", error);
+                });
               }
+              else
+                localStorage.setItem("userIsSignedIn","0");
             });
+
+
+          }
+
+          async function goToDashIfLoggedIn() {
+            if(localStorage.getItem("userIsSignedIn") == "1") {
+              if(localStorage.getItem("userCategory") == "admin")
+                window.location.pathname = "dashboard";
+              if(localStorage.getItem("userCategory") == "tenant")
+                window.location.pathname = "userDash";
+            }
           }
 
           async function submitSignInForm() {
