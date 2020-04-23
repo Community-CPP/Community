@@ -183,8 +183,12 @@
         <script type="text/javascript">
 
           // fires as soon as page loads
-          window.onload = async function () {
-            //check if user is signed in
+          window.onload = function () {
+            //set user if signed in
+            setUser();
+          }
+
+          async function setUser(){
             await firebase.auth().onAuthStateChanged(function(user) {
               if(user) {
                 // if user is signed in get user data
@@ -246,7 +250,9 @@
             if(emailErrorLabel.hidden && passwordErrorLabel.hidden) {
                 var promise = signIn(email,password);
                 promise.then(function () {
-                  window.location.pathname = 'dashboard';
+                  setUser().then(function () {
+                    goToDashIfLoggedIn();
+                  });
                 }).catch(function(error) {
                   // Handle Errors here.
                   console.log(error.message);
@@ -322,7 +328,11 @@
                 if(signinErrorLabel.hidden) {
                     var category = "tenant";
                     if(creatIsToggled) category = "admin";
-                    initializeNewUserData(firstName,lastName,category);
+                    initializeNewUserData(firstName,lastName,category).then(function() {
+                      setUser().then(function() {
+                        goToDashIfLoggedIn();
+                      });
+                    });
                 }
               }
             }
