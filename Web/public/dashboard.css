@@ -73,38 +73,36 @@ body {
 
 .card.tallcard1 {
   height: 500px;
-  overflow-y: auto;
   background-color: rgba(41, 43, 44, 0.8);
 }
 
 .card.shortcard1 {
   height: 300px;
-  overflow-y: auto;
   background-color: rgba(41, 43, 44, 0.8);
 }
 
 .card.tallcard2 {
   height: 500px;
-  overflow-y: auto;
   background-color: rgba(41, 43, 44, 0.8);
 }
 
 .card.shortcard2 {
   height: 300px;
-  overflow-y: auto;
   background-color: rgba(41, 43, 44, 0.8);
 }
 
 .card.tallcard3 {
   height: 450px;
-  overflow-y: auto;
   background-color: rgba(41, 43, 44, 0.8);
 }
 
 .card.shortcard3 {
   height: 350px;
-  overflow-y: auto;
   background-color: rgba(41, 43, 44, 0.8);
+}
+
+.card .card-body {
+  overflow-y: auto;
 }
 
 .cardRow {
@@ -119,9 +117,10 @@ body {
   padding-bottom: 1in;
 }
 
-.card::-webkit-scrollbar {
+.cardRow .card .card-body::-webkit-scrollbar {
   width: 0px;
 }
+
 
 .linkBtn {
   background:none;
