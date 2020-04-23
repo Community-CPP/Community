@@ -114,8 +114,10 @@ async function getCommunities() {
         communities = doc.data()['communities'];
         if(localStorage.getItem("userUID") == user.uid && localStorage.getItem("currentCommunity") != null) 
           getCommunityData(localStorage.getItem("currentCommunity"));
-        else 
+        else {
+          localStorage.setItem("currentCommunity", communities[0]);
           getCommunityData(communities[0]);
+        }
           
         showCommunity(communities);
       } else {
