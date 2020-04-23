@@ -60,9 +60,29 @@ async function addUserToDB(uid, firstName, lastName, userCategory, userEmail) {
 
 // on window load, check login state
 window.onload = async function() {
+  
   try {
     await firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
+        if((window.location.pathname === "/userDash.html")) {
+          document.getElementsByTagName('body')[0].hidden = false;
+          db.collection("users").doc(user.uid).get().then(function(doc) {
+            if (doc.exists) {
+              var navText = document.getElementById('userName');
+              navText.innerHTML = doc.data()['first'] + " " + doc.data()['last'];
+
+              console.log(doc.data()['first']);
+              console.log(doc.data()['last']);
+              console.log(doc.data()['category']);
+
+            } else {
+              console.log("No such document!");
+            }
+          }).catch(function(error) {
+            console.log("Error getting document: ", error);
+          });
+        }
+
         // on dashboard load
         if (window.location.pathname === "/dashboard.html") {
           document.getElementsByTagName('body')[0].hidden = false;
