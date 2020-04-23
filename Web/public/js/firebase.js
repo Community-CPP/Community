@@ -1,6 +1,7 @@
 // web app's Firebase configuration goes here
 
 // Initialize Firebase
+
 firebase.initializeApp(firebaseConfig);
 
 
@@ -71,7 +72,7 @@ window.onload = async function() {
             navText.innerHTML = doc.data()['first'] + " " + doc.data()['last'];
             localStorage.setItem("userFirst", doc.data()['first']);
             localStorage.setItem("userLast", doc.data()['last']);
-            localStorage.setItem("userCategory",doc.data()['category']);
+            localStorage.setItem("userCategory", doc.data()['category']);
             localStorage.setItem("userUID", user.uid);
           } else {
             console.log("No such document!");
@@ -79,21 +80,20 @@ window.onload = async function() {
         }).catch(function(error) {
           console.log("Error getting document: ", error);
         });
-        
-        if(localStorage.getItem("userCategory") == "tenant" && 
+
+        if (localStorage.getItem("userCategory") == "tenant" &&
           window.location.pathname === "/userDash.html") {
-            document.getElementsByTagName('body')[0].hidden = false;
+          document.getElementsByTagName('body')[0].hidden = false;
         }
 
         // on dashboard load
-        if (localStorage.getItem("userCategory") == "admin" && 
+        if (localStorage.getItem("userCategory") == "admin" &&
           window.location.pathname === "/dashboard.html") {
           document.getElementsByTagName('body')[0].hidden = false;
           getCommunities();
-          
+
         }
-      } 
-      else {
+      } else {
         console.log("Logged out");
         if (window.location.pathname === "/dashboard.html")
           window.location.pathname = "/";
@@ -112,13 +112,13 @@ async function getCommunities() {
     await db.collection("users").doc(user.uid).get().then(function(doc) {
       if (doc.exists) {
         communities = doc.data()['communities'];
-        if(localStorage.getItem("userUID") == user.uid && localStorage.getItem("currentCommunity") != null) 
+        if (localStorage.getItem("userUID") == user.uid && localStorage.getItem("currentCommunity") != null)
           getCommunityData(localStorage.getItem("currentCommunity"));
         else {
           localStorage.setItem("currentCommunity", communities[0]);
           getCommunityData(communities[0]);
         }
-          
+
         showCommunity(communities);
       } else {
         // doc.data() will be undefined in this case
@@ -132,7 +132,7 @@ async function getCommunities() {
 
 async function getCommunityData(commUID) {
   localStorage.setItem("currentCommunity", commUID);
-  console.log("current community: "+localStorage.getItem("currentCommunity"));
+  console.log("current community: " + localStorage.getItem("currentCommunity"));
 
   await db.collection("communities").doc(commUID).get().then(function(doc) {
     if (doc.exists) {
@@ -172,7 +172,7 @@ async function showCommunity(communityList) {
   for (i = 0; i < communityList.length; i++) {
     await db.collection("communities").doc(communityList[i]).get().then(function(doc) {
       if (doc.exists) {
-        comms += "<li><button id=\"btn"+ i +"\" onClick=\"btnInfo(this.id)\" class=\"linkBtn\" value="+ communityList[i] +">" + doc.data()['name'] + "</button></li>";
+        comms += "<li><button id=\"btn" + i + "\" onClick=\"btnInfo(this.id)\" class=\"linkBtn\" value=" + communityList[i] + ">" + doc.data()['name'] + "</button></li>";
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -187,8 +187,8 @@ async function showCommunity(communityList) {
 }
 
 async function btnInfo(id) {
-      var commUID = document.getElementById(id).value;
-      getCommunityData(commUID);
+  var commUID = document.getElementById(id).value;
+  getCommunityData(commUID);
 }
 
 
@@ -200,17 +200,17 @@ async function submitCreateForm() {
   var city = document.getElementById('communityCity').value;
   var zip = document.getElementById('communityZip').value;
   document.getElementById('createError').hidden = true;
-  
-  if(name != "" && capacity != "" && street != ""
-    && city != "" && zip != "") {
-      await db.collection("communities").add({
+
+  if (name != "" && capacity != "" && street != "" &&
+    city != "" && zip != "") {
+    await db.collection("communities").add({
         capacity: capacity,
         city: city,
         street: street,
         zip: zip,
         name: name,
         tenants: [],
-        tokenIDs:[],
+        tokenIDs: [],
       })
       .then(function(docRef) {
         console.log(docRef.id);
@@ -219,11 +219,10 @@ async function submitCreateForm() {
       .catch(function(error) {
         // error adding user
       });
-    }
-    else {
-      document.getElementById('createError').hidden = false;
-      document.getElementById('createError').innerHTML = "Please fill in all fields.";
-    }  
+  } else {
+    document.getElementById('createError').hidden = false;
+    document.getElementById('createError').innerHTML = "Please fill in all fields.";
+  }
 }
 
 async function addCommunityToAdmin(communityID) {
@@ -234,14 +233,14 @@ async function addCommunityToAdmin(communityID) {
       communities = doc.data()['communities'];
       communities.push(communityID);
       db.collection("users").doc(user.uid).update({
-        communities: communities,
-      })
-      .then(function(val) {
-        window.location.pathname = 'dashboard';
-      })
-      .catch(function(error) {
-        console.log("Error updating user communities:", error);
-      });
+          communities: communities,
+        })
+        .then(function(val) {
+          window.location.pathname = 'dashboard';
+        })
+        .catch(function(error) {
+          console.log("Error updating user communities:", error);
+        });
     } else {
       // doc.data() will be undefined in this case
       console.log("No such user");
@@ -254,48 +253,44 @@ async function addCommunityToAdmin(communityID) {
 
 async function generateToken(commUID) {
   var token = Math.random().toString(36).substring(2, 6) + Math.random().toString(36).substring(2, 6);
-  var date = ""+ new Date();
+  var date = "" + new Date();
 
   await db.collection("tokens").doc(token).get().then(async function(doc) {
     if (doc.exists) {
       // if generated token exists, regenerate
       generateToken();
-    } 
-    else {
+    } else {
       var tokenIDs = [];
       // get current list
-      await db.collection("communities").doc(commUID).get().then(function(doc){
-          if(doc.data()['tokenIDs'].length > 0) {
+      await db.collection("communities").doc(commUID).get().then(function(doc) {
+          if (doc.data()['tokenIDs'].length > 0) {
             tokenIDs = doc.data()['tokenIDs'];
           }
         })
         .catch(function(error) {
           // error
-        }
-      );
+        });
 
       //push new token
       tokenIDs.push(token);
 
       // update community token ids
       await db.collection("communities").doc(commUID).update({
-        tokenIDs:tokenIDs
-      })
-      .catch(function(error) {
-        // error 
-        }
-      );
+          tokenIDs: tokenIDs
+        })
+        .catch(function(error) {
+          // error
+        });
 
       // update tokens db
       await db.collection("tokens").doc(token).set({
-        community: commUID,
-        time: date,
-        inuse: false,
-      })
-      .catch(function(error) {
-        // error 
-        }
-      );
+          community: commUID,
+          time: date,
+          inuse: false,
+        })
+        .catch(function(error) {
+          // error
+        });
 
       // regenerate list
       showTokens(commUID);
@@ -305,7 +300,7 @@ async function generateToken(commUID) {
 
 async function showTokens(commUID) {
   //set add token button to current community
-  document.getElementById('addTokenBtn').onclick = function(){
+  document.getElementById('addTokenBtn').onclick = function() {
     generateToken(commUID)
   };
   var user = firebase.auth().currentUser;
@@ -316,23 +311,22 @@ async function showTokens(commUID) {
   tokenContainer.innerHTML = "";
 
   // get token ids
-  await db.collection('communities').doc(commUID).get().then(function(doc){
+  await db.collection('communities').doc(commUID).get().then(function(doc) {
     tokenIDs = doc.data()['tokenIDs'];
   });
   console.log(tokenIDs);
 
   // check length
-  if(tokenIDs.length < 1) {
+  if (tokenIDs.length < 1) {
     tokenContainer.innerHTML += "No active tokens.";
-  }
-  else {
+  } else {
     var code = "";
     // get token data by id
-    for(var i = 0; i < tokenIDs.length; i++) {
-      code += "<div class=\"d-flex justify-content-between w-100\"> "+
-                  "<a data-toggle=\"tooltip\" data-placement=\"top\" title=\"toggle use\" class=\"nav-link tokenLinks\" onclick=\"toggleToken('"+tokenIDs[i]+"')\">"+tokenIDs[i]+"</a>";
-      await db.collection('tokens').doc(tokenIDs[i]).get().then(function(doc){
-        if(doc.data()['inuse'])
+    for (var i = 0; i < tokenIDs.length; i++) {
+      code += "<div class=\"d-flex justify-content-between w-100\"> " +
+        "<a data-toggle=\"tooltip\" data-placement=\"top\" title=\"toggle use\" class=\"nav-link tokenLinks\" onclick=\"toggleToken('" + tokenIDs[i] + "')\">" + tokenIDs[i] + "</a>";
+      await db.collection('tokens').doc(tokenIDs[i]).get().then(function(doc) {
+        if (doc.data()['inuse'])
           code += "<div class=\"col w-100\">in use</div>";
         else
           code += "<div class=\"col w-100\">not in use</div>";
@@ -349,17 +343,53 @@ async function toggleToken(tokenID) {
   var inuse;
 
   // get current inuse
-  await db.collection('tokens').doc(tokenID).get().then(function(doc){
+  await db.collection('tokens').doc(tokenID).get().then(function(doc) {
     inuse = doc.data()['inuse'];
   });
 
   // toggle inuse
   await db.collection('tokens').doc(tokenID).update({
-    inuse:!inuse,
+    inuse: !inuse,
   }).then(function(doc) {
     // regenerate list
     showTokens(localStorage.getItem("currentCommunity"));
   });
+}
 
-  
+async function getUser(userUID) {
+  var name = "";
+  await db.collection("users").doc(userUID).get().then(function(doc) {
+    if (doc.exists) {
+      name = doc.data()['first'];
+      name += " " + doc.data()['last'];
+    } else {
+      console.log("No such user");
+    }
+  }).catch(function(error) {
+    console.log("Error getting user data:", error);
+  });
+  return name;
+}
+
+async function getMessages(msgType) {
+  var msg = document.getElementById("messages");
+  var data = "";
+  var name = "";
+  var commUID = localStorage.getItem("currentCommunity")
+  console.log("this community: " + commUID);
+  var i = 0;
+  await db.collection("communities").doc(commUID).collection(msgType).get().then(function(snapshot) {
+        snapshot.forEach(async function(doc) {
+            // console.log(doc.id, " => ", doc.data());
+          await getUser(doc.data()['senderId']).then(function(val){
+            name = val;
+            data += "<h5> "+ doc.data()['message'] + " " + name + "</h5>";
+            data += "<h6> "+ doc.data()['isRead'] + "</h6>";
+            msg.innerHTML = data;
+          });
+        });
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
 }
