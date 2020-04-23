@@ -29,6 +29,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.get('/dashboard', function(request,response){
     response.redirect('/dashboard.html');
 });
+app.get('/userDash', function(request,response){
+    response.redirect('/userDash.html');
+});
 
 app.get('/log-in', function(request,response){
     response.redirect('/log-in.html');
