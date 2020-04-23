@@ -10,7 +10,6 @@
             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href="index.css">
     </head>
-    
 
     <body>
         
@@ -185,10 +184,10 @@
 
           // fires as soon as page loads
           window.onload = async function () {
-
             //check if user is signed in
             await firebase.auth().onAuthStateChanged(function(user) {
               if(user) {
+                // if user is signed in get user data
                 db.collection("users").doc(user.uid).get().then(function(doc) {
                   if (doc.exists) {
                     localStorage.setItem("userIsSignedIn","1");
@@ -206,8 +205,6 @@
               else
                 localStorage.setItem("userIsSignedIn","0");
             });
-
-
           }
 
           async function goToDashIfLoggedIn() {
