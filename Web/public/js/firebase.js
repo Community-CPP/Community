@@ -9,6 +9,7 @@ firebase.initializeApp(firebaseConfig);
 // sign out
 async function signOut() {
   await firebase.auth().signOut().then(function() {
+    localStorage.clear();
     // Sign-out successful.
     window.location.pathname = '/';
   }).catch(function(error) {
@@ -60,50 +61,39 @@ async function addUserToDB(uid, firstName, lastName, userCategory, userEmail) {
 
 // on window load, check login state
 window.onload = async function() {
-  
   try {
     await firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        if((window.location.pathname === "/userDash.html")) {
-          document.getElementsByTagName('body')[0].hidden = false;
-          db.collection("users").doc(user.uid).get().then(function(doc) {
-            if (doc.exists) {
-              var navText = document.getElementById('userName');
-              navText.innerHTML = doc.data()['first'] + " " + doc.data()['last'];
 
-              console.log(doc.data()['first']);
-              console.log(doc.data()['last']);
-              console.log(doc.data()['category']);
-
-            } else {
-              console.log("No such document!");
-            }
-          }).catch(function(error) {
-            console.log("Error getting document: ", error);
-          });
+        db.collection("users").doc(user.uid).get().then(function(doc) {
+          if (doc.exists) {
+            var navText = document.getElementById('userName');
+            navText.innerHTML = doc.data()['first'] + " " + doc.data()['last'];
+            localStorage.setItem("userFirst", doc.data()['first']);
+            localStorage.setItem("userLast", doc.data()['last']);
+            localStorage.setItem("userCategory",doc.data()['category']);
+            localStorage.setItem("userUID", user.uid);
+          } else {
+            console.log("No such document!");
+          }
+        }).catch(function(error) {
+          console.log("Error getting document: ", error);
+        });
+        
+        if(localStorage.getItem("userCategory") == "tenant" && 
+          window.location.pathname === "/userDash.html") {
+            document.getElementsByTagName('body')[0].hidden = false;
         }
 
         // on dashboard load
-        if (window.location.pathname === "/dashboard.html") {
+        if (localStorage.getItem("userCategory") == "admin" && 
+          window.location.pathname === "/dashboard.html") {
           document.getElementsByTagName('body')[0].hidden = false;
-          db.collection("users").doc(user.uid).get().then(function(doc) {
-            if (doc.exists) {
-              var navText = document.getElementById('userName');
-              navText.innerHTML = doc.data()['first'] + " " + doc.data()['last'];
-
-              console.log(doc.data()['first']);
-              console.log(doc.data()['last']);
-              console.log(doc.data()['category']);
-
-            } else {
-              console.log("No such document!");
-            }
-            getCommunities();
-          }).catch(function(error) {
-            console.log("Error getting document: ", error);
-          });
+          getCommunities();
+          
         }
-      } else {
+      } 
+      else {
         console.log("Logged out");
         if (window.location.pathname === "/dashboard.html")
           window.location.pathname = "/";
@@ -122,7 +112,11 @@ async function getCommunities() {
     await db.collection("users").doc(user.uid).get().then(function(doc) {
       if (doc.exists) {
         communities = doc.data()['communities'];
-        getCommunityData(communities[0]);
+        if(localStorage.getItem("userUID") == user.uid && localStorage.getItem("currentCommunity") != null) 
+          getCommunityData(localStorage.getItem("currentCommunity"));
+        else 
+          getCommunityData(communities[0]);
+          
         showCommunity(communities);
       } else {
         // doc.data() will be undefined in this case
@@ -135,7 +129,8 @@ async function getCommunities() {
 }
 
 async function getCommunityData(commUID) {
-  console.log("current community: "+commUID);
+  localStorage.setItem("currentCommunity", commUID);
+  console.log("current community: "+localStorage.getItem("currentCommunity"));
 
   await db.collection("communities").doc(commUID).get().then(function(doc) {
     if (doc.exists) {
@@ -176,8 +171,6 @@ async function showCommunity(communityList) {
     await db.collection("communities").doc(communityList[i]).get().then(function(doc) {
       if (doc.exists) {
         comms += "<li><button id=\"btn"+ i +"\" onClick=\"btnInfo(this.id)\" class=\"linkBtn\" value="+ communityList[i] +">" + doc.data()['name'] + "</button></li>";
-        // console.log("COMM NAME = " + doc.data()['name']);
-        // console.log(communityList[i]);
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -194,16 +187,6 @@ async function showCommunity(communityList) {
 async function btnInfo(id) {
       var commUID = document.getElementById(id).value;
       getCommunityData(commUID);
-      // console.log("Showing UID = " + commUID);
-      // await db.collection("communities").doc(commUID).get().then(function(doc) {
-      //   if (doc.exists) {
-      //     showCommunityInfo(doc.data());
-      //   } else {
-      //     console.log("No such document!");
-      //   }
-      // }).catch(function(error) {
-      //   console.log("Error getting document:", error);
-      // });
 }
 
 
@@ -311,11 +294,14 @@ async function generateToken(commUID) {
         // error 
         }
       );
+
+      // regenerate list
+      showTokens(commUID);
     }
   });
 }
 
- async function showTokens(commUID) {
+async function showTokens(commUID) {
   //set add token button to current community
   document.getElementById('addTokenBtn').onclick = function(){
     generateToken(commUID)
@@ -369,7 +355,9 @@ async function toggleToken(tokenID) {
   await db.collection('tokens').doc(tokenID).update({
     inuse:!inuse,
   }).then(function(doc) {
-    // then reload dash
-    window.location.pathname = 'dashboard';
+    // regenerate list
+    showTokens(localStorage.getItem("currentCommunity"));
   });
+
+  
 }
