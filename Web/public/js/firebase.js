@@ -90,7 +90,6 @@ window.onload = async function() {
           window.location.pathname === "/dashboard.html") {
           document.getElementsByTagName('body')[0].hidden = false;
           getCommunities();
-          
         }
       } 
       else {
@@ -115,7 +114,7 @@ async function getCommunities() {
         if(localStorage.getItem("userUID") == user.uid && localStorage.getItem("currentCommunity") != null) 
           getCommunityData(localStorage.getItem("currentCommunity"));
         else {
-          localStorage.setItem("currentCommunity", communities[0]);
+          localStorage.setItem("currentCommunity", commUID);
           getCommunityData(communities[0]);
         }
           
@@ -329,13 +328,24 @@ async function showTokens(commUID) {
     var code = "";
     // get token data by id
     for(var i = 0; i < tokenIDs.length; i++) {
-      code += "<div class=\"d-flex justify-content-between w-100\"> "+
-                  "<a data-toggle=\"tooltip\" data-placement=\"top\" title=\"toggle use\" class=\"nav-link tokenLinks\" onclick=\"toggleToken('"+tokenIDs[i]+"')\">"+tokenIDs[i]+"</a>";
+      
       await db.collection('tokens').doc(tokenIDs[i]).get().then(function(doc){
-        if(doc.data()['inuse'])
+        if(doc.data()['inuse']) {
+          code += "<div class=\"d-flex justify-content-between w-100 \"> "+
+                  "<a data-toggle=\"tooltip\" data-placement=\"top\" title=\"toggle use\"" +
+                    "class=\"nav-link tokenLinks\" onclick=\"return false;\">"+
+                    tokenIDs[i]+
+                  "</a>";
           code += "<div class=\"col w-100\">in use</div>";
-        else
+        }
+        else {
+          code += "<div class=\"d-flex justify-content-between w-100 \"> "+
+                  "<a data-toggle=\"tooltip\" data-placement=\"top\" title=\"toggle use\"" +
+                    "class=\"nav-link tokenLinks inuse\" onclick=\"toggleToken('"+tokenIDs[i]+"')\">"+
+                    tokenIDs[i]+
+                  "</a>";
           code += "<div class=\"col w-100\">not in use</div>";
+        }
       });
       code += "</div><hr class=\"bg-light\"/>";
       tokenContainer.innerHTML = code;
@@ -344,22 +354,11 @@ async function showTokens(commUID) {
 }
 
 async function toggleToken(tokenID) {
-
-  var user = firebase.auth().currentUser;
-  var inuse;
-
-  // get current inuse
-  await db.collection('tokens').doc(tokenID).get().then(function(doc){
-    inuse = doc.data()['inuse'];
-  });
-
   // toggle inuse
   await db.collection('tokens').doc(tokenID).update({
-    inuse:!inuse,
+    inuse: true,
   }).then(function(doc) {
-    // regenerate list
+    // regenerate token list
     showTokens(localStorage.getItem("currentCommunity"));
   });
-
-  
 }
