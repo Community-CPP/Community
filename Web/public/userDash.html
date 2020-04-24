@@ -9,6 +9,11 @@
   <link rel="stylesheet" href="dashboard.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+  <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body hidden="true">
@@ -87,7 +92,7 @@
 
       <div class="row cardRow text-white">
         <div class="card w-100 shortcard1">
-          <h5 class="header bg-dark text-white card-title p-1">Maintenance</h5>
+          <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Maintenance<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">+</button></h5>
           <div class="card-body">
 
           </div>
@@ -114,80 +119,8 @@
 
       <div class="row cardRow">
         <div class="card w-100 tallcard2  ">
-          <h5 class="header bg-dark text-white card-title p-1">Pay Rent</h5>
-          <div class="card-body">
-            <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
-                <!-- Credit card form tabs -->
-                <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
-                    <li class="nav-item"> <a data-toggle="pill" href="#credit-card" class="nav-link active "> <i class="fas fa-credit-card mr-2"></i> Credit Card </a> </li>
-                    <li class="nav-item"> <a data-toggle="pill" href="#paypal" class="nav-link "> <i class="fab fa-paypal mr-2"></i> Paypal </a> </li>
-                    <li class="nav-item"> <a data-toggle="pill" href="#net-banking" class="nav-link "> <i class="fas fa-mobile-alt mr-2"></i> Net Banking </a> </li>
-                </ul>
-            </div>
-            <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
-            <div class="tab-content">
-                <!-- credit card info-->
-                <div id="credit-card" class="tab-pane fade show active pt-3">
-                    <form role="form ">
-                                <h6 >Card Owner</h6>
-                            </label> <input type="text" name="username" placeholder="Card Owner Name" required class="form-control ">
-                        <div class="form-group"> <label for="cardNumber">
-                                <h6>Card number</h6>
-                            </label>
-                            <div class="input-group"> <input type="text" name="cardNumber" placeholder="Valid card number" class="form-control " required>
-                                <div class="input-group-append"> <span class="input-group-text text-muted"> <i class="fab fa-cc-visa mx-1"></i> <i class="fab fa-cc-mastercard mx-1"></i> <i class="fab fa-cc-amex mx-1"></i> </span> </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-8">
-                                <div class="form-group"> <label><span class="hidden-xs">
-                                            <h6>Expiration Date</h6>
-                                        </span></label>
-                                    <div class="input-group"> <input type="number" placeholder="MM" name="" class="form-control" required> <input type="number" placeholder="YY" name="" class="form-control" required> </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group mb-4"> <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
-                                        <h6>CVV <i class="fa fa-question-circle d-inline"></i></h6>
-                                    </label> <input type="text" required class="form-control"> </div>
-                            </div>
-                        </div>
-                        <div class="card-footer"> <button type="button" class="subscribe btn btn-primary btn-block shadow-sm"> Confirm Payment </button>
-                    </form>
-                </div>
-            </div> <!-- End -->
-            <!-- Paypal info -->
-            <div id="paypal" class="tab-pane fade pt-3">
-                <h6 class="pb-2">Select your paypal account type</h6>
-                <div class="form-group "> <label class="radio-inline"> <input type="radio" name="optradio" checked> Domestic </label> <label class="radio-inline"> <input type="radio" name="optradio" class="ml-5">International </label></div>
-                <p> <button type="button" class="btn btn-primary "><i class="fab fa-paypal mr-2"></i> Log into my Paypal</button> </p>
-                <p class="text-muted"> Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
-            </div> <!-- End -->
-            <!-- bank transfer info -->
-            <div id="net-banking" class="tab-pane fade pt-3">
-                <div class="form-group "> <label for="Select Your Bank">
-                        <h6>Select your Bank</h6>
-                    </label> <select class="form-control" id="ccmonth">
-                        <option value="" selected disabled>--Please select your Bank--</option>
-                        <option>Bank 1</option>
-                        <option>Bank 2</option>
-                        <option>Bank 3</option>
-                        <option>Bank 4</option>
-                        <option>Bank 5</option>
-                        <option>Bank 6</option>
-                        <option>Bank 7</option>
-                        <option>Bank 8</option>
-                        <option>Bank 9</option>
-                        <option>Bank 10</option>
-                    </select> </div>
-                <div class="form-group">
-                    <p> <button type="button" class="btn btn-primary "><i class="fas fa-mobile-alt mr-2"></i> Proceed Pyment</button> </p>
-                </div>
-                <p class="text-muted">Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
-            </div>
-        </div>
-          </div> <!-- End -->
-          </div>
+          <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Pay Rent<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">+</button></h5>
+          
         </div>
       </div>
     </div>
@@ -205,10 +138,7 @@
 
       <div class="row cardRow">
         <div class="card w-100 shortcard3 text-white">
-          <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">
-            Tokens
-            <button class="btn btn-primary" id="addTokenBtn"class="btn btn-primary">+</button>
-          </h5>
+          <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Private Messages</h5>
           <div class="card-body" id="tokensContainer">
 
           </div>
@@ -249,19 +179,137 @@
         </div>
       </div>
     </div>
+  </div></div>
+  <!-- Create Community Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModal1Label" aria-hidden="true" style="color:white">
+  <div class="modal-dialog " role="document" >
+    <div class="modal-content bg-dark" >
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal1Label">Maintenance Calendar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="container formContainer">
+        <div class="formWrapper bg-dark text-white">
+          <div class="row align-middle justify-content-center align-items-center">
+            <div class="col">
+              <label for="name">Pick a Date</label>
+            
+              <br/>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center text-danger">
+            <label class="errorLabel" id="createError" hidden="true"></label>
+          </div>
+        <div class="calWrap">
+          <input id="datepicker" width="276"/>
+        </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="submitCreateForm();return false;">Schedule Maintenance</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Create Community Modal -->
+  <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true" style="color:white">
+    <div class="modal-dialog " role="document" >
+      <div class="modal-content bg-dark" >
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModal2Label">Schedule a Payment</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="container formContainer">
+          <div class="formWrapper bg-dark text-white">
+            <div class="row align-middle justify-content-center align-items-center">
+              <div class="col">
+                <label for="name">Choose a Payment Method</label>
+        
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="bg-dark shadow-sm pt-4 pl-2 pr-2 pb-2">
+                  <!-- Credit card form tabs -->
+                  <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
+                      <li class="nav-item"> <a data-toggle="pill" href="#credit-card" class="nav-link active "> <i class="fas fa-credit-card mr-2"></i> Credit Card </a> </li>
+                      <li class="nav-item"> <a data-toggle="pill" href="#paypal" class="nav-link "> <i class="fab fa-paypal mr-2"></i> Paypal </a> </li>
+                      <li class="nav-item"> <a data-toggle="pill" href="#net-banking" class="nav-link "> <i class="fas fa-mobile-alt mr-2"></i> Net Banking </a> </li>
+                  </ul>
+              </div>
+              <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
+              <div class="tab-content">
+                  <!-- credit card info-->
+                  <div id="credit-card " class="tab-pane fade show active pt-3 text-muted">
+                      <form role="form ">
+                                  <h6 >Card Owner</h6>
+                              </label> <input type="text" name="username" placeholder="Card Owner Name" required class="form-control ">
+                          <div class="form-group"> <label for="cardNumber">
+                                  <h6>Card number</h6>
+                              </label>
+                              <div class="input-group"> <input type="text" name="cardNumber" placeholder="Valid card number" class="form-control " required>
+                                  <div class="input-group-append"> <span class="input-group-text text-muted"> <i class="fab fa-cc-visa mx-1"></i> <i class="fab fa-cc-mastercard mx-1"></i> <i class="fab fa-cc-amex mx-1"></i> </span> </div>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-sm-8">
+                                  <div class="form-group"> <label><span class="hidden-xs">
+                                              <h6>Expiration Date</h6>
+                                          </span></label>
+                                      <div class="input-group"> <input type="number" placeholder="MM" name="" class="form-control" required> <input type="number" placeholder="YY" name="" class="form-control" required> </div>
+                                  </div>
+                              </div>
+                              <div class="col-sm-4">
+                                  <div class="form-group mb-4"> <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
+                                          <h6>CVV <i class="fa fa-question-circle d-inline"></i></h6>
+                                      </label> <input type="text" required class="form-control"> </div>
+                              </div>
+                          </div>
+                          <div class="card-footer"> <button type="button" class="subscribe btn btn-primary btn-block shadow-sm"> Confirm Payment </button>
+                      </form>
+                  </div>
+              </div> <!-- End -->
+              <!-- Paypal info -->
+              <div id="paypal" class="tab-pane fade pt-3 text-muted">
+                  <h6 class="pb-2">Select your paypal account type</h6>
+                  <div class="form-group "> <label class="radio-inline"> <input type="radio" name="optradio" checked> Domestic </label> <label class="radio-inline"> <input type="radio" name="optradio" class="ml-5">International </label></div>
+                  <p> <button type="button" class="btn btn-primary "><i class="fab fa-paypal mr-2"></i> Log into my Paypal</button> </p>
+                  <p class="text-muted"> Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
+              </div> <!-- End -->
+              <!-- bank transfer info -->
+              <div id="net-banking" class="tab-pane fade pt-3 text-muted">
+                  <div class="form-group "> <label for="Select Your Bank">
+                          <h6>Select your Bank</h6>
+                      </label> <select class="form-control" id="ccmonth">
+                          <option value="" selected disabled>--Please select your Bank--</option>
+                          <option>Bank 1</option>
+                          <option>Bank 2</option>
+                      </select> </div>
+                  <div class="form-group">
+                      <p> <button type="button" class="btn btn-primary "><i class="fas fa-mobile-alt mr-2"></i> Proceed Pyment</button> </p>
+                  </div>
+                  <p class="text-muted">Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
+              </div>
+              </div>
+            </div> <!-- End -->
+            </div>
+          
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   
 
-  <!-- The core Firebase JS SDK -->
   <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
-  <script src="js/firebase.js"></script>
-
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
+<script src="js/firebase.js"></script>
 
   <script type="text/javascript">
     window.onload = async function() {
@@ -279,9 +327,16 @@
       else
         window.location.pathname = "/";
     }
-
+    $('#datepicker').datepicker({
+      uiLibrary: 'bootstrap4'
+  });
   </script>
+<!-- The core Firebase JS SDK -->
 
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 
 </html>

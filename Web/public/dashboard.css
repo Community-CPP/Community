@@ -132,3 +132,7 @@ body {
   cursor: pointer;
   opacity: .5;
 }
+.calWrap{
+  width: 276px;
+  background-color: white;
+}
