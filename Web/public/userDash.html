@@ -181,57 +181,15 @@
     </div>
   </div></div>
   <!-- Create Community Modal -->
-<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModal1Label" aria-hidden="true" style="color:white">
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true" style="color:white">
   <div class="modal-dialog " role="document" >
     <div class="modal-content bg-dark" >
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModal1Label">Maintenance Calendar</h5>
+        <h5 class="modal-title" id="exampleModal2Label">Payment Methods</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="container formContainer">
-        <div class="formWrapper bg-dark text-white">
-          <div class="row align-middle justify-content-center align-items-center">
-            <div class="col">
-              <label for="name">Pick a Date</label>
-            
-              <br/>
-            </div>
-          </div>
-          <div class="row d-flex justify-content-center text-danger">
-            <label class="errorLabel" id="createError" hidden="true"></label>
-          </div>
-        <div class="calWrap">
-          <input id="datepicker" width="276"/>
-        </div>
-          
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onclick="submitCreateForm();return false;">Schedule Maintenance</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-  <!-- Create Community Modal -->
-  <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true" style="color:white">
-    <div class="modal-dialog " role="document" >
-      <div class="modal-content bg-dark" >
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModal2Label">Schedule a Payment</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="container formContainer">
-          <div class="formWrapper bg-dark text-white">
-            <div class="row align-middle justify-content-center align-items-center">
-              <div class="col">
-                <label for="name">Choose a Payment Method</label>
-        
-              </div>
-            </div>
             <div class="card-body">
               <div class="bg-dark shadow-sm pt-4 pl-2 pr-2 pb-2">
                   <!-- Credit card form tabs -->
@@ -244,7 +202,7 @@
               <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
               <div class="tab-content">
                   <!-- credit card info-->
-                  <div id="credit-card " class="tab-pane fade show active pt-3 text-muted">
+                  <div id="credit-card" class="tab-pane fade show active pt-3 text-muted">
                       <form role="form ">
                                   <h6 >Card Owner</h6>
                               </label> <input type="text" name="username" placeholder="Card Owner Name" required class="form-control ">
@@ -288,25 +246,94 @@
                           <option value="" selected disabled>--Please select your Bank--</option>
                           <option>Bank 1</option>
                           <option>Bank 2</option>
+                          <option>Bank 3</option>
                       </select> </div>
                   <div class="form-group">
                       <p> <button type="button" class="btn btn-primary "><i class="fas fa-mobile-alt mr-2"></i> Proceed Pyment</button> </p>
                   </div>
                   <p class="text-muted">Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
               </div>
-              </div>
-            </div> <!-- End -->
-            </div>
-          
           </div>
+            </div> <!-- End -->
+            
+          </div>
+        
+      </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+  <!-- Create Community Modal -->
+<!-- Create Community Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color:white">
+  <div class="modal-dialog " role="document" >
+    <div class="modal-content bg-dark" >
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enter token for current Community</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="container formContainer">
+        <div class="formWrapper bg-dark text-white">
+          <div class="row align-middle justify-content-center align-items-center">
+            <div class="col">
+              <label for="name">Token</label>
+              <input type="text"class="form-control" id="communityNameField">
+              <label class="errorLabel" id="communityNameFeildError" hidden='true'></label>
+              <br/>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center text-danger">
+            <label class="errorLabel" id="createError" hidden="true"></label>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="submitCreateForm();return false;">Add Community</button>
+        </div>
+      </div>
+    </div>
+  </div></div>
+  <!-- Create Community Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModal1Label" aria-hidden="true" style="color:white">
+  <div class="modal-dialog " role="document" >
+    <div class="modal-content bg-dark" >
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal1Label">Maintenance Calendar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="container formContainer">
+        <div class="formWrapper bg-dark text-white">
+          <div class="row align-middle justify-content-center align-items-center">
+            <div class="col">
+              <label for="name">Pick a Date</label>
+            
+              <br/>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center text-danger">
+            <label class="errorLabel" id="createError" hidden="true"></label>
+          </div>
+        <div class="calWrap">
+          <input id="datepicker" width="276"/>
+        </div>
+      </br>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="submitCreateForm();return false;">Schedule Maintenance</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
   
 
-  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
 <script src="js/firebase.js"></script>
