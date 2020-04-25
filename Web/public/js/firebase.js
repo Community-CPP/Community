@@ -2,6 +2,7 @@
 
 // Initialize Firebase
 
+
 firebase.initializeApp(firebaseConfig);
 
 
@@ -91,7 +92,6 @@ window.onload = async function() {
           window.location.pathname === "/dashboard.html") {
           document.getElementsByTagName('body')[0].hidden = false;
           getCommunities();
-
         }
       } else {
         console.log("Logged out");
@@ -138,6 +138,7 @@ async function getCommunityData(commUID) {
     if (doc.exists) {
       showCommunityInfo(doc.data());
       showTokens(commUID);
+      getMessages("publicMessages");
       console.log(doc.data);
     } else {
       console.log("No such document!");
@@ -189,6 +190,7 @@ async function showCommunity(communityList) {
 async function btnInfo(id) {
   var commUID = document.getElementById(id).value;
   getCommunityData(commUID);
+  getMessages("publicMessages");
 }
 
 
@@ -375,21 +377,64 @@ async function getMessages(msgType) {
   var msg = document.getElementById("messages");
   var data = "";
   var name = "";
+  var userUID = "";
   var commUID = localStorage.getItem("currentCommunity")
   console.log("this community: " + commUID);
   var i = 0;
   await db.collection("communities").doc(commUID).collection(msgType).get().then(function(snapshot) {
-        snapshot.forEach(async function(doc) {
-            // console.log(doc.id, " => ", doc.data());
-          await getUser(doc.data()['senderId']).then(function(val){
+      snapshot.forEach(async function(doc) {
+        if(JSON.stringify(doc.data()) != '{}') { //might want to change the condition if the database for communities doesn't have the collection for messages yet
+          // console.log(doc.id, " => ", doc.data());
+          userUID = doc.data()['senderId'];
+          await getUser(userUID).then(function(val) {
             name = val;
-            data += "<h5> "+ doc.data()['message'] + " " + name + "</h5>";
-            data += "<h6> "+ doc.data()['isRead'] + "</h6>";
+            data += "<li><button id=\"sender" + i + "\" onClick=\"showMessages('" + userUID + "','" + msgType + "','" + commUID +"')\" class=\"linkBtn\">" + name + "</button></li>";
+            // data += "<p>" + subject + "</p>";
+            // data += "<p>" + message + ": " + status + "</p>";
             msg.innerHTML = data;
+            i++;
           });
-        });
+        } else {
+          console.log("No Data");
+          data += "<h6> No Messages </h6>";
+          msg.innerHTML = data;
+        }
+      });
     })
     .catch(function(error) {
-        console.log("Error getting documents: ", error);
+      console.log("Error getting documents: ", error);
     });
+}
+
+async function getUserMsg(msgType, commUID, msgUID) {
+  await db.collection("communities").doc(commUID).collection(msgType).doc(msgUID).get().then(function(doc) {
+    if (doc.exists) {
+      console.log(doc.data());
+      // doc.data()["subject"];
+      // doc.data()["message"];
+      // doc.data()["isRead"];
+    } else {
+      console.log("No");
+    }
+  }).catch(function(error) {
+    console.log("Error getting user data:", error);
+  });
+}
+
+async function showMessages(userUID, msgType, commUID) {
+  var arr = "";
+  await db.collection("users").doc(userUID).get().then(function(doc) {
+    if (doc.exists) {
+      arr = doc.data()[msgType]
+      for(var i in arr) {
+        // console.log(arr[i]);
+        getUserMsg(msgType, commUID, arr[i])
+      }
+    } else {
+      console.log("No messages");
+    }
+  }).catch(function(error) {
+    console.log("Error getting user data:", error);
+  });
+  // console.log(msgType + "ASDASDASD" + userUID)
 }
