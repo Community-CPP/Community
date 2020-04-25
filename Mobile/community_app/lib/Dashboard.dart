@@ -40,7 +40,7 @@ class _DashboardState extends State<Dashboard>{
                     child: Text(heading,
                     style: TextStyle(
                       color: new Color(color),
-                      fontSize: 20.0,
+                      fontSize: 15.0,
                     ),
                     ),
                   ),
@@ -120,25 +120,25 @@ class _DashboardState extends State<Dashboard>{
       crossAxisSpacing: 12.0,
       mainAxisSpacing: 12.0,
       padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      // children: <Widget>[
-      //   //myItems(Icons.account_circle, "Profile", 0xffed622b),
-      //   //myItems(Icons.notifications, "Notification", 0xffff3266, ),
-      //   //myItems(Icons.bookmark, "Appartment Info", 0xff26cb3c, ),
-      //   // myItems(Icons.attach_money, "Balance", 0xff3399fe, ),
-      //   // myItems(Icons.message, "Repair History", 0xff7297ff, ),
-      //   // myItems(Icons.payment, "Payment History", 0xff622F74, ),
-      //   // myItems(Icons.settings, "Settings", 0xfff4c83f,)
-      //   ],
+      children: <Widget>[
+        myItems(Icons.account_circle, "Profile", 0xffed622b),
+        myItems(Icons.notifications, "Notification", 0xffff3266, ),
+        myItems(Icons.bookmark, "Appartment Info", 0xff26cb3c, ),
+        myItems(Icons.attach_money, "Balance", 0xff3399fe, ),
+        myItems(Icons.message, "Repair History", 0xff7297ff, ),
+        myItems(Icons.payment, "Payment History", 0xff622F74, ),
+        myItems(Icons.settings, "Settings", 0xfff4c83f,)
+        ],
 
-      // staggeredTiles: [
-      //   // StaggeredTile.extent(2, 130.0),
-      //   // StaggeredTile.extent(1, 130.0),
-      //   // StaggeredTile.extent(1, 130.0),
-      //   // StaggeredTile.extent(1, 130.0),
-      //   // StaggeredTile.extent(1, 130.0),
-      //   // StaggeredTile.extent(1, 130.0),
-      //   // StaggeredTile.extent(1, 130.0),
-      // ],
+      staggeredTiles: [
+        StaggeredTile.extent(2, 130.0),
+        StaggeredTile.extent(1, 130.0),
+        StaggeredTile.extent(1, 130.0),
+        StaggeredTile.extent(1, 130.0),
+        StaggeredTile.extent(1, 130.0),
+        StaggeredTile.extent(1, 130.0),
+        StaggeredTile.extent(1, 130.0),
+      ],
     ),
 
         drawer: new Drawer(
@@ -191,7 +191,7 @@ class _DashboardState extends State<Dashboard>{
                     title: new Text('Sign Out'),
                     onTap: (){
                        _auth.signOut();
-                      Navigator.pop(this.context);
+                      Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
                       //Navigator.of(context).pop();
                       //Navigator.push(context, new MaterialPageRoute(
                           //builder: (BuildContext context) => new Login()));

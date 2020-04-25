@@ -15,6 +15,7 @@ class _SignUpState extends State<SignUp> {
   String _email;
   String _password;
   String _category;
+  List<bool> isSelected = [false,true];
   AuthService _authGetUser = new AuthService();
 
   @override
@@ -58,16 +59,37 @@ class _SignUpState extends State<SignUp> {
                       //obscureText: true,
                       decoration: InputDecoration(labelText: "Password")),
                       SizedBox(height: 20.0),
-                  TextFormField(
-                      onChanged: (value) => setState(()=>_category = value),
-                      decoration: InputDecoration(labelText: "Category")),
-                      SizedBox(height: 20.0),
+                  ToggleButtons(
+                      children: <Widget>[
+                        Text("Create"),
+                        Text("Join"),
+                      ],
+                      onPressed: (int index) {
+                        setState(() {
+                            for (int buttonIndex = 0; buttonIndex < isSelected.length; buttonIndex++) {
+                              if (buttonIndex == index) {
+                                isSelected[buttonIndex] = true;
+                              } else {
+                                isSelected[buttonIndex] = false;
+                              }
+                            }
+                          });
+                      },
+                      isSelected: isSelected,
+                    ),
+                                          SizedBox(height: 20.0),
                   RaisedButton(
                     child: Text("Create Account"),
                     textColor: Colors.white,
                     color: Colors.black54,
                     onPressed: () {
+
+                      if(isSelected[0])
+                        _category = "admin";
+                      else
+                        _category = "tenant";
                       _authGetUser.registerWithEmail(_email, _password, _firstName, _lastName, _category);
+                      Navigator.pop(context);
                     //Navigator.push(context, new MaterialPageRoute(
                       //builder: (BuildContext context) => Dashboard()));
                       }

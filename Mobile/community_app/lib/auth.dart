@@ -42,9 +42,12 @@ class AuthService {
       //await  DatabaseService(uid: user.uid).setUserData(fname, lname,user.email,0);
       Firestore.instance.collection('users').document(user.uid).setData({
       'category' : category,
+      'communities' : [],
       'first' : fname,
       'last' : lname,
       'email' : email,
+      'privateMessages' : [],
+      'publicMessages' : [],
       //'favoriteSpots' : <String>[],
       //'mySpots' : <String>[],
     });
