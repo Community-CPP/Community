@@ -25,7 +25,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="dashboard">
+         <!-- <a class="nav-link" href="dashboard">
             <svg class="bi bi-house-door" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd"
                 d="M7.646 1.146a.5.5 0 01.708 0l6 6a.5.5 0 01.146.354v7a.5.5 0 01-.5.5H9.5a.5.5 0 01-.5-.5v-4H7v4a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5v-7a.5.5 0 01.146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 01.5-.5h3a.5.5 0 01.5.5v4h3.5V7.707L8 2.207l-5.5 5.5z"
@@ -33,7 +33,7 @@
               <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 01.5-.5h1a.5.5 0 01.5.5z" clip-rule="evenodd" />
             </svg>
             Dashboard
-          </a>
+          </a>-->
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -45,7 +45,7 @@
             Info
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a id="dropItem1" class="dropdown-item" href="#">About Us</a>
+            <a id="dropItem1" class="dropdown-item"  data-toggle="modal" data-target="#infoModal">About Us</a>
             <div class="dropdown-divider"></div>
             <a id="dropItem2" class="dropdown-item" href="https://github.com/Community-CPP/Community">Github</a>
           </div>
@@ -94,7 +94,7 @@
         <div class="card w-100 shortcard1">
           <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Maintenance<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">+</button></h5>
           <div class="card-body">
-
+           
           </div>
         </div>
       </div>
@@ -129,7 +129,7 @@
     <div class="col">
       <div class="row cardRow">
         <div class="card w-100 tallcard3 text-white">
-          <h5 class="header bg-dark text-white card-title p-1">Public Messages</h5>
+          <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Messages<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#privateMessageModal">+</button></h5>
           <div class="card-body">
 
           </div>
@@ -138,7 +138,7 @@
 
       <div class="row cardRow">
         <div class="card w-100 shortcard3 text-white">
-          <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Private Messages</h5>
+          <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Under Construction</h5>
           <div class="card-body" id="tokensContainer">
 
           </div>
@@ -232,8 +232,7 @@
                   </div>
               </div> <!-- End -->
               <!-- Paypal info -->
-              <div id="paypal" class="tab-pane fade pt-3 text-muted">
-                
+              <div id="paypal" class="tab-pane fade pt-3 text-muted">         
                   <h6 class="pb-2" >Select your paypal account type</h6>
                   <div class="form-group "> <label class="radio-inline" > <input type="radio" name="optradio" checked> Domestic </label> <label class="radio-inline"> <input type="radio" name="optradio" class="ml-5">International </label></div>
                   <p> <button type="button" class="btn btn-primary "><i class="fab fa-paypal mr-2"></i> Log into my Paypal</button> <img id="dimg_4" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHwAAAAhCAMAAAAs0D+lAAAAw1BMVEX///8AL4YAnN4BIGlPb6sAKXsvVZxPu+ilttQLoN8DMYckquOHncYEnt8vruT5/f719/o6XqLP2OgfSJXn6/Rng7edr9DC5/cKN4sVQJBif7XR7fnr9/wXpeGPpMpoxOt9lcF3yu214vWq3vRAtebh8/uT1fEBMXworONGaKcnT5m+yuDj6PLt8PYQPI4zUI2ywNoBPIcAb7aI0fB+lsIASpQAfMJyjLwBMHsBRpAAYaoAk9af2vPF0OMAUqMAh81OntHccMZiAAADkklEQVRYhe1X2WLaMBAUimtz+uA2MRiDDYEAzVnalB7//1XV7kpGsmlC8kBfOg9YlhSNtDs7chgTCCo56mGwv2UXRLtSQLC5HHm1SF7pbC9GPi2RV/YXI7fK5LuLkdtl8kr3UuRD4vuU44LkG8l9peHzdWGO3GBluO61z1l01uKEmptkp8ZhSDzvTpAvawNjbl/LSL1/BnnCjyislY+PxbNJa+rcV/d87Olz97oehmfYgKORF9bKx1PxHJ0gf+B8rs/FgrCDdR2nTt4mbwBp6jaIvXx0V/TGLDdXg1wMPepz13Bgsf9NeJ4LeEDpisYAc38ojddE70I0duWUi4PzRJvrw4ntPARP2NntlqOpcM3lySgEGEUvi/LxTMajW9bbM5f7UkD3HzEVpipjt5bQ/9Bqj2zbnrCe+B3R1KZoBv6Bq9iNoSVqZ56KGNTiLHVdd4Zi52IvtyXy51Ke0P2bsAtM+sbrKSeE9ynJBksQV7NI7DPxPkfBsShV2qNAPEqx9wspX36h+tBj+oSZrvb3mKKV0qhElShhc9uOaIRdEvtifogx5Ynn6uIXgYil2GUVXX1dLpf3316+ywmxnkLD/ett3O9w3292KvLIoMOAycq5Y+zGqLQIAzFODgnojLe8XOwrWvGXsTfeMixOd3/hMaD9EIp9C6R1nzFIQ31L6ekJbbW0pWqDCF5dkNs1tBqMKbHT7kOT29B67v4Y8zbJj2wOSDvi+QO7NpCVtS/FLk/hZOwgRScAuXdI7EISPq350+Q2gk7uHzYnk8kdXDgTeKXPjRFKQB7BWmFSlMxuHheLxQzOG0t5MTKXhA1gPMu/oV506puZwU3uPzXlh9eeD2FHy8n9F2SHYtYs0snJMwj7gS04XSvyG+qBaBuOEy8KN5p0/2r+iicHSt/KE6C+A4OcjR+XidVeIvcodvA/+Q1FemtF7BSOZcyORMG0R3L5gZ1rbO82eXBbx1rFnHMniVHswlxSmVlZRVRh7klutDXQtMJKrzyZfcyFCo/UtII3NiqPbA/8j6poR/3OafKd1LTCho5c6cCuQurD9EmLzYprDejIHG+5lEUqDXVd7MZNdsTIsqyq3rGd2sNd0Nz2xQDVXBekp764I0fAEG0WN2rj9OAlOOCL3xgiubcAv4ncuMPfBayyD/6rExN5SefnYmIW4/tAl07r7xf062iDBdof/ev0Nb29DXDZ8Kyv2v/49/gDggM98lgyTiEAAAAASUVORK5CYII=" class="rISBZc M4dUYb" height="33" title="https://www.paypal.com/us/home" width="124" alt="Image result for paypal" data-atf="1" style="width: 90px; height: 24px; margin-left: 1px; margin-right: 1px; margin-top: 0px;"></p>
@@ -241,8 +240,7 @@
               </div> <!-- End -->
               <!-- bank transfer info -->
               <div id="net-banking" class="tab-pane fade pt-3 text-muted">
-                  <div class="form-group "> <label for="Select Your Bank">
-                    
+                  <div class="form-group "> <label for="Select Your Bank">                   
                     <img alt="Bank transfer logo - Free logo icons" class="n3VNCb" src="https://imageog.flaticon.com/icons/png/512/38/38978.png?size=1200x630f&amp;pad=10,10,10,10&amp;ext=png&amp;bg=FFFFFFFF" jsname="HiaYvf" jsaction="load:XAeZkd;" data-iml="51397.85999999731" style="width: 100%; height: 202.125px; margin: 46.0875px 0px;">
                           <h6>Select your Bank </h6>
                       </label> <select class="form-control" id="ccmonth">
@@ -253,15 +251,12 @@
                       </select> </div>
                   <div class="form-group">
                       <p> <button type="button" class="btn btn-primary "><i class="fas fa-mobile-alt mr-2"></i> Proceed Pyment</button> <button type="button" class="btn btn-primary "style="float: right"><i class="fas fa-mobile-alt mr-2"></i> Add Bank Account</button></p>
-                  
                   </div>
                   <p class="text-muted">Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
               </div>
+            </div>
+          </div> <!-- End -->            
           </div>
-            </div> <!-- End -->
-            
-          </div>
-        
       </div>
         </div>
       </div>
@@ -321,6 +316,7 @@
           <div class="row d-flex justify-content-center text-danger">
             <label class="errorLabel" id="createError" hidden="true"></label>
           </div>
+          
         <div class="calWrap">
           <input id="datepicker" width="276"/>
         </div>
@@ -333,8 +329,138 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="privateMessageModal" tabindex="-1" role="dialog" aria-labelledby="privateMessageModalLabel" aria-hidden="true" style="color:white">
+  <div class="modal-dialog " role="document" >
+    <div class="modal-content bg-dark" >
+      <div class="modal-header">
+        <h5 class="modal-title" id="privateMessageModalLabel">Messages</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="container formContainer">
+        <div class="formWrapper bg-dark text-white">
+          <div class="row align-middle justify-content-center align-items-center">
+            <div class="col">
+              <br/>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center text-danger">
+            <label class="errorLabel" id="createError" hidden="true"></label>
+          </div>
+          <label for="name">Subject</label>
+          <textarea id="subjectPrivateText" rows="1" cols="50"></textarea>
+          <br/>
+          <label for="name">Message</label>
+          <textarea id="privateText" rows="7" cols="50"></textarea>
+      </br><br/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="submitCreateForm();return false;">Submit Message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true" style="color:white">
+  <div class="modal-dialog " role="document" >
+    <div class="modal-content bg-dark" >
+      <div class="modal-header">
+        <h5 class="modal-title" id="infoModalLabel">Meet the Team</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="container formContainer">
+        <div class="formWrapper bg-dark text-white">
+          <!--
+-->
+          
+            <div id="carouselExampleIndicators" class="carousel slide " data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0"  class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+              </ol>
+              <div class="carousel-inner">
+              
+                <div class="carousel-item active">
+                </br><h2 class ="h2carousel">Team Leader</h2>
+                     <a href="https://github.com/pedro12133"><div class="card1 bg-dark justify-content-center align-items-center">
+                        <img src="/image/pedro.jpg" alt="Avatar" class="avatar" style="width:100%">
+                         </a><div class="container">
+                        <h4><b>Pedro Beltran</b></h4> 
+                        <p>Software Engineer</p> 
+                        </br>
+                      </div>
+                    </div>
+                    </br>
+                </div>
+                
+                <div class="carousel-item">
+                  </br><h2 class="h2carousel">Middle and Back End</h2>
+                  <a href="https://www.linkedin.com/in/hengalvin/"><div class="card1 bg-dark justify-content-center align-items-center">
+                        <img src="/image/alvin.jpeg" alt="Avatar" class="avatar" style="width:100%">
+                       <div class="container">
+                         </a><h4><b>Alvin Heng</b></h4> 
+                        <p>Software Engineer</p> 
+                        </br>
+                      </div>
+                    </div>
+                    </br>
+                </div>
+                <div class="carousel-item">
+                </br><h2 class="h2carousel">Front and Middle End</h2>
+                <a href="https://www.linkedin.com/in/milush-yanev/"><div class="card1 bg-dark justify-content-center align-items-center">
+                        <img src="/image/milush.jpeg" alt="Avatar" class="avatar" style="width:100%">
+                        </a><div class="container">
+                        <h4><b>Milush Yanev</b></h4> 
+                        <p>Software Engineer</p> 
+                        </br>
+                      </div>
+                    </div>
+                    </br>
+                </div>
+                
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
+
+
+<h2>Team Leader</h2>
+<div class="card1 bg-dark justify-content-center align-items-center">
+  <img src="/image/pedro.jpg" alt="Avatar" class="avatar" style="width:100%">
+  <div class="container">
+    <h4><b>Pedro Beltran</b></h4> 
+    <p>Architect & Engineer</p> 
+  </br>
   
+  </div>
+</div>
+<h2>Team Leader</h2>
+<div class="card1 bg-dark justify-content-center align-items-center">
+  <img src="/image/pedro.jpg" alt="Avatar" class="avatar" style="width:100%">
+  <div class="container">
+    <h4><b>Pedro Beltran</b></h4> 
+    <p>Architect & Engineer</p> 
+  </br>
+  
+  </div>
+</div>
 
 <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
