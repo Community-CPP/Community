@@ -211,13 +211,46 @@
   <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
   <script src="js/firebase.js"></script>
+  <script src="js/user.js"></script>
 
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
   <script type="text/javascript">
-    
+    // User object of current signed in user (see js/user.js)
+    var currentUser;
+
+    // fires when window loads
+    window.onload = async function() {
+      await firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+         currentUser = new User();
+         currentUser.uid = user.uid;
+         setUserData(currentUser.uid);
+        } 
+        else {
+          console.log("not signed in");
+        }
+      });
+    }
+
+    // initializes currentUser
+    async function setUserData(uid) {
+      await db.collection('users').doc(uid).get().then(function(doc) {
+        if(doc.exists) {
+          currentUser.first = doc.data()['first'];
+          currentUser.last = doc.data()['last'];
+          currentUser.communities = doc.data()['communities'];
+          currentUser.category = doc.data()['category'];
+
+          if(currentUser.category == 'admin') {
+            getCommunities();
+            document.getElementsByTagName('body')[0].hidden = false;
+          }
+        }
+      });
+    }
 
   </script>
 

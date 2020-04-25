@@ -59,46 +59,6 @@ async function addUserToDB(uid, firstName, lastName, userCategory, userEmail) {
     });
 }
 
-// on window load, check login state
-window.onload = async function() {
-  try {
-    await firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-
-        db.collection("users").doc(user.uid).get().then(function(doc) {
-          if (doc.exists) {
-            var navText = document.getElementById('userName');
-            navText.innerHTML = doc.data()['first'] + " " + doc.data()['last'];
-            localStorage.setItem("userFirst", doc.data()['first']);
-            localStorage.setItem("userLast", doc.data()['last']);
-            localStorage.setItem("userCategory",doc.data()['category']);
-            localStorage.setItem("userUID", user.uid);
-          } else {
-            console.log("No such document!");
-          }
-        }).catch(function(error) {
-          console.log("Error getting document: ", error);
-        });
-
-        // on dashboard load
-        if (localStorage.getItem("userCategory") == "admin" && 
-          window.location.pathname === "/dashboard.html") {
-          document.getElementsByTagName('body')[0].hidden = false;
-          getCommunities();
-        }
-      } 
-      else {
-        console.log("Logged out");
-        if (window.location.pathname === "/dashboard.html")
-          window.location.pathname = "/";
-      }
-    });
-
-  } catch (error) {
-    this.console.log(error);
-  }
-};
-
 async function getCommunities() {
   var user = firebase.auth().currentUser;
   var communities = [];
