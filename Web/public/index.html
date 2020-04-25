@@ -186,29 +186,36 @@
           window.onload = function () {
             //set user if signed in
             setUser();
+            console.log(localStorage.getItem("userCommunities").split(","));
           }
 
           async function setUser(){
-            await firebase.auth().onAuthStateChanged(function(user) {
-              if(user) {
-                // if user is signed in get user data
-                db.collection("users").doc(user.uid).get().then(function(doc) {
-                  if (doc.exists) {
-                    localStorage.setItem("userIsSignedIn","1");
-                    localStorage.setItem("userFirst", doc.data()['first']);
-                    localStorage.setItem("userLast", doc.data()['last']);
-                    localStorage.setItem("userCategory",doc.data()['category']);
-                    localStorage.setItem("userUID", user.uid);
-                  } else {
-                    console.log("No such document!");
-                  }
-                }).catch(function(error) {
-                  console.log("Error getting document: ", error);
-                });
-              }
-              else
-                localStorage.setItem("userIsSignedIn","0");
-            });
+            try {
+              await firebase.auth().onAuthStateChanged(async function(user) {
+                if(user) {
+                  // if user is signed in get user data
+                  await db.collection("users").doc(user.uid).get().then(function(doc) {
+                    if (doc.exists) {
+                      localStorage.setItem("userIsSignedIn","1");
+                      localStorage.setItem("userFirst", doc.data()['first']);
+                      localStorage.setItem("userLast", doc.data()['last']);
+                      localStorage.setItem("userCategory",doc.data()['category']);
+                      localStorage.setItem("userUID", user.uid);
+                      localStorage.setItem("userCommunities", doc.data()['communities'].toString());
+                    } else {
+                      console.log("No such document!");
+                    }
+                  }).catch(function(error) {
+                    console.log("Error getting document: ", error);
+                  });
+                }
+                else
+                  localStorage.setItem("userIsSignedIn","0");
+              });
+            }
+            catch(error) {
+
+            }
           }
 
           async function goToDashIfLoggedIn() {
