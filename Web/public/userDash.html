@@ -25,15 +25,6 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-         <!-- <a class="nav-link" href="dashboard">
-            <svg class="bi bi-house-door" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd"
-                d="M7.646 1.146a.5.5 0 01.708 0l6 6a.5.5 0 01.146.354v7a.5.5 0 01-.5.5H9.5a.5.5 0 01-.5-.5v-4H7v4a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5v-7a.5.5 0 01.146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 01.5-.5h3a.5.5 0 01.5.5v4h3.5V7.707L8 2.207l-5.5 5.5z"
-                clip-rule="evenodd" />
-              <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 01.5-.5h1a.5.5 0 01.5.5z" clip-rule="evenodd" />
-            </svg>
-            Dashboard
-          </a>-->
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -104,16 +95,6 @@
       <div class="row cardRow">
         <div class="card w-100 shortcard2 text-white">
           <h5 class="header bg-dark text-white card-title p-1">Info</h5>
-         
-            <div class="container " id="communityInfo">
-              <h5 id="communityNameTitle"></h5>
-              <h6 id="communityName"></h6>
-              <h5 id="communityAddrTitle"></h5>
-              <h6 id="communityAddr"></h6>
-              <h5 id="communityVacancyTitle"></h5>
-              <h6 id="communityVacancy"></h6>
-            </div>
-          
         </div>
       </div>
 
@@ -466,33 +447,167 @@
 <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
 <script src="js/firebase.js"></script>
-
-  <script type="text/javascript">
-    window.onload = async function() {
-      if(localStorage.getItem("userCategory") == "tenant") {
-        // set user name in navabr
-      var navText = document.getElementById('userName');
-      navText.innerHTML = localStorage.getItem("first") + " " + localStorage.getItem('last');
-      document.getElementsByTagName('body')[0].hidden = false;
-
-      //render widgets
-
-      }
-      else if(localStorage.getItem("userCategory") == "admin")
-        window.location.pathname = "dashboard";
-      else
-        window.location.pathname = "/";
-    }
-    $('#datepicker').datepicker({
-      uiLibrary: 'bootstrap4'
-  });
-  </script>
-<!-- The core Firebase JS SDK -->
-
+<script src="js/user.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+  <script type="text/javascript">
+    // User object of current signed in user (see js/user.js)
+    var currentUser;
+
+    // fires when window loads
+    window.onload = async function() {
+      await firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+         currentUser = new User();
+         currentUser.uid = user.uid;
+         setUserData(currentUser.uid);
+        } 
+        else {
+          console.log("not signed in");
+        }
+      });
+    }
+
+    // initializes currentUser
+    async function setUserData(uid) {
+      await db.collection('users').doc(uid).get().then(function(doc) {
+        if(doc.exists) {
+          currentUser.first = doc.data()['first'];
+          currentUser.last = doc.data()['last'];
+          currentUser.communities = doc.data()['communities'];
+          currentUser.category = doc.data()['category'];
+
+          if(currentUser.category == 'tenant') {
+            document.getElementsByTagName('body')[0].hidden = false;
+          }
+        }
+      });
+    }
+
+    // add community
+    async function addCommunity() {
+      var token = document.getElementById('tokenFeild').value;
+      validateToken(token);
+      document.getElementById('tokenFeild').value = "";
+    }
+
+    // validates and cashes token if valid
+    async function validateToken(token) {
+      var tokenIsValid = false;
+      await db.collection('tokens').doc(token).get().then(function(doc) {
+        if(doc.exists) {
+          if(doc.data()['inuse'] && dateIsLessThanXHours(doc.data()['time'],12)) {
+            // update community tenants and user communities
+            updateCommunityTenants(doc.data()['community'],currentUser.uid);
+            updateUserCommunities(doc.data()['community']);
+            destroyToken(token,doc.data()['community']);
+          }
+          else{
+            console.log("Invalid token");
+            // destroy token
+            destroyToken(token,doc.data()['community']);
+          }
+        }
+        else {
+          // invalid token
+          console.log("Invalid token");
+        }
+      });
+    }
+
+    // checks if token has expired
+    function dateIsLessThanXHours(date,expirationHours) {
+      var tokenExpired = true;
+      var now = new Date();
+      var tokenDate = new Date(date);
+      var milliseconds = Math.abs(now.getTime() - tokenDate.getTime());
+      var hoursBetween = milliseconds / 36e5;
+      console.log("hour diff: "+hoursBetween);
+      if(hoursBetween <= expirationHours)
+        tokenExpired = false;
+      return !tokenExpired;
+    }
+
+    // update community tenant list
+    async function updateCommunityTenants(commID,tenantID) {
+      var tenantIDs = [];
+      try{
+        await db.collection('communities').doc("biKAxNGF2W7kNSKriu7W").get().then( async function(doc){
+          if(doc.exists){
+            tenantIDs = doc.data()['tenants'];
+            tenantIDs.push(currentUser.uid);
+          }
+        });
+        //update tenant list
+        await db.collection('communities').doc("biKAxNGF2W7kNSKriu7W").update({
+              tenants:tenantIDs,
+        });
+      }
+      catch(error) {
+        console.log("ERROR");
+      }
+      
+    }
+
+    // update communities in user profile
+    async function updateUserCommunities(commUID) {
+      var communities = [];
+      await db.collection("users").doc(currentUser.uid).get().then(async function(doc) {
+        if (doc.exists) {
+          communities = doc.data()['communities'];
+          communities.push(commUID);
+
+          await db.collection("users").doc(currentUser.uid).update({
+            communities: communities,
+          })
+          .then( async function(val) {
+            console.log("updated user communities");
+            
+          })
+          .catch(function(error) {
+            console.log("Error updating user communities:", error);
+          });
+        } else {
+          console.log("No such user");
+        }
+      }).catch(function(error) {
+        console.log("Error getting user data:", error);
+      });
+    }
+
+    // destroy token from community token list and token collection
+    async function destroyToken(token,commUID) {
+      var tokenIDs = [];
+      await db.collection('tokens').doc(token).delete().then(async function(){
+        // delete from community db after deleting from token db
+        await db.collection('communities').doc(commUID).get().then( async function(doc){
+          if(doc.exists){
+            // copy new list of tokens
+            for(var i = 0;i < doc.data()['tokenIDs'].length; i++)
+              if(doc.data()['tokenIDs'][i] != token)
+                tokenIDs.push(doc.data()['tokenIDs'][i]);
+            // update community list of tokens
+            await db.collection('communities').doc(commUID).update({
+              tokenIDs:tokenIDs,
+            });
+            console.log("token destroyed");
+          }
+
+        });
+      }).catch(function(error){
+        console.log("token doesnt exist");
+      });
+    }
+
+    $('#datepicker').datepicker({
+      uiLibrary: 'bootstrap4'
+  });
+  </script>
+
 </body>
 
 </html>
