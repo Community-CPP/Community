@@ -182,49 +182,24 @@
         <!-- custom scripts -->
         <script type="text/javascript">
 
-          // fires as soon as page loads
-          window.onload = function () {
-            //set user if signed in
-            setUser();
-            console.log(localStorage.getItem("userCommunities").split(","));
-          }
-
-          async function setUser(){
-            try {
-              await firebase.auth().onAuthStateChanged(async function(user) {
-                if(user) {
-                  // if user is signed in get user data
-                  await db.collection("users").doc(user.uid).get().then(function(doc) {
-                    if (doc.exists) {
-                      localStorage.setItem("userIsSignedIn","1");
-                      localStorage.setItem("userFirst", doc.data()['first']);
-                      localStorage.setItem("userLast", doc.data()['last']);
-                      localStorage.setItem("userCategory",doc.data()['category']);
-                      localStorage.setItem("userUID", user.uid);
-                      localStorage.setItem("userCommunities", doc.data()['communities'].toString());
-                    } else {
-                      console.log("No such document!");
-                    }
-                  }).catch(function(error) {
-                    console.log("Error getting document: ", error);
-                  });
-                }
-                else
-                  localStorage.setItem("userIsSignedIn","0");
-              });
-            }
-            catch(error) {
-
-            }
-          }
-
           async function goToDashIfLoggedIn() {
-            if(localStorage.getItem("userIsSignedIn") == "1") {
-              if(localStorage.getItem("userCategory") == "admin")
-                window.location.pathname = "dashboard";
-              if(localStorage.getItem("userCategory") == "tenant")
-                window.location.pathname = "userDash";
-            }
+            await firebase.auth().onAuthStateChanged(async function(user) {
+              if (user) {
+                var userType;
+                await db.collection('users').doc(user.uid).get().then(function(doc) {
+                  if(doc.exists) {
+                    userType = doc.data()['category']
+                  }
+                });
+                if(userType == "tenant")
+                  window.location.pathname = "userDash";
+                if(userType == "admin")
+                  window.location.pathname = "dashboard"; 
+              } 
+              else {
+                console.log("not signed in");
+              }
+            });
           }
 
           async function submitSignInForm() {
@@ -268,7 +243,6 @@
                 });
             }
           }
-          
 
           function submitSignUpForm() {
   
@@ -343,6 +317,7 @@
                 }
               }
             }
+            
           </script>
     </body>
 </html>
