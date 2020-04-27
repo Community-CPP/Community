@@ -384,15 +384,15 @@ async function getMessages(msgType) {
   await db.collection("communities").doc(commUID).collection(msgType).get().then(function(snapshot) {
       snapshot.forEach(async function(doc) {
         if(JSON.stringify(doc.data()) != '{}') { //might want to change the condition if the database for communities doesn't have the collection for messages yet
-          // console.log(doc.id, " => ", doc.data());
           userUID = doc.data()['senderId'];
           await getUser(userUID).then(function(val) {
-            name = val;
-            data += "<li><button id=\"sender" + i + "\" onClick=\"showMessages('" + userUID + "','" + msgType + "','" + commUID +"')\" class=\"linkBtn\">" + name + "</button></li>";
-            // data += "<p>" + subject + "</p>";
-            // data += "<p>" + message + ": " + status + "</p>";
-            msg.innerHTML = data;
-            i++;
+            if(val != name)
+            {
+              name = val;
+              data += "<li><button id=\"sender" + i + "\" onClick=\"showMessages('" + userUID + "','" + msgType + "','" + commUID +"')\" class=\"linkBtn\">" + name + "</button></li>";
+              msg.innerHTML = data;
+              i++;
+            }
           });
         } else {
           console.log("No Data");
@@ -406,10 +406,27 @@ async function getMessages(msgType) {
     });
 }
 
+async function showMessages(userUID, msgType, commUID) {
+  var arr = [];
+  await db.collection("users").doc(userUID).get().then(function(doc) {
+    if (doc.exists) {
+      arr = doc.data()[msgType]
+      for(var i in arr) {
+        getUserMsg(msgType, commUID, arr[i])
+      }
+    } else {
+      console.log("No messages");
+    }
+  }).catch(function(error) {
+    console.log("Error getting user data:", error);
+  });
+  //toggle isRead to true when opened
+}
+
 async function getUserMsg(msgType, commUID, msgUID) {
   await db.collection("communities").doc(commUID).collection(msgType).doc(msgUID).get().then(function(doc) {
     if (doc.exists) {
-      console.log(doc.data());
+      console.log(doc.data()); //was thinking of putting this on a modal of some sort instead of showing
       // doc.data()["subject"];
       // doc.data()["message"];
       // doc.data()["isRead"];
@@ -419,22 +436,4 @@ async function getUserMsg(msgType, commUID, msgUID) {
   }).catch(function(error) {
     console.log("Error getting user data:", error);
   });
-}
-
-async function showMessages(userUID, msgType, commUID) {
-  var arr = "";
-  await db.collection("users").doc(userUID).get().then(function(doc) {
-    if (doc.exists) {
-      arr = doc.data()[msgType]
-      for(var i in arr) {
-        // console.log(arr[i]);
-        getUserMsg(msgType, commUID, arr[i])
-      }
-    } else {
-      console.log("No messages");
-    }
-  }).catch(function(error) {
-    console.log("Error getting user data:", error);
-  });
-  // console.log(msgType + "ASDASDASD" + userUID)
 }
