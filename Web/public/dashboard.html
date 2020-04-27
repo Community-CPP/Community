@@ -119,13 +119,25 @@
         </div>
       </div>
     </div>
-    
+
 
     <div class="col">
       <div class="row cardRow">
         <div class="card w-100 tallcard3 text-white">
-          <h5 class="header bg-dark text-white card-title p-1">Public Messages</h5>
+          <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Messages
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-primary" id="publicBtn" onClick="toggleMessages(true);return false">
+                <input type="radio" checked> Public
+              </label>
+              <label class="btn btn-primary" id="privateBtn" onClick="toggleMessages(false);return false">
+                <input type="radio"> Private
+              </label>
+            </div>
+          </h5>
+
+
           <div class="card-body">
+            <div id="messages"></div>
 
           </div>
         </div>
@@ -228,7 +240,7 @@
          currentUser = new User();
          currentUser.uid = user.uid;
          setUserData(currentUser.uid);
-        } 
+        }
         else {
           console.log("not signed in");
         }
@@ -251,6 +263,20 @@
         }
       });
     }
+    //toggle between public and private messages
+    function toggleMessages(public) {
+        var msgType = "";
+
+        if(public == true) {
+          console.log("IS PUBLIC");
+          msgType = "publicMessages";
+        } else {
+          console.log("IS PRIVATE")
+          msgType = "privateMessages";
+        }
+        getMessages(msgType);
+      }
+
 
   </script>
 
