@@ -72,14 +72,9 @@
     <div class="col">
       <div class="row cardRow">
         <div class="card w-100 tallcard1 text-white">
-
           <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between" >My Community<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">+</button></h5>
-
-          <div class="card-body">
-            <ul id="commList">
+          <div class="card-body" id="cardBody0">
               <!-- LIST OF COMMUNINTIES -->
-            </ul>
-
           </div>
         </div>
       </div>
@@ -98,6 +93,9 @@
       <div class="row cardRow">
         <div class="card w-100 shortcard2 text-white">
           <h5 class="header bg-dark text-white card-title p-1">Info</h5>
+          <div class="card-body" id="infoCardBody">
+            <!-- Selected Community Info -->
+        </div>
         </div>
       </div>
 
@@ -480,9 +478,91 @@
 
           if(currentUser.category == 'tenant') {
             document.getElementsByTagName('body')[0].hidden = false;
+            document.getElementById('userName').innerHTML = currentUser.first+" "+currentUser.last;
+            listCommunities();
           }
         }
       });
+    }
+
+    async function listCommunities() {
+      var body = document.getElementById('cardBody0');
+      body.innerHTML = "";
+
+      if(currentUser.communities.length > 0) {
+        for(var i = 0; i < currentUser.communities.length; i++) {
+          await db.collection('communities')
+          .doc(currentUser.communities[i]).get()
+          .then(function(doc){
+            if(doc.exists) {
+              body.innerHTML += "<div class=\"d-flex justify-content-between w-100 \">"+
+                "<a data-toggle=\"tooltip\" data-placement=\"top\" title=\"toggle use\""+
+                  " onclick=\"reloadCommunityWidgets(this,'"+currentUser.communities[i]+"')\" class=\"nav-link tokenLinks\" >"+doc.data()['name']+
+                "</a>"+
+              "</div>";
+              body.innerHTML += "<hr class=\"bg-light\" />";
+            }
+            
+          });
+        }
+        var body = document.getElementById('cardBody0');
+        var list = body.getElementsByClassName('tokenLinks');
+        list[0].style.opacity = .5;
+        list[0].onmouseover = function() {
+          this.style.opacity = .5;
+        };
+        list[0].onmouseout = function() {
+          this.style.opacity = .5;
+        };
+        loadCommunityInfo(currentUser.communities[0]);
+
+      }
+      else {
+        body.innerHTML += "No communities added yet."
+      }
+    }
+
+    function reloadCommunityWidgets(element,commID) {
+
+      // dim selected community
+      var body = document.getElementById('cardBody0');
+      var list = body.getElementsByClassName('tokenLinks');
+      for(var i = 0; i < list.length; i++) {
+        list[i].style.opacity = 1;
+        list[i].onmouseover = function() {
+          this.style.opacity = .5;
+        };
+        list[i].onmouseout = function() {
+          this.style.opacity = 1;
+        };
+      }
+
+      element.onmouseover = function() {
+        this.style.opacity = .5;
+      };
+      element.onmouseout = function() {
+        this.style.opacity = .5;
+      };
+    console.log(commID);
+
+      //reload info widget
+      loadCommunityInfo(commID);
+    }
+
+    async function loadCommunityInfo(commID) {
+      var body = document.getElementById('infoCardBody');
+      body.innerHTML = "";
+
+      await db.collection('communities').doc(commID).get().then(function(doc){
+        console.log(doc.data())
+        body.innerHTML += "<h5><u><strong>"+doc.data()['name'].toUpperCase()+"</strong></u><h5/>";
+        body.innerHTML += "<h7>"+doc.data()['street'].toUpperCase()+
+          ", "+doc.data()['city'].toUpperCase()+", "+doc.data()['zip']+"</h7>";
+        body.innerHTML += "<hr class=\"bg-light\">";
+        body.innerHTML += "<h7>Vacancies: "+(doc.data()['capacity'] - doc.data()['tenants'].length)+"</h7>";
+        
+      });
+
     }
 
     // add community
@@ -600,9 +680,6 @@
       });
     }
 
-    $(function() {
-  $('#datetimepicker1').datetimepicker();
-});
   </script>
 
 </body>
