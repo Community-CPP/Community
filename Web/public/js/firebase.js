@@ -82,7 +82,7 @@ async function getCommunities() {
 async function getCommunityData(commUID) {
   await db.collection("communities").doc(commUID).get().then(function(doc) {
     if (doc.exists) {
-      showCommunityInfo(doc.data());
+      showCommunityInfo(commUID);
       showTokens(commUID);
       getMessages("publicMessages");
       console.log(doc.data);
@@ -94,23 +94,61 @@ async function getCommunityData(commUID) {
   });
 }
 
-function showCommunityInfo(map) {
-  var name = document.getElementById('communityName');
-  var addr = document.getElementById('communityAddr');
-  var vacancies = document.getElementById('communityVacancy');
+async function showCommunityInfo(commUID) {
 
-  var nameTitle = document.getElementById('communityNameTitle');
-  var addrTitle = document.getElementById('communityAddrTitle');
-  var vacanciesTitle = document.getElementById('communityVacancyTitle');
+  var body = document.getElementById('infoCardBody');
+  body.innerHTML = "";
 
-  nameTitle.innerHTML = "Name:";
-  addrTitle.innerHTML = "Address:";
-  vacanciesTitle.innerHTML = "Vacancies:";
+  await db.collection('communities').doc(commUID).get().then(async function(doc){
+    console.log(doc.data())
+    body.innerHTML += "<h5><u><strong>"+doc.data()['name'].toUpperCase()+"</strong></u><h5/>";
+    body.innerHTML += "<h7>"+doc.data()['street'].toUpperCase()+
+      ", "+doc.data()['city'].toUpperCase()+", "+doc.data()['zip']+"</h7>";
+    body.innerHTML += "<hr class=\"bg-light\">";
+    body.innerHTML += "<h7>Vacancies: "+(doc.data()['capacity'] - doc.data()['tenants'].length)+"</h7>";
+    body.innerHTML += "<hr class=\"bg-light\">";
+    body.innerHTML += "<h7>Tenants:</h7>";
+
+    for(var i = 0; i < doc.data()['tenants'].length; i++) {
+      body.innerHTML += "<div class=\"accodion\" id=\"accordion"+i+"\">";
+      await db.collection('users').doc(doc.data()['tenants'][i]).get().then(function(userDoc){
+        body.innerHTML +=   "<button class=\"btn btn-link text-white tenantCollapseLink\" id=\"tenant"+i+
+          "\" data-toggle=\"collapse\" data-target=\"#collapse"+i+"\" aria-expanded=\"true\" aria-controls=\"collapse"+i+"\" >"+
+          userDoc.data()['first']+" "+userDoc.data()['last']+"</button>";
+
+        body.innerHTML +=   "<div id=\"collapse"+i+"\" class=\"collapse\" data-parent=\"#accordion"+i+
+          "\"><div ><div class=\"d-flex justify-content-between\"><p>Unit: "+userDoc.data()['unit']+"</p>"+
+          "<svg onclick=\"alert('clicked')\" class=\"bi bi-chat-square-fill iconButton\" width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">"+
+          "<path fill-rule=\"evenodd\" d=\"M2 0a2 2 0 00-2 2v8a2 2 0 002 2h2.5a1 1 0 01.8.4l1.9 2.533a1 1 0 001.6 0l1.9-2.533a1 1 0 01.8-.4H14a2 2 0 002-2V2a2 2 0 00-2-2H2z\" clip-rule=\"evenodd\"/>"+
+          "</svg></div></div></div>";
+      });
+     
+     
+      
+      body.innerHTML += "";
+      body.innerHTML += "</div>";
+    }
+    
+  });
 
 
-  name.innerHTML = map['name'];
-  addr.innerHTML = map['street'] + ", " + map['city'] + ", " + map['zip'];
-  vacancies.innerHTML = (map['capacity'] - map['tenants'].length);
+
+//   var name = document.getElementById('communityName');
+//   var addr = document.getElementById('communityAddr');
+//   var vacancies = document.getElementById('communityVacancy');
+
+//   var nameTitle = document.getElementById('communityNameTitle');
+//   var addrTitle = document.getElementById('communityAddrTitle');
+//   var vacanciesTitle = document.getElementById('communityVacancyTitle');
+
+//   nameTitle.innerHTML = "Name:";
+//   addrTitle.innerHTML = "Address:";
+//   vacanciesTitle.innerHTML = "Vacancies:";
+
+
+//   name.innerHTML = map['name'];
+//   addr.innerHTML = map['street'] + ", " + map['city'] + ", " + map['zip'];
+//   vacancies.innerHTML = (map['capacity'] - map['tenants'].length);
 }
 
 async function showCommunity(communityList) {

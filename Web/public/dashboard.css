@@ -164,3 +164,15 @@ h2.h2carousel {
   text-align: center;
 }
 
+.iconButton:hover {
+  opacity: .5;
+  cursor: pointer;
+
+}
+
+.tenantCollapseLink:hover {
+  opacity: .5;
+  cursor: pointer;
+
+}
+
