@@ -67,13 +67,7 @@ async function getCommunities() {
     await db.collection("users").doc(user.uid).get().then(function(doc) {
       if (doc.exists) {
         communities = doc.data()['communities'];
-        if(localStorage.getItem("userUID") == user.uid && localStorage.getItem("currentCommunity") != null)
-          getCommunityData(localStorage.getItem("currentCommunity"));
-        else {
-          localStorage.setItem("currentCommunity", commUID);
-          getCommunityData(communities[0]);
-        }
-
+        getCommunityData(communities[0]);
         showCommunity(communities);
       } else {
         // doc.data() will be undefined in this case
@@ -86,9 +80,6 @@ async function getCommunities() {
 }
 
 async function getCommunityData(commUID) {
-  localStorage.setItem("currentCommunity", commUID);
-  console.log("current community: "+localStorage.getItem("currentCommunity"));
-
   await db.collection("communities").doc(commUID).get().then(function(doc) {
     if (doc.exists) {
       showCommunityInfo(doc.data());
@@ -299,7 +290,7 @@ async function showTokens(commUID) {
         else {
           code += "<div class=\"d-flex justify-content-between w-100 \"> "+
                   "<a data-toggle=\"tooltip\" data-placement=\"top\" title=\"toggle use\"" +
-                    "class=\"nav-link tokenLinks inuse\" onclick=\"toggleToken('"+tokenIDs[i]+"')\">"+
+                    "class=\"nav-link tokenLinks inuse\" onclick=\"toggleToken('"+tokenIDs[i]+"','"+commUID+"')\">"+
                     tokenIDs[i]+
                   "</a>";
           code += "<div class=\"col w-100\">not in use</div>";
@@ -311,13 +302,13 @@ async function showTokens(commUID) {
   }
 }
 
-async function toggleToken(tokenID) {
+async function toggleToken(tokenID,commUID) {
   // toggle inuse
   await db.collection('tokens').doc(tokenID).update({
     inuse: true,
   }).then(function(doc) {
     // regenerate token list
-    showTokens(localStorage.getItem("currentCommunity"));
+    showTokens(commUID);
   });
 }
 
