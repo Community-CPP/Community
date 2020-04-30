@@ -212,14 +212,14 @@ async function addCommunityToAdmin(communityID) {
 
 }
 
-async function generateToken(commUID) {
+async function generateToken(commUID,unit) {
   var token = Math.random().toString(36).substring(2, 6) + Math.random().toString(36).substring(2, 6);
   var date = ""+ new Date();
 
   await db.collection("tokens").doc(token).get().then(async function(doc) {
     if (doc.exists) {
       // if generated token exists, regenerate
-      generateToken();
+      generateToken(commUID,unit);
     }
     else {
       var tokenIDs = [];
@@ -251,6 +251,7 @@ async function generateToken(commUID) {
         community: commUID,
         time: date,
         inuse: false,
+        unit: unit,
       })
       .catch(function(error) {
         // error
@@ -263,12 +264,25 @@ async function generateToken(commUID) {
   });
 }
 
+function validateUnit(commUID) {
+  var unit = document.getElementById('tokenUnitInput').value;
+  document.getElementById('tokenUnitInputError').hidden = true;
+
+  // add validation for unit vacancy
+  if(unit != "") {
+    generateToken(commUID,unit);
+  }
+  else {
+    document.getElementById('tokenUnitInputError').hidden = false;
+    document.getElementById('tokenUnitInputError').innerHTML = "Enter a unit number.";
+  }
+}
+
 async function showTokens(commUID) {
   //set add token button to current community
-  document.getElementById('addTokenBtn').onclick = function(){
-    generateToken(commUID)
+  document.getElementById('generateTokenBtn').onclick = function(){
+    validateUnit(commUID);
   };
-  var user = firebase.auth().currentUser;
   var tokenContainer = document.getElementById('tokensContainer');
   var tokenIDs;
 
@@ -297,6 +311,7 @@ async function showTokens(commUID) {
                     "class=\"nav-link tokenLinks\" onclick=\"return false;\">"+
                     tokenIDs[i]+
                   "</a>";
+          code += "<div class=\"col w-100\">"+doc.data()['unit']+"</div>";
           code += "<div class=\"col w-100\">in use</div>";
         }
         else {
@@ -305,6 +320,7 @@ async function showTokens(commUID) {
                     "class=\"nav-link tokenLinks inuse\" onclick=\"toggleToken('"+tokenIDs[i]+"','"+commUID+"')\">"+
                     tokenIDs[i]+
                   "</a>";
+          code += "<div class=\"col w-100\">"+doc.data()['unit']+"</div>";
           code += "<div class=\"col w-100\">not in use</div>";
         }
       });
