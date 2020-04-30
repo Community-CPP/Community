@@ -316,8 +316,8 @@
                   <div class="form-group">
                     <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
                       <input id="dateTime" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" />
-                      <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                        <div id="" class="input-group-text">
+                      <div id="calendarButton" class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                        <div  id="" class="input-group-text">
                           <span class="input-group-addon">
                             <span class="fa fa-calendar "></span>
                           </span>
@@ -396,9 +396,7 @@
       </div>
       <div class="container formContainer">
         <div class="formWrapper bg-dark text-white">
-          <!--
--->
-
+    
             <div id="carouselExampleIndicators" class="carousel slide " data-ride="carousel">
               <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0"  class="active"></li>
@@ -462,10 +460,6 @@
   </div>
 </div>
 
-
-
-
-
 <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
@@ -493,6 +487,13 @@
           console.log("not signed in");
         }
       });
+
+      var today = new Date();
+      var date = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
+      var time = today.toLocaleTimeString().replace(/:\d+ /, ' ');
+      var newDateTime = date+' '+time;
+      var dateInput = document.getElementById('dateTime');
+      dateInput.value =newDateTime;
     }
 
     // initializes currentUser
@@ -734,12 +735,7 @@
     .catch(function(error) {
       // error adding maintenance
     });
-
-    
         window.parent.location = window.parent.location.href;
-    
-
-
   }
 
   //might not need this after firebase.js has been refactored (adding current community to user class)
