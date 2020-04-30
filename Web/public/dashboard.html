@@ -252,6 +252,7 @@
           if(currentUser.category == 'admin') {
             getCommunities();
             document.getElementsByTagName('body')[0].hidden = false;
+            document.getElementById('userName').innerHTML = currentUser.first+" "+currentUser.last;
           }
         }
       });
