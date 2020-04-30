@@ -116,7 +116,7 @@ async function showCommunityInfo(commUID) {
           userDoc.data()['first']+" "+userDoc.data()['last']+"</button>";
         body.innerHTML +=   "<div id=\"collapse"+i+"\" class=\"collapse\" data-parent=\"#accordion"+i+
           "\"><div class=\"d-flex justify-content-between\"><div class=\"col\"><p>Unit: "+userDoc.data()['unit']+"</p></div>"+
-          "<div class=\"col\"><svg onclick=\"alert('clicked')\" class=\"bi bi-chat-square-fill iconButton\" width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">"+
+          "<div class=\"col\"><svg type=\"button\" data-toggle=\"modal\" data-target=\"#MessageModal\" class=\"bi bi-chat-square-fill iconButton\" width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">"+
           "<path fill-rule=\"evenodd\" d=\"M2 0a2 2 0 00-2 2v8a2 2 0 002 2h2.5a1 1 0 01.8.4l1.9 2.533a1 1 0 001.6 0l1.9-2.533a1 1 0 01.8-.4H14a2 2 0 002-2V2a2 2 0 00-2-2H2z\" clip-rule=\"evenodd\"/>"+
           "</svg></div></div></div>";
       });
@@ -324,82 +324,82 @@ async function toggleToken(tokenID,commUID) {
   });
 }
 
-// async function getUser(userUID) {
-//   var name = "";
-//   await db.collection("users").doc(userUID).get().then(function(doc) {
-//     if (doc.exists) {
-//       name = doc.data()['first'];
-//       name += " " + doc.data()['last'];
-//     } else {
-//       console.log("No such user");
-//     }
-//   }).catch(function(error) {
-//     console.log("Error getting user data:", error);
-//   });
-//   return name;
-// }
+async function getUser(userUID) {
+  var name = "";
+  await db.collection("users").doc(userUID).get().then(function(doc) {
+    if (doc.exists) {
+      name = doc.data()['first'];
+      name += " " + doc.data()['last'];
+    } else {
+      console.log("No such user");
+    }
+  }).catch(function(error) {
+    console.log("Error getting user data:", error);
+  });
+  return name;
+}
 
-// async function getMessages(msgType) {
-//   var msg = document.getElementById("messages");
-//   var data = "";
-//   var name = "";
-//   var userUID = "";
-//   var commUID = localStorage.getItem("currentCommunity")
-//   console.log("this community: " + commUID);
-//   var i = 0;
-//   await db.collection("communities").doc(commUID).collection(msgType).get().then(function(snapshot) {
-//       snapshot.forEach(async function(doc) {
-//         if(JSON.stringify(doc.data()) != '{}') { //might want to change the condition if the database for communities doesn't have the collection for messages yet
-//           userUID = doc.data()['senderId'];
-//           await getUser(userUID).then(function(val) {
-//             if(val != name)
-//             {
-//               name = val;
-//               data += "<li><button id=\"sender" + i + "\" onClick=\"showMessages('" + doc.data()['senderId'] + "','" + msgType + "','" + commUID +"')\" class=\"linkBtn\">" + name + "</button></li>";
-//               msg.innerHTML = data;
-//               i++;
-//             }
-//           });
-//         } else {
-//           console.log("No Data");
-//           data += "<h6> No Messages </h6>";
-//           msg.innerHTML = data;
-//         }
-//       });
-//     })
-//     .catch(function(error) {
-//       console.log("Error getting documents: ", error);
-//     });
-// }
+async function getMessages(msgType) {
+  var msg = document.getElementById("messages");
+  var data = "";
+  var name = "";
+  var userUID = "";
+  var commUID = localStorage.getItem("currentCommunity")
+  console.log("this community: " + commUID);
+  var i = 0;
+  await db.collection("communities").doc(commUID).collection(msgType).get().then(function(snapshot) {
+      snapshot.forEach(async function(doc) {
+        if(JSON.stringify(doc.data()) != '{}') { //might want to change the condition if the database for communities doesn't have the collection for messages yet
+          userUID = doc.data()['senderId'];
+          await getUser(userUID).then(function(val) {
+            if(val != name)
+            {
+              name = val;
+              data += "<li><button id=\"sender" + i + "\" onClick=\"showMessages('" + doc.data()['senderId'] + "','" + msgType + "','" + commUID +"')\" class=\"linkBtn\">" + name + "</button></li>";
+              msg.innerHTML = data;
+              i++;
+            }
+          });
+        } else {
+          console.log("No Data");
+          data += "<h6> No Messages </h6>";
+          msg.innerHTML = data;
+        }
+      });
+    })
+    .catch(function(error) {
+      console.log("Error getting documents: ", error);
+    });
+}
 
-// async function showMessages(userUID, msgType, commUID) {
-//   var arr = [];
-//   await db.collection("users").doc(userUID).get().then(function(doc) {
-//     if (doc.exists) {
-//       arr = doc.data()[msgType]
-//       for(var i in arr) {
-//         getUserMsg(msgType, commUID, arr[i])
-//       }
-//     } else {
-//       console.log("No messages");
-//     }
-//   }).catch(function(error) {
-//     console.log("Error getting user data:", error);
-//   });
-//   //toggle isRead to true when opened
-// }
+async function showMessages(userUID, msgType, commUID) {
+  var arr = [];
+  await db.collection("users").doc(userUID).get().then(function(doc) {
+    if (doc.exists) {
+      arr = doc.data()[msgType]
+      for(var i in arr) {
+        getUserMsg(msgType, commUID, arr[i])
+      }
+    } else {
+      console.log("No messages");
+    }
+  }).catch(function(error) {
+    console.log("Error getting user data:", error);
+  });
+  //toggle isRead to true when opened
+}
 
-// async function getUserMsg(msgType, commUID, msgUID) {
-//   await db.collection("communities").doc(commUID).collection(msgType).doc(msgUID).get().then(function(doc) {
-//     if (doc.exists) {
-//       console.log(doc.data()); //was thinking of putting this on a modal of some sort instead of showing
-//       // console.log(doc.data()["subject"]);
-//       // console.log(doc.data()["message"]);
-//       // console.log(doc.data()["isRead"]);
-//     } else {
-//       console.log("No");
-//     }
-//   }).catch(function(error) {
-//     console.log("Error getting user data:", error);
-//   });
-// }
+async function getUserMsg(msgType, commUID, msgUID) {
+  await db.collection("communities").doc(commUID).collection(msgType).doc(msgUID).get().then(function(doc) {
+    if (doc.exists) {
+      console.log(doc.data()); //was thinking of putting this on a modal of some sort instead of showing
+      // console.log(doc.data()["subject"]);
+      // console.log(doc.data()["message"]);
+      // console.log(doc.data()["isRead"]);
+    } else {
+      console.log("No");
+    }
+  }).catch(function(error) {
+    console.log("Error getting user data:", error);
+  });
+}
