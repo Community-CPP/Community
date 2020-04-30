@@ -3,21 +3,23 @@
 <html lang="en">
 
 <head>
-    <title>Community-Dashboard</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="dashboard.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.js" integrity="sha256-2JRzNxMJiS0aHOJjG+liqsEOuBb6++9cY4dSOyiijX4=" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" integrity="sha256-5YmaxAwMjIpMrVlK84Y/+NjCpKnFYa8bWWBbUHSBGfU=" crossorigin="anonymous"></script>  
+  <title>Community-Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="dashboard.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.js" integrity="sha256-2JRzNxMJiS0aHOJjG+liqsEOuBb6++9cY4dSOyiijX4=" crossorigin="anonymous"></script>
+
 </head>
 
 <body hidden="true">
@@ -65,54 +67,80 @@
     </div>
   </nav>
   <div class="row row-cols-3 mainRow">
+
+    <!-- col 1 -->
     <div class="col">
       <div class="row cardRow">
         <div class="card w-100 tallcard1 text-white">
           <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between" >My Community<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">+</button></h5>
+          <div class="card-body" id="cardBody0">
+              <!-- LIST OF COMMUNINTIES -->
+          </div>
+        </div>
+      </div>
+
+      <div class="row cardRow text-white">
+        <div class="card w-100 shortcard1">
+          <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Maintenance<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">+</button></h5>
           <div class="card-body">
-            <ul id="commList">
-            </ul>
 
           </div>
         </div>
       </div>
-      <div class="row cardRow text-white">
-        <div class="card w-100 shortcard1">
-          <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Maintenance<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">+</button></h5>
-          <div class="card-body">         
-          </div>
-        </div>
-      </div>
     </div>
+
     <div class="col">
       <div class="row cardRow">
         <div class="card w-100 shortcard2 text-white">
           <h5 class="header bg-dark text-white card-title p-1">Info</h5>
+          <div class="card-body" id="infoCardBody">
+            <!-- Selected Community Info -->
+        </div>
         </div>
       </div>
+
       <div class="row cardRow">
         <div class="card w-100 tallcard2  ">
-          <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Pay Rent<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">+</button></h5>         
+          <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Pay Rent<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">+</button></h5>
+
         </div>
       </div>
     </div>
+
+
     <div class="col">
       <div class="row cardRow">
         <div class="card w-100 tallcard3 text-white">
-          <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Messages<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#privateMessageModal">+</button></h5>
+          <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Messages
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-primary" id="publicBtn" onClick="toggleMessages(true);return false">
+                <input type="radio" checked> Public
+              </label>
+              <label class="btn btn-primary" id="privateBtn" onClick="toggleMessages(false);return false">
+                <input type="radio"> Private
+              </label>
+            </div>
+          </h5>
           <div class="card-body">
+            <div id="messages"></div>
           </div>
         </div>
       </div>
+
       <div class="row cardRow">
         <div class="card w-100 shortcard3 text-white">
           <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Under Construction</h5>
           <div class="card-body" id="tokensContainer">
+
           </div>
         </div>
       </div>
     </div>
   </div>
+
+
+
+<!-- Create Community Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color:white">
   <div class="modal-dialog " role="document" >
     <div class="modal-content bg-dark" >
@@ -138,123 +166,128 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onclick="">Add Community</button>
+          <button type="button" class="btn btn-primary" onclick="submitCreateForm();return false;">Add Community</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Create Community Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true" style="color:white">
+  <div class="modal-dialog " role="document" >
+    <div class="modal-content bg-dark" >
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal2Label">Payment Methods</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+            <div class="card-body">
+              <div class="bg-dark shadow-sm pt-4 pl-2 pr-2 pb-2">
+                  <!-- Credit card form tabs -->
+                  <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
+                      <li class="nav-item"> <a data-toggle="pill" href="#credit-card" class="nav-link active "> <i class="fas fa-credit-card mr-2"></i> Credit Card </a> </li>
+                      <li class="nav-item"> <a data-toggle="pill" href="#paypal" class="nav-link "> <i class="fab fa-paypal mr-2"></i> Paypal </a> </li>
+                      <li class="nav-item"> <a data-toggle="pill" href="#net-banking" class="nav-link "> <i class="fas fa-mobile-alt mr-2"></i> Net Banking </a> </li>
+                  </ul>
+              </div>
+              <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
+              <div class="tab-content">
+                  <!-- credit card info-->
+                  <div id="credit-card" class="tab-pane fade show active pt-3 text-muted">
+                      <form role="form "><img src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg" alt="PayPal Acceptance Mark">
+                                  <h6 >Card Owner</h6>
+                              </label> <input type="text" name="username" placeholder="Card Owner Name" required class="form-control ">
+                          <div class="form-group"> <label for="cardNumber">
+                                  <h6>Card number</h6>
+                              </label>
+                              <div class="input-group"> <input type="text" name="cardNumber" placeholder="Valid card number" class="form-control " required>
+                                  <div class="input-group-append"> <span class="input-group-text text-muted"> <i class="fab fa-cc-visa mx-1"></i> <i class="fab fa-cc-mastercard mx-1"></i> <i class="fab fa-cc-amex mx-1"></i> </span> </div>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-sm-8">
+                                  <div class="form-group"> <label><span class="hidden-xs">
+                                              <h6>Expiration Date</h6>
+                                          </span></label>
+                                      <div class="input-group"> <input type="number" placeholder="MM" name="" class="form-control" required> <input type="number" placeholder="YY" name="" class="form-control" required> </div>
+                                  </div>
+                              </div>
+                              <div class="col-sm-4">
+                                  <div class="form-group mb-4"> <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
+                                          <h6>CVV <i class="fa fa-question-circle d-inline"></i></h6>
+                                      </label> <input type="text" required class="form-control"> </div>
+                              </div>
+                          </div>
+                          <div class="card-footer"> <button type="button" class="subscribe btn btn-primary btn-block shadow-sm"> Confirm Payment </button>
+                      </form>
+                  </div>
+              </div> <!-- End -->
+              <!-- Paypal info -->
+              <div id="paypal" class="tab-pane fade pt-3 text-muted">
+                  <h6 class="pb-2" >Select your paypal account type</h6>
+                  <div class="form-group "> <label class="radio-inline" > <input type="radio" name="optradio" checked> Domestic </label> <label class="radio-inline"> <input type="radio" name="optradio" class="ml-5">International </label></div>
+                  <p> <button type="button" class="btn btn-primary "><i class="fab fa-paypal mr-2"></i> Log into my Paypal</button> <img id="dimg_4" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHwAAAAhCAMAAAAs0D+lAAAAw1BMVEX///8AL4YAnN4BIGlPb6sAKXsvVZxPu+ilttQLoN8DMYckquOHncYEnt8vruT5/f719/o6XqLP2OgfSJXn6/Rng7edr9DC5/cKN4sVQJBif7XR7fnr9/wXpeGPpMpoxOt9lcF3yu214vWq3vRAtebh8/uT1fEBMXworONGaKcnT5m+yuDj6PLt8PYQPI4zUI2ywNoBPIcAb7aI0fB+lsIASpQAfMJyjLwBMHsBRpAAYaoAk9af2vPF0OMAUqMAh81OntHccMZiAAADkklEQVRYhe1X2WLaMBAUimtz+uA2MRiDDYEAzVnalB7//1XV7kpGsmlC8kBfOg9YlhSNtDs7chgTCCo56mGwv2UXRLtSQLC5HHm1SF7pbC9GPi2RV/YXI7fK5LuLkdtl8kr3UuRD4vuU44LkG8l9peHzdWGO3GBluO61z1l01uKEmptkp8ZhSDzvTpAvawNjbl/LSL1/BnnCjyislY+PxbNJa+rcV/d87Olz97oehmfYgKORF9bKx1PxHJ0gf+B8rs/FgrCDdR2nTt4mbwBp6jaIvXx0V/TGLDdXg1wMPepz13Bgsf9NeJ4LeEDpisYAc38ojddE70I0duWUi4PzRJvrw4ntPARP2NntlqOpcM3lySgEGEUvi/LxTMajW9bbM5f7UkD3HzEVpipjt5bQ/9Bqj2zbnrCe+B3R1KZoBv6Bq9iNoSVqZ56KGNTiLHVdd4Zi52IvtyXy51Ke0P2bsAtM+sbrKSeE9ynJBksQV7NI7DPxPkfBsShV2qNAPEqx9wspX36h+tBj+oSZrvb3mKKV0qhElShhc9uOaIRdEvtifogx5Ynn6uIXgYil2GUVXX1dLpf3316+ywmxnkLD/ett3O9w3292KvLIoMOAycq5Y+zGqLQIAzFODgnojLe8XOwrWvGXsTfeMixOd3/hMaD9EIp9C6R1nzFIQ31L6ekJbbW0pWqDCF5dkNs1tBqMKbHT7kOT29B67v4Y8zbJj2wOSDvi+QO7NpCVtS/FLk/hZOwgRScAuXdI7EISPq350+Q2gk7uHzYnk8kdXDgTeKXPjRFKQB7BWmFSlMxuHheLxQzOG0t5MTKXhA1gPMu/oV506puZwU3uPzXlh9eeD2FHy8n9F2SHYtYs0snJMwj7gS04XSvyG+qBaBuOEy8KN5p0/2r+iicHSt/KE6C+A4OcjR+XidVeIvcodvA/+Q1FemtF7BSOZcyORMG0R3L5gZ1rbO82eXBbx1rFnHMniVHswlxSmVlZRVRh7klutDXQtMJKrzyZfcyFCo/UtII3NiqPbA/8j6poR/3OafKd1LTCho5c6cCuQurD9EmLzYprDejIHG+5lEUqDXVd7MZNdsTIsqyq3rGd2sNd0Nz2xQDVXBekp764I0fAEG0WN2rj9OAlOOCL3xgiubcAv4ncuMPfBayyD/6rExN5SefnYmIW4/tAl07r7xf062iDBdof/ev0Nb29DXDZ8Kyv2v/49/gDggM98lgyTiEAAAAASUVORK5CYII=" class="rISBZc M4dUYb" height="33" title="https://www.paypal.com/us/home" width="124" alt="Image result for paypal" data-atf="1" style="width: 90px; height: 24px; margin-left: 1px; margin-right: 1px; margin-top: 0px;"></p>
+                  <p class="text-muted"> Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
+              </div> <!-- End -->
+              <!-- bank transfer info -->
+              <div id="net-banking" class="tab-pane fade pt-3 text-muted">
+                  <div class="form-group "> <label for="Select Your Bank">
+                    <img alt="Bank transfer logo - Free logo icons" class="n3VNCb" src="https://imageog.flaticon.com/icons/png/512/38/38978.png?size=1200x630f&amp;pad=10,10,10,10&amp;ext=png&amp;bg=FFFFFFFF" jsname="HiaYvf" jsaction="load:XAeZkd;" data-iml="51397.85999999731" style="width: 100%; height: 202.125px; margin: 46.0875px 0px;">
+                          <h6>Select your Bank </h6>
+                      </label> <select class="form-control" id="ccmonth">
+                          <option value="" selected disabled>--Please select your Bank--</option>
+                          <option>Bank 1</option>
+                          <option>Bank 2</option>
+                          <option>Bank 3</option>
+                      </select> </div>
+                  <div class="form-group">
+                      <p> <button type="button" class="btn btn-primary "><i class="fas fa-mobile-alt mr-2"></i> Proceed Pyment</button> <button type="button" class="btn btn-primary "style="float: right"><i class="fas fa-mobile-alt mr-2"></i> Add Bank Account</button></p>
+                  </div>
+                  <p class="text-muted">Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
+              </div>
+            </div>
+          </div> <!-- End -->
+          </div>
+      </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Create Community Modal -->
+<!-- Create Community Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color:white">
+  <div class="modal-dialog " role="document" >
+    <div class="modal-content bg-dark" >
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enter token for current Community</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="container formContainer">
+        <div class="formWrapper bg-dark text-white">
+          <div class="row align-middle justify-content-center align-items-center">
+            <div class="col">
+              <label for="name">Token</label>
+              <input type="text"class="form-control" id="communityNameField">
+              <label class="errorLabel" id="communityNameFeildError" hidden='true'></label>
+              <br/>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center text-danger">
+            <label class="errorLabel" id="createError" hidden="true"></label>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="submitCreateForm();return false;">Add Community</button>
         </div>
       </div>
     </div>
   </div></div>
   <!-- Create Community Modal -->
-  <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true" style="color:white">
-    <div class="modal-dialog " role="document" >
-      <div class="modal-content bg-dark" >
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModal2Label">Payment Methods</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-              <div class="card-body">
-                <div class="bg-dark shadow-sm pt-4 pl-2 pr-2 pb-2">
-                    <!-- Credit card form tabs -->
-                    <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
-                        <li class="nav-item"> <a data-toggle="pill" href="#credit-card" class="nav-link active "> <i class="fas fa-credit-card mr-2"></i> Credit Card </a> </li>
-                        <li class="nav-item"> <a data-toggle="pill" href="#paypal" class="nav-link "> <i class="fab fa-paypal mr-2"></i> Paypal </a> </li>
-                        <li class="nav-item"> <a data-toggle="pill" href="#net-banking" class="nav-link "> <i class="fas fa-mobile-alt mr-2"></i> Net Banking </a> </li>
-                    </ul>
-                </div>
-                <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
-                <div class="tab-content">
-                    <!-- credit card info-->
-                    <div id="credit-card" class="tab-pane fade show active pt-3 text-muted">
-                        <form role="form "><img src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg" alt="PayPal Acceptance Mark">
-                                    <h6 >Card Owner</h6>
-                                </label> <input type="text" name="username" placeholder="Card Owner Name" required class="form-control ">
-                            <div class="form-group"> <label for="cardNumber">
-                                    <h6>Card number</h6>
-                                </label>
-                                <div class="input-group"> <input type="text" name="cardNumber" placeholder="Valid card number" class="form-control " required>
-                                    <div class="input-group-append"> <span class="input-group-text text-muted"> <i class="fab fa-cc-visa mx-1"></i> <i class="fab fa-cc-mastercard mx-1"></i> <i class="fab fa-cc-amex mx-1"></i> </span> </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    <div class="form-group"> <label><span class="hidden-xs">
-                                                <h6>Expiration Date</h6>
-                                            </span></label>
-                                        <div class="input-group"> <input type="number" placeholder="MM" name="" class="form-control" required> <input type="number" placeholder="YY" name="" class="form-control" required> </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group mb-4"> <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
-                                          <h6>CVV <i class="fa fa-question-circle d-inline"></i></h6>
-                                        </label> <input type="text" required class="form-control"> </div>
-                                </div>
-                            </div>
-                            <div class="card-footer"> <button type="button" class="subscribe btn btn-primary btn-block shadow-sm"> Confirm Payment </button>
-                        </form>
-                    </div>
-                </div> 
-                <div id="paypal" class="tab-pane fade pt-3 text-muted">         
-                    <h6 class="pb-2" >Select your paypal account type</h6>
-                    <div class="form-group "> <label class="radio-inline" > <input type="radio" name="optradio" checked> Domestic </label> <label class="radio-inline"> <input type="radio" name="optradio" class="ml-5">International </label></div>
-                    <p> <button type="button" class="btn btn-primary "><i class="fab fa-paypal mr-2"></i> Log into my Paypal</button> <img id="dimg_4" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHwAAAAhCAMAAAAs0D+lAAAAw1BMVEX///8AL4YAnN4BIGlPb6sAKXsvVZxPu+ilttQLoN8DMYckquOHncYEnt8vruT5/f719/o6XqLP2OgfSJXn6/Rng7edr9DC5/cKN4sVQJBif7XR7fnr9/wXpeGPpMpoxOt9lcF3yu214vWq3vRAtebh8/uT1fEBMXworONGaKcnT5m+yuDj6PLt8PYQPI4zUI2ywNoBPIcAb7aI0fB+lsIASpQAfMJyjLwBMHsBRpAAYaoAk9af2vPF0OMAUqMAh81OntHccMZiAAADkklEQVRYhe1X2WLaMBAUimtz+uA2MRiDDYEAzVnalB7//1XV7kpGsmlC8kBfOg9YlhSNtDs7chgTCCo56mGwv2UXRLtSQLC5HHm1SF7pbC9GPi2RV/YXI7fK5LuLkdtl8kr3UuRD4vuU44LkG8l9peHzdWGO3GBluO61z1l01uKEmptkp8ZhSDzvTpAvawNjbl/LSL1/BnnCjyislY+PxbNJa+rcV/d87Olz97oehmfYgKORF9bKx1PxHJ0gf+B8rs/FgrCDdR2nTt4mbwBp6jaIvXx0V/TGLDdXg1wMPepz13Bgsf9NeJ4LeEDpisYAc38ojddE70I0duWUi4PzRJvrw4ntPARP2NntlqOpcM3lySgEGEUvi/LxTMajW9bbM5f7UkD3HzEVpipjt5bQ/9Bqj2zbnrCe+B3R1KZoBv6Bq9iNoSVqZ56KGNTiLHVdd4Zi52IvtyXy51Ke0P2bsAtM+sbrKSeE9ynJBksQV7NI7DPxPkfBsShV2qNAPEqx9wspX36h+tBj+oSZrvb3mKKV0qhElShhc9uOaIRdEvtifogx5Ynn6uIXgYil2GUVXX1dLpf3316+ywmxnkLD/ett3O9w3292KvLIoMOAycq5Y+zGqLQIAzFODgnojLe8XOwrWvGXsTfeMixOd3/hMaD9EIp9C6R1nzFIQ31L6ekJbbW0pWqDCF5dkNs1tBqMKbHT7kOT29B67v4Y8zbJj2wOSDvi+QO7NpCVtS/FLk/hZOwgRScAuXdI7EISPq350+Q2gk7uHzYnk8kdXDgTeKXPjRFKQB7BWmFSlMxuHheLxQzOG0t5MTKXhA1gPMu/oV506puZwU3uPzXlh9eeD2FHy8n9F2SHYtYs0snJMwj7gS04XSvyG+qBaBuOEy8KN5p0/2r+iicHSt/KE6C+A4OcjR+XidVeIvcodvA/+Q1FemtF7BSOZcyORMG0R3L5gZ1rbO82eXBbx1rFnHMniVHswlxSmVlZRVRh7klutDXQtMJKrzyZfcyFCo/UtII3NiqPbA/8j6poR/3OafKd1LTCho5c6cCuQurD9EmLzYprDejIHG+5lEUqDXVd7MZNdsTIsqyq3rGd2sNd0Nz2xQDVXBekp764I0fAEG0WN2rj9OAlOOCL3xgiubcAv4ncuMPfBayyD/6rExN5SefnYmIW4/tAl07r7xf062iDBdof/ev0Nb29DXDZ8Kyv2v/49/gDggM98lgyTiEAAAAASUVORK5CYII=" class="rISBZc M4dUYb" height="33" title="https://www.paypal.com/us/home" width="124" alt="Image result for paypal" data-atf="1" style="width: 90px; height: 24px; margin-left: 1px; margin-right: 1px; margin-top: 0px;"></p>
-                    <p class="text-muted"> Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
-                </div> 
-                <div id="net-banking" class="tab-pane fade pt-3 text-muted">
-                    <div class="form-group "> <label for="Select Your Bank">                   
-                      <img alt="Bank transfer logo - Free logo icons" class="n3VNCb" src="https://imageog.flaticon.com/icons/png/512/38/38978.png?size=1200x630f&amp;pad=10,10,10,10&amp;ext=png&amp;bg=FFFFFFFF" jsname="HiaYvf" jsaction="load:XAeZkd;" data-iml="51397.85999999731" style="width: 100%; height: 202.125px; margin: 46.0875px 0px;">
-                            <h6>Select your Bank </h6>
-                        </label> <select class="form-control" id="ccmonth">
-                            <option value="" selected disabled>--Please select your Bank--</option>
-                            <option>Bank 1</option>
-                            <option>Bank 2</option>
-                            <option>Bank 3</option>
-                        </select> </div>
-                    <div class="form-group">
-                        <p> <button type="button" class="btn btn-primary "><i class="fas fa-mobile-alt mr-2"></i> Proceed Pyment</button> <button type="button" class="btn btn-primary "style="float: right"><i class="fas fa-mobile-alt mr-2"></i> Add Bank Account</button></p>
-                    </div>
-                    <p class="text-muted">Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
-                  </div>
-                </div>
-              </div>          
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color:white">
-    <div class="modal-dialog " role="document" >
-      <div class="modal-content bg-dark" >
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Enter token for current Community</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="container formContainer">
-          <div class="formWrapper bg-dark text-white">
-            <div class="row align-middle justify-content-center align-items-center">
-              <div class="col">
-                <label for="name">Token</label>
-                <input type="text"class="form-control" id="communityNameField">
-                <label class="errorLabel" id="communityNameFeildError" hidden='true'></label>
-                <br/>
-              </div>
-            </div>
-            <div class="row d-flex justify-content-center text-danger">
-              <label class="errorLabel" id="createError" hidden="true"></label>
-            </div>
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" onclick="">Add Community</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModal1Label" aria-hidden="true" style="color:white">
     <div class="modal-dialog " role="document" >
       <div class="modal-content bg-dark" >
@@ -272,140 +305,177 @@
                 <br/>
               </div>
             </div>
-            <div class="row d-flex justify-content-center text-danger">
+            <div class="row d-flex justify-content-center">
               <label class="errorLabel" id="createError" hidden="true"></label>
             </div>
-            <div class="container">
+            
+          
+            <div class="container1">
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
                     <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                      <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" />
+                      <input id="dateTime" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" />
                       <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                      </div>
+                        <div id="" class="input-group-text">
+                          <span class="input-group-addon">
+                            <span class="fa fa-calendar "></span>
+                          </span>
+                          </div>
+                      </div> 
                     </div>
                   </div>
+                  <select class="form-control" id="maintenanceTopic">
+                    <option value="" selected disabled>Select Maintenance</option>
+                    <option>Plumbing</option>
+                    <option>Electrical</option>
+                    <option>Cosmetic</option>
+                    <option>Appliances</option>
+                    <option>Other</option>
+                </select> 
+                  <br/>
+                  <label for="name">Describe the problem</label>
+                  <textarea id="privateText" rows="7" cols="49"></textarea>
                 </div>
               </div>
-            </div>     
+            </div>
+            <div class="row d-flex justify-content-center">
+              <label class="errorLabel" id="createError" hidden="true"></label>
+            </div>
+           
         </br>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" onclick="">Schedule Maintenance</button>
+            <button type="button" class="btn btn-primary" onclick="scheduleMaintenance();return false;">Schedule Maintenance</button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="modal fade" id="privateMessageModal" tabindex="-1" role="dialog" aria-labelledby="privateMessageModalLabel" aria-hidden="true" style="color:white">
-    <div class="modal-dialog " role="document" >
-      <div class="modal-content bg-dark" >
-        <div class="modal-header">
-          <h5 class="modal-title" id="privateMessageModalLabel">Messages</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="container formContainer">
-          <div class="formWrapper bg-dark text-white">
-            <div class="row align-middle justify-content-center align-items-center">
-              <div class="col">
-                <br/>
-              </div>
+<div class="modal fade" id="privateMessageModal" tabindex="-1" role="dialog" aria-labelledby="privateMessageModalLabel" aria-hidden="true" style="color:white">
+  <div class="modal-dialog " role="document" >
+    <div class="modal-content bg-dark" >
+      <div class="modal-header">
+        <h5 class="modal-title" id="privateMessageModalLabel">Messages</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="container formContainer">
+        <div class="formWrapper bg-dark text-white">
+          <div class="row align-middle justify-content-center align-items-center">
+            <div class="col">
+              <br/>
             </div>
-            <div class="row d-flex justify-content-center text-danger">
-              <label class="errorLabel" id="createError" hidden="true"></label>
-            </div>
-            <label for="name">Subject</label>
-            <textarea id="subjectPrivateText" rows="1" cols="50"></textarea>
-            <br/>
-            <label for="name">Message</label>
-            <textarea id="privateText" rows="7" cols="50"></textarea>
-        </br><br/>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" onclick="">Submit Message</button>
+          <div class="row d-flex justify-content-center text-danger">
+            <label class="errorLabel" id="createError" hidden="true"></label>
           </div>
+          <label for="name">Subject</label>
+          <textarea id="subjectPrivateText" rows="1" cols="50"></textarea>
+          <br/>
+          <label for="name">Message</label>
+          <textarea id="privateText" rows="7" cols="50"></textarea>
+      </br><br/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="submitCreateForm();return false;">Submit Message</button>
         </div>
       </div>
     </div>
   </div>
-  <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true" style="color:white">
-    <div class="modal-dialog " role="document" >
-      <div class="modal-content bg-dark" >
-        <div class="modal-header">
-          <h5 class="modal-title" id="infoModalLabel">Meet the Team</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="container formContainer">
-          <div class="formWrapper bg-dark text-white">
-              <div id="carouselExampleIndicators" class="carousel slide " data-ride="carousel">
-                <ol class="carousel-indicators">
-                  <li data-target="#carouselExampleIndicators" data-slide-to="0"  class="active"></li>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">              
-                  <div class="carousel-item active">
-                  </br><h2 class ="h2carousel">Team Leader</h2>
-                      <a href="https://github.com/pedro12133"><div class="card1 bg-dark justify-content-center align-items-center">
-                          <img src="/image/pedro.jpg" alt="Avatar" class="avatar" style="width:100%">
-                          </a><div class="container">
-                          <h4><b>Pedro Beltran</b></h4> 
-                          <p>Software Engineer</p> 
-                          </br>
-                        </div>
-                      </div>
-                      </br>
-                  </div>                
-                  <div class="carousel-item">
-                    </br><h2 class="h2carousel">Middle and Back End</h2>
-                    <a href="https://www.linkedin.com/in/hengalvin/"><div class="card1 bg-dark justify-content-center align-items-center">
-                          <img src="/image/alvin.jpeg" alt="Avatar" class="avatar" style="width:100%">
-                        <div class="container">
-                          </a><h4><b>Alvin Heng</b></h4> 
-                          <p>Software Engineer</p> 
-                          </br>
-                        </div>
-                      </div>
-                      </br>
-                  </div>
-                  <div class="carousel-item">
-                  </br><h2 class="h2carousel">Front and Middle End</h2>
-                  <a href="https://www.linkedin.com/in/milush-yanev/"><div class="card1 bg-dark justify-content-center align-items-center">
-                          <img src="/image/milush.jpeg" alt="Avatar" class="avatar" style="width:100%">
-                          </a><div class="container">
-                          <h4><b>Milush Yanev</b></h4> 
-                          <p>Software Engineer</p> 
-                          </br>
-                        </div>
-                      </div>
-                      </br>
-                  </div>              
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </div>
-          </div>
-        </div>
+</div>
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true" style="color:white">
+  <div class="modal-dialog " role="document" >
+    <div class="modal-content bg-dark" >
+      <div class="modal-header">
+        <h5 class="modal-title" id="infoModalLabel">Meet the Team</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-    </div>
-  </div>
+      <div class="container formContainer">
+        <div class="formWrapper bg-dark text-white">
+          <!--
+-->
 
-  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
-  <script src="js/firebase.js"></script>
-  <script src="js/user.js"></script>
+            <div id="carouselExampleIndicators" class="carousel slide " data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0"  class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+              </ol>
+              <div class="carousel-inner">
+
+                <div class="carousel-item active">
+                </br><h2 class ="h2carousel">Team Leader</h2>
+                     <a href="https://github.com/pedro12133"><div class="card1 bg-dark justify-content-center align-items-center">
+                        <img src="/image/pedro.jpg" alt="Avatar" class="avatar" style="width:100%">
+                         </a><div class="container">
+                        <h4><b>Pedro Beltran</b></h4>
+                        <p>Software Engineer</p>
+                        </br>
+                      </div>
+                    </div>
+                    </br>
+                </div>
+
+                <div class="carousel-item">
+                  </br><h2 class="h2carousel">Middle and Back End</h2>
+                  <a href="https://www.linkedin.com/in/hengalvin/"><div class="card1 bg-dark justify-content-center align-items-center">
+                        <img src="/image/alvin.jpeg" alt="Avatar" class="avatar" style="width:100%">
+                       <div class="container">
+                         </a><h4><b>Alvin Heng</b></h4>
+                        <p>Software Engineer</p>
+                        </br>
+                      </div>
+                    </div>
+                    </br>
+                </div>
+                <div class="carousel-item">
+                </br><h2 class="h2carousel">Front and Middle End</h2>
+                <a href="https://www.linkedin.com/in/milush-yanev/"><div class="card1 bg-dark justify-content-center align-items-center">
+                        <img src="/image/milush.jpeg" alt="Avatar" class="avatar" style="width:100%">
+                        </a><div class="container">
+                        <h4><b>Milush Yanev</b></h4>
+                        <p>Software Engineer</p>
+                        </br>
+                      </div>
+                    </div>
+                    </br>
+                </div>
+
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
+<script src="js/firebase.js"></script>
+<script src="js/user.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 
   <script type="text/javascript">
     // User object of current signed in user (see js/user.js)
@@ -418,12 +488,13 @@
          currentUser = new User();
          currentUser.uid = user.uid;
          setUserData(currentUser.uid);
-        } 
+        }
         else {
           console.log("not signed in");
         }
       });
     }
+
     // initializes currentUser
     async function setUserData(uid) {
       await db.collection('users').doc(uid).get().then(function(doc) {
@@ -432,13 +503,98 @@
           currentUser.last = doc.data()['last'];
           currentUser.communities = doc.data()['communities'];
           currentUser.category = doc.data()['category'];
-
+          currentUser.currentCommunity = doc.data()['communities'][0];
           if(currentUser.category == 'tenant') {
             document.getElementsByTagName('body')[0].hidden = false;
+            document.getElementById('userName').innerHTML = currentUser.first+" "+currentUser.last;
+            listCommunities();
           }
         }
       });
+      getMessages("publicMessages");
     }
+
+    async function listCommunities() {
+      var body = document.getElementById('cardBody0');
+      body.innerHTML = "";
+
+      if(currentUser.communities.length > 0) {
+        for(var i = 0; i < currentUser.communities.length; i++) {
+          await db.collection('communities')
+          .doc(currentUser.communities[i]).get()
+          .then(function(doc){
+            if(doc.exists) {
+              body.innerHTML += "<div class=\"d-flex justify-content-between w-100 \">"+
+                "<a data-toggle=\"tooltip\" data-placement=\"top\" title=\"toggle use\""+
+                  " onclick=\"reloadCommunityWidgets(this,'"+currentUser.communities[i]+"')\" class=\"nav-link tokenLinks\" >"+doc.data()['name']+
+                "</a>"+
+              "</div>";
+              body.innerHTML += "<hr class=\"bg-light\" />";
+            }
+
+          });
+        }
+        var body = document.getElementById('cardBody0');
+        var list = body.getElementsByClassName('tokenLinks');
+        list[0].style.opacity = .5;
+        list[0].onmouseover = function() {
+          this.style.opacity = .5;
+        };
+        list[0].onmouseout = function() {
+          this.style.opacity = .5;
+        };
+        loadCommunityInfo(currentUser.communities[0]);
+
+      }
+      else {
+        body.innerHTML += "No communities added yet."
+      }
+    }
+
+    function reloadCommunityWidgets(element,commID) {
+      currentUser.currentCommunity = commID;
+      getMessages("publicMessages");
+      // dim selected community
+      var body = document.getElementById('cardBody0');
+      var list = body.getElementsByClassName('tokenLinks');
+      for(var i = 0; i < list.length; i++) {
+        list[i].style.opacity = 1;
+        list[i].onmouseover = function() {
+          this.style.opacity = .5;
+        };
+        list[i].onmouseout = function() {
+          this.style.opacity = 1;
+        };
+      }
+
+      element.onmouseover = function() {
+        this.style.opacity = .5;
+      };
+      element.onmouseout = function() {
+        this.style.opacity = .5;
+      };
+    console.log(commID);
+
+      //reload info widget
+      loadCommunityInfo(commID);
+    }
+
+    async function loadCommunityInfo(commID) {
+      var body = document.getElementById('infoCardBody');
+      body.innerHTML = "";
+
+      await db.collection('communities').doc(commID).get().then(function(doc){
+        console.log(doc.data())
+        body.innerHTML += "<h5><u><strong>"+doc.data()['name'].toUpperCase()+"</strong></u><h5/>";
+        body.innerHTML += "<h7>"+doc.data()['street'].toUpperCase()+
+          ", "+doc.data()['city'].toUpperCase()+", "+doc.data()['zip']+"</h7>";
+        body.innerHTML += "<hr class=\"bg-light\">";
+        body.innerHTML += "<h7>Vacancies: "+(doc.data()['capacity'] - doc.data()['tenants'].length)+"</h7>";
+
+      });
+
+    }
+
     // add community
     async function addCommunity() {
       var token = document.getElementById('tokenFeild').value;
@@ -501,7 +657,9 @@
       catch(error) {
         console.log("ERROR");
       }
+
     }
+
     // update communities in user profile
     async function updateUserCommunities(commUID) {
       var communities = [];
@@ -515,7 +673,7 @@
           })
           .then( async function(val) {
             console.log("updated user communities");
-            
+
           })
           .catch(function(error) {
             console.log("Error updating user communities:", error);
@@ -545,14 +703,126 @@
             });
             console.log("token destroyed");
           }
+
         });
       }).catch(function(error){
         console.log("token doesnt exist");
       });
     }
-    $(function() {
-    $('#datetimepicker1').datetimepicker();
+
+    function toggleMessages(public) {
+        var msgType = "";
+
+        if(public == true) {
+          console.log("IS PUBLIC");
+          msgType = "publicMessages";
+        } else {
+          console.log("IS PRIVATE")
+          msgType = "privateMessages";
+        }
+        getMessages(msgType);
+  }
+
+  function scheduleMaintenance() {
+    var dateTime = document.getElementById('dateTime').value;
+    var topic = document.getElementById('maintenanceTopic').value;
+    var text = document.getElementById('privateText').value;
+    var newMaintenance  = {dateTime: dateTime, text: text, topic: topic, status: "pending"};
+    db.collection("users").doc(currentUser.uid).update({
+      maintenance: firebase.firestore.FieldValue.arrayUnion(newMaintenance),
+    })
+    .catch(function(error) {
+      // error adding maintenance
     });
+
+
+
+
+  }
+
+  //might not need this after firebase.js has been refactored (adding current community to user class)
+  async function getUser(userUID) {
+  var name = "";
+  await db.collection("users").doc(userUID).get().then(function(doc) {
+    if (doc.exists) {
+      name = doc.data()['first'];
+      name += " " + doc.data()['last'];
+    } else {
+      console.log("No such user");
+    }
+  }).catch(function(error) {
+    console.log("Error getting user data:", error);
+  });
+  return name;
+}
+
+async function getMessages(msgType) {
+  var msg = document.getElementById("messages");
+  var data = "";
+  var name = "";
+  var userUID = "";
+  var commUID = currentUser.currentCommunity;
+  console.log("this community: " + commUID);
+  var i = 0;
+  await db.collection("communities").doc(commUID).collection(msgType).get().then(function(snapshot) {
+      snapshot.forEach(async function(doc) {
+        if(JSON.stringify(doc.data()) != '{}') { //might want to change the condition if the database for communities doesn't have the collection for messages yet
+          userUID = doc.data()['senderId'];
+          await getUser(userUID).then(function(val) {
+            if(val != name)
+            {
+              name = val;
+              data += "<li><button id=\"sender" + i + "\" onClick=\"showMessages('" + doc.data()['senderId'] + "','" + msgType + "','" + commUID +"')\" class=\"linkBtn\" data-toggle=\"modal\" data-target=\"#privateMessageModal\">" + name + "</button></li>";
+              msg.innerHTML = data;
+              i++;
+            }
+          });
+        } else {
+          console.log("No Data");
+          data += "<h6> No Messages </h6>";
+          msg.innerHTML = data;
+        }
+      });
+    })
+    .catch(function(error) {
+      console.log("Error getting documents: ", error);
+    });
+}
+
+async function showMessages(userUID, msgType, commUID) {
+  var arr = [];
+  await db.collection("users").doc(userUID).get().then(function(doc) {
+    if (doc.exists) {
+      arr = doc.data()[msgType]
+      for(var i in arr) {
+        getUserMsg(msgType, commUID, arr[i])
+      }
+    } else {
+      console.log("No messages");
+    }
+  }).catch(function(error) {
+    console.log("Error getting user data:", error);
+  });
+  //toggle isRead to true when opened
+}
+
+async function getUserMsg(msgType, commUID, msgUID) {
+  await db.collection("communities").doc(commUID).collection(msgType).doc(msgUID).get().then(function(doc) {
+    if (doc.exists) {
+      console.log(doc.data()); //was thinking of putting this on a modal of some sort instead of showing
+      // console.log(doc.data()["subject"]);
+      // console.log(doc.data()["message"]);
+      // console.log(doc.data()["isRead"]);
+    } else {
+      console.log("No");
+    }
+  }).catch(function(error) {
+    console.log("Error getting user data:", error);
+  });
+}
+
+
+
   </script>
 
 </body>
