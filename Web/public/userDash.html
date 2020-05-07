@@ -138,14 +138,12 @@
     </div>
   </div>
 
-
-
-<!-- Create Community Modal -->
+<!-- Cash Token Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color:white">
   <div class="modal-dialog " role="document" >
     <div class="modal-content bg-dark" >
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Enter token for current Community</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Enter token to add Community</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -155,8 +153,8 @@
           <div class="row align-middle justify-content-center align-items-center">
             <div class="col">
               <label for="name">Token</label>
-              <input type="text"class="form-control" id="communityNameField">
-              <label class="errorLabel" id="communityNameFeildError" hidden='true'></label>
+              <input type="text"class="form-control" id="tokenFeild">
+              <label class="errorLabel" id="tokenStatusMessage" hidden='true'></label>
               <br/>
             </div>
           </div>
@@ -166,13 +164,14 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onclick="submitCreateForm();return false;">Add Community</button>
+          <button type="button" class="btn btn-primary" onclick="addCommunity();return false;">Cash Token</button>
         </div>
       </div>
     </div>
   </div>
 </div>
-  <!-- Create Community Modal -->
+
+  <!-- Pay Rent Modal -->
 <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true" style="color:white">
   <div class="modal-dialog " role="document" >
     <div class="modal-content bg-dark" >
@@ -255,39 +254,8 @@
     </div>
   </div>
 </div>
-  <!-- Create Community Modal -->
-<!-- Create Community Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color:white">
-  <div class="modal-dialog " role="document" >
-    <div class="modal-content bg-dark" >
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Enter token for current Community</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="container formContainer">
-        <div class="formWrapper bg-dark text-white">
-          <div class="row align-middle justify-content-center align-items-center">
-            <div class="col">
-              <label for="name">Token</label>
-              <input type="text"class="form-control" id="communityNameField">
-              <label class="errorLabel" id="communityNameFeildError" hidden='true'></label>
-              <br/>
-            </div>
-          </div>
-          <div class="row d-flex justify-content-center text-danger">
-            <label class="errorLabel" id="createError" hidden="true"></label>
-          </div>
 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onclick="submitCreateForm();return false;">Add Community</button>
-        </div>
-      </div>
-    </div>
-  </div></div>
-  <!-- Create Community Modal -->
+  <!-- Maintenance Modal -->
   <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModal1Label" aria-hidden="true" style="color:white">
     <div class="modal-dialog " role="document" >
       <div class="modal-content bg-dark" >
@@ -352,6 +320,8 @@
       </div>
     </div>
   </div>
+
+  <!-- Send Message -->
 <div class="modal fade" id="privateMessageModal" tabindex="-1" role="dialog" aria-labelledby="privateMessageModalLabel" aria-hidden="true" style="color:white">
   <div class="modal-dialog " role="document" >
     <div class="modal-content bg-dark" >
@@ -494,6 +464,10 @@
       var newDateTime = date+' '+time;
       var dateInput = document.getElementById('dateTime');
       dateInput.value =newDateTime;
+
+      document.getElementById('tokenFeild').onclick = function() {
+        document.getElementById('tokenStatusMessage').hidden = true;
+      };
     }
 
     // initializes currentUser
@@ -590,7 +564,6 @@
         body.innerHTML += "<h7>"+doc.data()['street'].toUpperCase()+
           ", "+doc.data()['city'].toUpperCase()+", "+doc.data()['zip']+"</h7>";
         body.innerHTML += "<hr class=\"bg-light\">";
-        body.innerHTML += "<h7>Vacancies: "+(doc.data()['capacity'] - doc.data()['tenants'].length)+"</h7>";
 
       });
 
@@ -616,6 +589,10 @@
           }
           else{
             console.log("Invalid token");
+            var tokenMessage = document.getElementById('tokenStatusMessage');
+            tokenMessage.innerHTML = "Invalid token.";
+            tokenMessage.hidden = false;
+            tokenMessage.style.color = "red";
             // destroy token
             destroyToken(token,doc.data()['community']);
           }
@@ -674,7 +651,10 @@
           })
           .then( async function(val) {
             console.log("updated user communities");
-
+            var tokenMessage = document.getElementById('tokenStatusMessage');
+            tokenMessage.style.color = "green";
+            tokenMessage.innerHTML = "Token accepted.";
+            tokenMessage.hidden = false;
           })
           .catch(function(error) {
             console.log("Error updating user communities:", error);
