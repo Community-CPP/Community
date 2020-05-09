@@ -15,7 +15,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard>{
   AuthService _auth = new AuthService();
-  
+
   //MyItems method
   Material myItems(IconData icon, String heading, int color)
   {
@@ -28,29 +28,30 @@ class _DashboardState extends State<Dashboard>{
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
 
-                  //text
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(heading,
-                    style: TextStyle(
-                      color: new Color(color),
-                      fontSize: 15.0,
-                    ),
-                    ),
-                  ),
+                      //text
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(heading,
+                          style: TextStyle(
+                            color: new Color(color),
+                            fontSize: 15.0,
+                          ),
+                        ),
+                      ),
 
-                  //Icon
+                      //Icon
 /*
                   new IconButton(
                     color: new Color(color),
                     padding: const EdgeInsets.all(16.0),
                     icon: Icon(icon, size: 30.0,),
+
                     onPressed: () {
                       // Interactivity or events codes here
                       Navigator.of(context).pop();
@@ -58,19 +59,20 @@ class _DashboardState extends State<Dashboard>{
                           builder: (BuildContext context) => Payment()));
                       print("hello");
                     },
-                  ),
-*/
-/*
-                  Material(
-                    color: new Color(color),
-                    borderRadius: BorderRadius.circular(24.0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Icon(icon, color: Colors.white, size: 30.0,),
-                    ),
+
                   ),
 */
 
+                      Material(
+                        color: new Color(color),
+                        borderRadius: BorderRadius.circular(24.0),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Icon(icon, color: Colors.white, size: 30.0,),
+                        ),
+                      ),
+
+/*
                   MaterialButton(
                     color: new Color(color),
                       shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
@@ -87,10 +89,10 @@ class _DashboardState extends State<Dashboard>{
                             builder: (BuildContext context) => Payment()));
                     },
                   ),
-
-                ]
-              )
-    ]
+*/
+                    ]
+                )
+              ]
           ),
         ),
       ),
@@ -105,7 +107,7 @@ class _DashboardState extends State<Dashboard>{
       if(value == null){
         Navigator.pop(context);
       }
-      });
+    });
     return Scaffold(
         appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
@@ -115,31 +117,33 @@ class _DashboardState extends State<Dashboard>{
         ),
         body: //_buildBody(context), //build dashboard
 
-      StaggeredGridView.count(
-      crossAxisCount: 2,
-      crossAxisSpacing: 12.0,
-      mainAxisSpacing: 12.0,
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      children: <Widget>[
-        myItems(Icons.account_circle, "Profile", 0xffed622b),
-        myItems(Icons.notifications, "Notification", 0xffff3266, ),
-        myItems(Icons.bookmark, "Appartment Info", 0xff26cb3c, ),
-        myItems(Icons.attach_money, "Balance", 0xff3399fe, ),
-        myItems(Icons.message, "Repair History", 0xff7297ff, ),
-        myItems(Icons.payment, "Payment History", 0xff622F74, ),
-        myItems(Icons.settings, "Settings", 0xfff4c83f,)
-        ],
+        StaggeredGridView.count(
+          crossAxisCount: 2,
+          crossAxisSpacing: 12.0,
 
-      staggeredTiles: [
-        StaggeredTile.extent(2, 130.0),
-        StaggeredTile.extent(1, 130.0),
-        StaggeredTile.extent(1, 130.0),
-        StaggeredTile.extent(1, 130.0),
-        StaggeredTile.extent(1, 130.0),
-        StaggeredTile.extent(1, 130.0),
-        StaggeredTile.extent(1, 130.0),
-      ],
-    ),
+          mainAxisSpacing: 12.0,
+          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          children: <Widget>[
+
+            myItems(Icons.account_circle, "Profile", 0xffed622b),
+            myItems(Icons.notifications, "Notification", 0xffff3266, ),
+            myItems(Icons.bookmark, "Appartment Info", 0xff26cb3c, ),
+            myItems(Icons.attach_money, "Balance", 0xff3399fe, ),
+            myItems(Icons.message, "Repair History", 0xff7297ff, ),
+            myItems(Icons.payment, "Payment History", 0xff622F74, ),
+            myItems(Icons.settings, "Settings", 0xfff4c83f,),
+          ],
+
+          staggeredTiles: [
+            StaggeredTile.extent(2, 130.0),
+            StaggeredTile.extent(1, 130.0),
+            StaggeredTile.extent(1, 130.0),
+            StaggeredTile.extent(1, 130.0),
+            StaggeredTile.extent(1, 130.0),
+            StaggeredTile.extent(1, 130.0),
+            StaggeredTile.extent(1, 130.0),
+          ],
+        ),
 
         drawer: new Drawer(
             child: ListView(
@@ -170,7 +174,7 @@ class _DashboardState extends State<Dashboard>{
                       Navigator.push(context, new MaterialPageRoute(
                           builder: (BuildContext context) => new ScheduleMaintenance()));
                     },
-                    ),
+                  ),
                   new Divider(
                     color: Colors.black,
                     height: 5.0,
@@ -190,11 +194,11 @@ class _DashboardState extends State<Dashboard>{
                   new ListTile(
                     title: new Text('Sign Out'),
                     onTap: (){
-                       _auth.signOut();
+                      _auth.signOut();
                       Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
                       //Navigator.of(context).pop();
                       //Navigator.push(context, new MaterialPageRoute(
-                          //builder: (BuildContext context) => new Login()));
+                      //builder: (BuildContext context) => new Login()));
                     },
                   ),
                 ]
@@ -296,4 +300,5 @@ class _DashboardState extends State<Dashboard>{
       );
   }
   */
+
 

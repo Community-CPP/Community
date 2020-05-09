@@ -216,70 +216,210 @@ class _AdminDashboardState extends State<AdminDashboard>{
                   GestureDetector(
                     onTap: () { 
                       generateCommunity();
+
                     },
-                    child: Container(
-                      padding: const EdgeInsets.all(2),
-                      color: Colors.teal[500],
-                      child: Center(child: Text("Create"),),
-                    ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Container(
+                  padding: const EdgeInsets.all(2),
+                  color: Colors.teal[500],
+                  alignment: Alignment.center,
+                  child: Container(
+                    //color: Colors.brown,
+                    child: Column(
+
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        // mainAxisSize: MainAxisSize.min,
+
+                        children: <Widget>[
+                          Container(child: Icon(Icons.notifications, color: Colors.white), alignment: Alignment.center,),
+                          Container(child: Text("Notifications", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+
+                        ]),
+                  ),
+                ),
+              )
+          ),
+
+                  GestureDetector(
+                    onTap: ()
+                    {
+                      //generateToken("eIHKllJbs790GyrqDudf");
+                      },
+
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(2),
+                          color: Colors.teal[500],
+                          alignment: Alignment.center,
+                          child: Container(
+                            //color: Colors.brown,
+                            child: Column(
+
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                // mainAxisSize: MainAxisSize.min,
+
+                                children: <Widget>[
+                                  Container(child: Icon(Icons.account_circle, color: Colors.white), alignment: Alignment.center,),
+                                  Container(child: Text("Profile", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+                                ]),
+                          ),
+                        ),
+                      )
                   ),
                   GestureDetector(
-                    onTap: () { generateToken("eIHKllJbs790GyrqDudf") ;},
+                    onTap: ()
+                    {
+
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Container(
+                        padding: const EdgeInsets.all(2),
+                        color: Colors.teal[500],
+                        alignment: Alignment.center,
+                        child: Container(
+                            //color: Colors.brown,
+                            child: Column(
+
+                              mainAxisAlignment: MainAxisAlignment.center,
+                             // mainAxisSize: MainAxisSize.min,
+
+                              children: <Widget>[
+                        Container(child: Icon(Icons.info, color: Colors.white), alignment: Alignment.center,),
+                        Container(child: Text("Apartment Info", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+                      ]),
+                        ),
+                      ),
+                    )
+                  ),
+                  GestureDetector(
+                    onTap: () { },
+
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(2),
+                          color: Colors.teal[500],
+                          alignment: Alignment.center,
+                          child: Container(
+                            //color: Colors.brown,
+                            child: Column(
+
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                // mainAxisSize: MainAxisSize.min,
+
+                                children: <Widget>[
+                                  Container(child: Icon(Icons.account_balance, color: Colors.white), alignment: Alignment.center,),
+                                  Container(child: Text("Balance", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+
+                                ]),
+                          ),
+                        ),
+                      ),
+
+                  ),
+                  GestureDetector(
+                    onTap: () { },
+
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(2),
+                          color: Colors.teal[500],
+                          alignment: Alignment.center,
+                          child: Container(
+                            //color: Colors.brown,
+                            child: Column(
+
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                // mainAxisSize: MainAxisSize.min,
+
+                                children: <Widget>[
+                                  Container(child: Icon(Icons.history, color: Colors.white), alignment: Alignment.center,),
+                                  Container(child: Text("Repair History", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+
+                                ]),
+                          ),
+                        ),
+                      ),
+                  ),
+                  GestureDetector(
+                    onTap: () { },
+
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(2),
+                          color: Colors.teal[500],
+                          alignment: Alignment.center,
+                          child: Container(
+                            //color: Colors.brown,
+                            child: Column(
+
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                // mainAxisSize: MainAxisSize.min,
+
+                                children: <Widget>[
+                                  Container(child: Icon(Icons.receipt, color: Colors.white), alignment: Alignment.center,),
+                                  Container(child: Text("Payment History", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+
+                                ]),
+                          ),
+                        ),
+                      ),
+                  ),
+
+
+                  GestureDetector(
+                    onTap: () { },
                     child: Container(
-                      padding: const EdgeInsets.all(2),
-                      color: Colors.teal[500],
-                      child: Center(child: Text("Generate Token"),),
+                      width: 100,
+                      //padding: const EdgeInsets.all(2),
+                      color: Colors.teal[200],
                     ),
                   ),
+
+
+                  GestureDetector(
+                    onTap: () { },
+
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Container(
+                        padding: const EdgeInsets.all(2),
+                        color: Colors.teal[500],
+                        alignment: Alignment.center,
+
+                        child: Container(
+                          //color: Colors.brown,
+                          child: Column(
+
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              // mainAxisSize: MainAxisSize.min,
+
+                              children: <Widget>[
+                                Container(child: Icon(Icons.settings, color: Colors.white), alignment: Alignment.center,),
+                                Container(child: Text("Settings", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+
+                              ]),
+                        ),
+                      ),
+                    ),
+                  ),
+
+
                   GestureDetector(
                     onTap: () { },
                     child: Container(
                       padding: const EdgeInsets.all(2),
-                      color: Colors.teal[500],
+                      color: Colors.teal[200],
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () { },
-                    child: Container(
-                      padding: const EdgeInsets.all(2),
-                      color: Colors.teal[500],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () { },
-                    child: Container(
-                      padding: const EdgeInsets.all(2),
-                      color: Colors.teal[500],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () { },
-                    child: Container(
-                      padding: const EdgeInsets.all(2),
-                      color: Colors.teal[500],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () { },
-                    child: Container(
-                      padding: const EdgeInsets.all(2),
-                      color: Colors.teal[500],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () { },
-                    child: Container(
-                      padding: const EdgeInsets.all(2),
-                      color: Colors.teal[500],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () { },
-                    child: Container(
-                      padding: const EdgeInsets.all(2),
-                      color: Colors.teal[500],
-                    ),
-                  ),
+
+
+
                 ],
               ),
             ),
