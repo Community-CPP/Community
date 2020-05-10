@@ -16,89 +16,6 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard>{
   AuthService _auth = new AuthService();
 
-  //MyItems method
-  Material myItems(IconData icon, String heading, int color)
-  {
-    return Material(
-      color: Colors.white,
-      elevation: 14.0,
-      shadowColor: Color(0xFF757575),//Color(0x802196F3),
-      borderRadius: BorderRadius.circular(24.0),
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-
-                      //text
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(heading,
-                          style: TextStyle(
-                            color: new Color(color),
-                            fontSize: 15.0,
-                          ),
-                        ),
-                      ),
-
-                      //Icon
-/*
-                  new IconButton(
-                    color: new Color(color),
-                    padding: const EdgeInsets.all(16.0),
-                    icon: Icon(icon, size: 30.0,),
-
-                    onPressed: () {
-                      // Interactivity or events codes here
-                      Navigator.of(context).pop();
-                      Navigator.push(context, new MaterialPageRoute(
-                          builder: (BuildContext context) => Payment()));
-                      print("hello");
-                    },
-
-                  ),
-*/
-
-                      Material(
-                        color: new Color(color),
-                        borderRadius: BorderRadius.circular(24.0),
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Icon(icon, color: Colors.white, size: 30.0,),
-                        ),
-                      ),
-
-/*
-                  MaterialButton(
-                    color: new Color(color),
-                      shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Icon(icon, size: 30.0,),
-                    ),
-                    onPressed: ()
-                    {
-                        print("helloooooooooooooooooo");
-                        // Interactivity or events codes here
-                        Navigator.of(context).pop();
-                        Navigator.push(context, new MaterialPageRoute(
-                            builder: (BuildContext context) => Payment()));
-                    },
-                  ),
-*/
-                    ]
-                )
-              ]
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     _auth.getUser().then((value){
@@ -114,35 +31,6 @@ class _DashboardState extends State<Dashboard>{
           // the App.build method, and use it to set our appbar title.
           title: Text('Dashboard'),
           backgroundColor: Colors.black54,
-        ),
-        body: //_buildBody(context), //build dashboard
-
-        StaggeredGridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 12.0,
-
-          mainAxisSpacing: 12.0,
-          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          children: <Widget>[
-
-            myItems(Icons.account_circle, "Profile", 0xffed622b),
-            myItems(Icons.notifications, "Notification", 0xffff3266, ),
-            myItems(Icons.bookmark, "Appartment Info", 0xff26cb3c, ),
-            myItems(Icons.attach_money, "Balance", 0xff3399fe, ),
-            myItems(Icons.message, "Repair History", 0xff7297ff, ),
-            myItems(Icons.payment, "Payment History", 0xff622F74, ),
-            myItems(Icons.settings, "Settings", 0xfff4c83f,),
-          ],
-
-          staggeredTiles: [
-            StaggeredTile.extent(2, 130.0),
-            StaggeredTile.extent(1, 130.0),
-            StaggeredTile.extent(1, 130.0),
-            StaggeredTile.extent(1, 130.0),
-            StaggeredTile.extent(1, 130.0),
-            StaggeredTile.extent(1, 130.0),
-            StaggeredTile.extent(1, 130.0),
-          ],
         ),
 
         drawer: new Drawer(
@@ -203,102 +91,287 @@ class _DashboardState extends State<Dashboard>{
                   ),
                 ]
             )
-        )
+        ),
+        body: //_buildBody(context), //build dashboard
+        Column(
+          children: <Widget>[
+
+            Expanded(
+              child: Container(
+                //color: Colors.teal[200],
+                color: Colors.grey,
+                height: MediaQuery.of(context).size.height/1.5,
+                child: GridView.count(
+                  primary: false,
+                  padding: EdgeInsets.all(10),
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5,
+                  crossAxisCount: 3,
+                  children: <Widget>[
+                    GestureDetector(
+                        onTap: () {
+
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Container(
+                            padding: const EdgeInsets.all(2),
+                            //color: Colors.teal[500],
+                            color: Colors.blueGrey[800],
+                            alignment: Alignment.center,
+                            child: Container(
+                              //color: Colors.brown,
+                              child: Column(
+
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  // mainAxisSize: MainAxisSize.min,
+
+                                  children: <Widget>[
+                                    Container(child: Icon(Icons.notifications, color: Colors.white), alignment: Alignment.center,),
+                                    Container(child: Text("Notifications", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+
+                                  ]),
+                            ),
+                          ),
+                        )
+                    ),
+
+                    GestureDetector(
+                        onTap: ()
+                        {
+                          Navigator.push(context, new MaterialPageRoute(
+                              builder: (BuildContext context) => new MyAccount()));
+                        },
+
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Container(
+                            padding: const EdgeInsets.all(2),
+                            color: Colors.blueGrey[800],
+                            alignment: Alignment.center,
+                            child: Container(
+                              //color: Colors.brown,
+                              child: Column(
+
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  // mainAxisSize: MainAxisSize.min,
+
+                                  children: <Widget>[
+                                    Container(child: Icon(Icons.account_circle, color: Colors.white), alignment: Alignment.center,),
+                                    Container(child: Text("Profile", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+
+                                  ]),
+                            ),
+                          ),
+                        )
+                    ),
+
+
+                    GestureDetector(
+                        onTap: ()
+                        {
+
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Container(
+                            padding: const EdgeInsets.all(2),
+                            color: Colors.blueGrey[800],
+                            alignment: Alignment.center,
+                            child: Container(
+                              //color: Colors.brown,
+                              child: Column(
+
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  // mainAxisSize: MainAxisSize.min,
+
+                                  children: <Widget>[
+                                    Container(child: Icon(Icons.info, color: Colors.white), alignment: Alignment.center,),
+                                    Container(child: Text("Apartment Info", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+                                  ]),
+                            ),
+                          ),
+                        )
+                    ),
+                    GestureDetector(
+                      onTap: () { },
+
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(2),
+                          color: Colors.blueGrey[800],
+                          alignment: Alignment.center,
+                          child: Container(
+                            //color: Colors.brown,
+                            child: Column(
+
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                // mainAxisSize: MainAxisSize.min,
+
+                                children: <Widget>[
+                                  Container(child: Icon(Icons.account_balance, color: Colors.white), alignment: Alignment.center,),
+                                  Container(child: Text("Balance", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+
+                                ]),
+                          ),
+                        ),
+                      ),
+
+                    ),
+                    GestureDetector(
+                      onTap: () { },
+
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(2),
+                          color: Colors.blueGrey[800],
+                          alignment: Alignment.center,
+                          child: Container(
+                            //color: Colors.brown,
+                            child: Column(
+
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                // mainAxisSize: MainAxisSize.min,
+
+                                children: <Widget>[
+                                  Container(child: Icon(Icons.history, color: Colors.white), alignment: Alignment.center,),
+                                  Container(child: Text("Repair History", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+
+                                ]),
+                          ),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () { },
+
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(2),
+                          color: Colors.blueGrey[800],
+                          alignment: Alignment.center,
+                          child: Container(
+                            //color: Colors.brown,
+                            child: Column(
+
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                // mainAxisSize: MainAxisSize.min,
+
+                                children: <Widget>[
+                                  Container(child: Icon(Icons.receipt, color: Colors.white), alignment: Alignment.center,),
+                                  Container(child: Text("Payment History", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+
+                                ]),
+                          ),
+                        ),
+                      ),
+                    ),
+
+
+                    GestureDetector(
+                      onTap: () { },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(2),
+                          color: Colors.blueGrey[800],
+                          alignment: Alignment.center,
+
+                          child: Container(
+                            //color: Colors.brown,
+                            child: Column(
+
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                // mainAxisSize: MainAxisSize.min,
+
+                                children: <Widget>[
+                                  Container(child: Icon(Icons.message, color: Colors.white), alignment: Alignment.center,),
+                                  Container(child: Text("Message", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+
+                                ]),
+                          ),
+                        ),
+                      ),
+                    ),
+
+
+                    GestureDetector(
+                      onTap: () { },
+
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(2),
+                          color: Colors.blueGrey[800],
+                          alignment: Alignment.center,
+
+                          child: Container(
+                            //color: Colors.brown,
+                            child: Column(
+
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                // mainAxisSize: MainAxisSize.min,
+
+                                children: <Widget>[
+                                  Container(child: Icon(Icons.event, color: Colors.white), alignment: Alignment.center,),
+                                  Container(child: Text("Events", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+
+                                ]),
+                          ),
+                        ),
+                      ),
+                    ),
+
+
+                    GestureDetector(
+                      onTap: () { },
+
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(2),
+                          color: Colors.blueGrey[800],
+                          alignment: Alignment.center,
+
+                          child: Container(
+                            //color: Colors.brown,
+                            child: Column(
+
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                // mainAxisSize: MainAxisSize.min,
+
+                                children: <Widget>[
+                                  Container(child: Icon(Icons.settings, color: Colors.white), alignment: Alignment.center,),
+                                  Container(child: Text("Settings", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+
+                                ]),
+                          ),
+                        ),
+                      ),
+                    ),
+                    /*
+                  GestureDetector(
+                    onTap: () { },
+                    child: Container(
+                      padding: const EdgeInsets.all(2),
+                      color: Colors.teal[200],
+                    ),
+                  ),
+*/
+
+
+                  ],
+                ),
+              ),
+            ),
+
+          ],
+        ),
     );
   }
 }
-
-/*
-  Widget _buildBody(BuildContext context)
-  {
-      return SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            const SizedBox(height: 30.0),
-            Row(
-              children: <Widget>[
-                const SizedBox(width: 10.0),
-                Expanded(
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        height: 190,
-                        color: Colors.blue,
-                        child: Column(
-                          crossAxisAlignment:
-                            CrossAxisAlignment.start,
-                          children: <Widget>[
-                            ListTile(
-                              title: Text("Notifications",),
-                            ),
-                            /*
-                            Padding(
-                              padding: const EdgeInsets.only(left:
-                              16.0),
-                              child: Text('Steps'),
-                            ) */
-                          ]
-                        )
-                      ),
-                      const SizedBox(height: 10.0),
-                      Container(
-                          height: 120,
-                          color: Colors.yellow,
-                          child: Column(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                              children: <Widget>[
-                                ListTile(
-                                  title: Text("Schedule History",),
-                                ),
-                              ]
-                          )
-                      ),
-                    ]
-                  )
-                ),
-                const SizedBox(width: 10.0),
-                Expanded(
-                    child: Column(
-                        children: <Widget>[
-                          Container(
-                              height: 120,
-                              margin: const EdgeInsets.only(right: 10.0),
-                              color: Colors.green,
-                              child: Column(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    ListTile(
-                                      title: Text("Payment History",),
-                                    ),
-                                  ]
-                              )
-                          ),
-                          const SizedBox(height: 10.0),
-                          Container(
-                              height: 190,
-                              margin: const EdgeInsets.only(right: 10.0),
-                              color: Colors.red,
-                              child: Column(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    ListTile(
-                                      title: Text("Apartment Info",),
-                                    ),
-                                  ]
-                              )
-                          ),
-                        ]
-                    )
-                )
-              ]
-            )
-          ]
-        )
-      );
-  }
-  */
 
 

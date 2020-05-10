@@ -48,21 +48,22 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-        
-
 
     return Scaffold(
       appBar: AppBar(
         title: Text("Community"),
-        backgroundColor: Colors.black54,
+        backgroundColor: Colors.grey[850],
       ),
       body: Center(
         child: Container(
           decoration: BoxDecoration(
+
             image: DecorationImage(
               image: AssetImage("images/cityView.jpg"),
-              fit: BoxFit.cover
+              fit: BoxFit.fill, //BoxFit.cover
+
             )
+
           ),
             padding: EdgeInsets.all(20.0),
             child: Form(

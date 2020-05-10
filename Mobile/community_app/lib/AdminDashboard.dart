@@ -139,7 +139,10 @@ class _AdminDashboardState extends State<AdminDashboard>{
       }
       });
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text("Dashboard"),
+        backgroundColor: Colors.black54,
+      ),
       drawer: new Drawer(
             child: ListView(
                 children: <Widget>[
@@ -151,7 +154,7 @@ class _AdminDashboardState extends State<AdminDashboard>{
                     ),
                   ),
                   new ListTile(
-                    title: new Text('Make a Payment'),
+                    title: new Text('Payments'),
                     onTap: () {
                       Navigator.of(context).pop();
                       Navigator.push(context, new MaterialPageRoute(
@@ -199,12 +202,14 @@ class _AdminDashboardState extends State<AdminDashboard>{
                 ]
             )
         ),
-      body: Column(
+      body:
+      Column(
         children: <Widget>[
           
           Expanded(
             child: Container(
-              color: Colors.teal[200],
+              //color: Colors.teal[200],
+              color: Colors.grey,
               height: MediaQuery.of(context).size.height/1.5,
               child: GridView.count(
                 primary: false,
@@ -222,7 +227,8 @@ class _AdminDashboardState extends State<AdminDashboard>{
                 borderRadius: BorderRadius.circular(8.0),
                 child: Container(
                   padding: const EdgeInsets.all(2),
-                  color: Colors.teal[500],
+                  //color: Colors.teal[500],
+                  color: Colors.blueGrey[800],
                   alignment: Alignment.center,
                   child: Container(
                     //color: Colors.brown,
@@ -232,8 +238,8 @@ class _AdminDashboardState extends State<AdminDashboard>{
                         // mainAxisSize: MainAxisSize.min,
 
                         children: <Widget>[
-                          Container(child: Icon(Icons.notifications, color: Colors.white), alignment: Alignment.center,),
-                          Container(child: Text("Notifications", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+                          Container(child: Icon(Icons.create, color: Colors.white), alignment: Alignment.center,),
+                          Container(child: Text("Create", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
 
                         ]),
                   ),
@@ -244,14 +250,14 @@ class _AdminDashboardState extends State<AdminDashboard>{
                   GestureDetector(
                     onTap: ()
                     {
-                      //generateToken("eIHKllJbs790GyrqDudf");
+                      generateToken("eIHKllJbs790GyrqDudf");
                       },
 
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Container(
                           padding: const EdgeInsets.all(2),
-                          color: Colors.teal[500],
+                          color: Colors.blueGrey[800],
                           alignment: Alignment.center,
                           child: Container(
                             //color: Colors.brown,
@@ -261,13 +267,16 @@ class _AdminDashboardState extends State<AdminDashboard>{
                                 // mainAxisSize: MainAxisSize.min,
 
                                 children: <Widget>[
-                                  Container(child: Icon(Icons.account_circle, color: Colors.white), alignment: Alignment.center,),
-                                  Container(child: Text("Profile", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+                                  Container(child: Icon(Icons.bookmark, color: Colors.white), alignment: Alignment.center,),
+                                  Container(child: Text("Generate Token", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+
                                 ]),
                           ),
                         ),
                       )
                   ),
+
+
                   GestureDetector(
                     onTap: ()
                     {
@@ -277,7 +286,7 @@ class _AdminDashboardState extends State<AdminDashboard>{
                       borderRadius: BorderRadius.circular(8.0),
                       child: Container(
                         padding: const EdgeInsets.all(2),
-                        color: Colors.teal[500],
+                        color: Colors.blueGrey[800],
                         alignment: Alignment.center,
                         child: Container(
                             //color: Colors.brown,
@@ -287,8 +296,8 @@ class _AdminDashboardState extends State<AdminDashboard>{
                              // mainAxisSize: MainAxisSize.min,
 
                               children: <Widget>[
-                        Container(child: Icon(Icons.info, color: Colors.white), alignment: Alignment.center,),
-                        Container(child: Text("Apartment Info", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+                        Container(child: Icon(Icons.notifications, color: Colors.white), alignment: Alignment.center,),
+                        Container(child: Text("Notifications", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
                       ]),
                         ),
                       ),
@@ -301,7 +310,7 @@ class _AdminDashboardState extends State<AdminDashboard>{
                         borderRadius: BorderRadius.circular(8.0),
                         child: Container(
                           padding: const EdgeInsets.all(2),
-                          color: Colors.teal[500],
+                          color: Colors.blueGrey[800],
                           alignment: Alignment.center,
                           child: Container(
                             //color: Colors.brown,
@@ -311,8 +320,8 @@ class _AdminDashboardState extends State<AdminDashboard>{
                                 // mainAxisSize: MainAxisSize.min,
 
                                 children: <Widget>[
-                                  Container(child: Icon(Icons.account_balance, color: Colors.white), alignment: Alignment.center,),
-                                  Container(child: Text("Balance", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+                                  Container(child: Icon(Icons.account_circle, color: Colors.white), alignment: Alignment.center,),
+                                  Container(child: Text("Profile", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
 
                                 ]),
                           ),
@@ -327,7 +336,32 @@ class _AdminDashboardState extends State<AdminDashboard>{
                         borderRadius: BorderRadius.circular(8.0),
                         child: Container(
                           padding: const EdgeInsets.all(2),
-                          color: Colors.teal[500],
+                          color: Colors.blueGrey[800],
+                          alignment: Alignment.center,
+                          child: Container(
+                            //color: Colors.brown,
+                            child: Column(
+
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                // mainAxisSize: MainAxisSize.min,
+
+                                children: <Widget>[
+                                  Container(child: Icon(Icons.info, color: Colors.white), alignment: Alignment.center,),
+                                  Container(child: Text("Apartment Info", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+
+                                ]),
+                          ),
+                        ),
+                      ),
+                  ),
+                  GestureDetector(
+                    onTap: () { },
+
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(2),
+                          color: Colors.blueGrey[800],
                           alignment: Alignment.center,
                           child: Container(
                             //color: Colors.brown,
@@ -345,39 +379,31 @@ class _AdminDashboardState extends State<AdminDashboard>{
                         ),
                       ),
                   ),
+
+
                   GestureDetector(
                     onTap: () { },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Container(
+                        padding: const EdgeInsets.all(2),
+                        color: Colors.blueGrey[800],
+                        alignment: Alignment.center,
 
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
                         child: Container(
-                          padding: const EdgeInsets.all(2),
-                          color: Colors.teal[500],
-                          alignment: Alignment.center,
-                          child: Container(
-                            //color: Colors.brown,
-                            child: Column(
+                          //color: Colors.brown,
+                          child: Column(
 
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                // mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              // mainAxisSize: MainAxisSize.min,
 
-                                children: <Widget>[
-                                  Container(child: Icon(Icons.receipt, color: Colors.white), alignment: Alignment.center,),
-                                  Container(child: Text("Payment History", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+                              children: <Widget>[
+                                Container(child: Icon(Icons.receipt, color: Colors.white), alignment: Alignment.center,),
+                                Container(child: Text("Payment History", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
 
-                                ]),
-                          ),
+                              ]),
                         ),
                       ),
-                  ),
-
-
-                  GestureDetector(
-                    onTap: () { },
-                    child: Container(
-                      width: 100,
-                      //padding: const EdgeInsets.all(2),
-                      color: Colors.teal[200],
                     ),
                   ),
 
@@ -389,7 +415,35 @@ class _AdminDashboardState extends State<AdminDashboard>{
                       borderRadius: BorderRadius.circular(8.0),
                       child: Container(
                         padding: const EdgeInsets.all(2),
-                        color: Colors.teal[500],
+                        color: Colors.blueGrey[800],
+                        alignment: Alignment.center,
+
+                        child: Container(
+                          //color: Colors.brown,
+                          child: Column(
+
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              // mainAxisSize: MainAxisSize.min,
+
+                              children: <Widget>[
+                                Container(child: Icon(Icons.event, color: Colors.white), alignment: Alignment.center,),
+                                Container(child: Text("Events", style: TextStyle(color: new Color(0xFFFFFFFF),fontSize: 15.0),)),
+
+                              ]),
+                        ),
+                      ),
+                    ),
+                  ),
+
+
+                  GestureDetector(
+                    onTap: () { },
+
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Container(
+                        padding: const EdgeInsets.all(2),
+                        color: Colors.blueGrey[800],
                         alignment: Alignment.center,
 
                         child: Container(
@@ -408,8 +462,7 @@ class _AdminDashboardState extends State<AdminDashboard>{
                       ),
                     ),
                   ),
-
-
+  /*
                   GestureDetector(
                     onTap: () { },
                     child: Container(
@@ -417,7 +470,7 @@ class _AdminDashboardState extends State<AdminDashboard>{
                       color: Colors.teal[200],
                     ),
                   ),
-
+*/
 
 
                 ],
