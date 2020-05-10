@@ -1,6 +1,14 @@
 import 'package:community_app/MyAccount.dart';
 import 'package:community_app/ScheduleMaintenance.dart';
 import 'package:flutter/material.dart';
+import 'package:community_app/Notifications.dart';
+import 'package:community_app/ApartmentInfo.dart';
+import 'package:community_app/Balance.dart';
+import 'package:community_app/PaymentHistory.dart';
+import 'package:community_app/RepairHistory.dart';
+import 'package:community_app/Message.dart';
+import 'package:community_app/Events.dart';
+import 'package:community_app/Settings.dart';
 import 'package:community_app/Login.dart';
 import 'package:flutter/cupertino.dart';
 import './payment.dart';
@@ -110,7 +118,8 @@ class _DashboardState extends State<Dashboard>{
                   children: <Widget>[
                     GestureDetector(
                         onTap: () {
-
+                          Navigator.push(context, new MaterialPageRoute(
+                              builder: (BuildContext context) => new Notifications()));
                         },
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
@@ -170,7 +179,8 @@ class _DashboardState extends State<Dashboard>{
                     GestureDetector(
                         onTap: ()
                         {
-
+                          Navigator.push(context, new MaterialPageRoute(
+                              builder: (BuildContext context) => new ApartmentInfo()));
                         },
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
@@ -194,7 +204,10 @@ class _DashboardState extends State<Dashboard>{
                         )
                     ),
                     GestureDetector(
-                      onTap: () { },
+                      onTap: () {
+                        Navigator.push(context, new MaterialPageRoute(
+                            builder: (BuildContext context) => new Balance()));
+                      },
 
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
@@ -220,7 +233,10 @@ class _DashboardState extends State<Dashboard>{
 
                     ),
                     GestureDetector(
-                      onTap: () { },
+                      onTap: () {
+                        Navigator.push(context, new MaterialPageRoute(
+                            builder: (BuildContext context) => new RepairHistory()));
+                      },
 
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
@@ -245,7 +261,10 @@ class _DashboardState extends State<Dashboard>{
                       ),
                     ),
                     GestureDetector(
-                      onTap: () { },
+                      onTap: () {
+                        Navigator.push(context, new MaterialPageRoute(
+                            builder: (BuildContext context) => new PaymentHistory()));
+                      },
 
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
@@ -272,7 +291,10 @@ class _DashboardState extends State<Dashboard>{
 
 
                     GestureDetector(
-                      onTap: () { },
+                      onTap: () {
+                        Navigator.push(context, new MaterialPageRoute(
+                            builder: (BuildContext context) => new Message()));
+                      },
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Container(
@@ -299,7 +321,10 @@ class _DashboardState extends State<Dashboard>{
 
 
                     GestureDetector(
-                      onTap: () { },
+                      onTap: () {
+                        Navigator.push(context, new MaterialPageRoute(
+                            builder: (BuildContext context) => new Events()));
+                      },
 
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
@@ -327,7 +352,11 @@ class _DashboardState extends State<Dashboard>{
 
 
                     GestureDetector(
-                      onTap: () { },
+                      onTap: ()
+                      {
+                        Navigator.push(context, new MaterialPageRoute(
+                            builder: (BuildContext context) => new Settings()));
+                      },
 
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
