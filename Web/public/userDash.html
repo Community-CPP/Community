@@ -83,6 +83,8 @@
         <div class="card w-100 shortcard1">
           <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Maintenance<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">+</button></h5>
           <div class="card-body">
+            
+            <div id="userMaintenance"></div>
 
           </div>
         </div>
@@ -314,7 +316,7 @@
         </br>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" onclick="scheduleMaintenance();return false;">Schedule Maintenance</button>
+            <button type="button" class="btn btn-primary" onclick="scheduleMaintenance();window.location.reload();">Schedule Maintenance</button>
           </div>
         </div>
       </div>
@@ -489,6 +491,7 @@
             document.getElementsByTagName('body')[0].hidden = false;
             document.getElementById('userName').innerHTML = currentUser.first+" "+currentUser.last;
             listCommunities();
+            showMaintenance();
           }
         }
       });
@@ -721,8 +724,8 @@
     .catch(function(error) {
       // error adding maintenance
     });
-        window.parent.location = window.parent.location.href;
-  }
+    // window.parent.location = window.parent.location.href;
+   }
 
   //might not need this after firebase.js has been refactored (adding current community to user class)
   async function getUser(userUID) {
@@ -799,9 +802,6 @@ async function getUserMsg(msgType, commUID, msgUID) {
       console.log(doc.data()); //was thinking of putting this on a modal of some sort instead of showing
       data += "<p>Subject: " + doc.data()["subject"] + " </p>"
       data += "<p>Message: " + doc.data()["message"] + " </p>"
-      // console.log(doc.data()["subject"]);
-      // console.log(doc.data()["message"]);
-      // console.log(doc.data()["isRead"]);
     } else {
       console.log("No");
     }
@@ -812,7 +812,29 @@ async function getUserMsg(msgType, commUID, msgUID) {
   modal.innerHTML += data;
 }
 
-
+async function showMaintenance() {
+  var mtnc;
+  var maintenance = document.getElementById("userMaintenance");
+  var data = "";
+  await db.collection("users").doc(currentUser.uid).get().then(function(doc) {
+    if (doc.exists) {
+      for(var i = 0; i < doc.data()["maintenance"].length; i++)
+      {
+        mtnc = doc.data()["maintenance"][i];
+        data += "<p>" + mtnc["dateTime"] + " - [" + mtnc["status"] + "]</p>";
+        data += "<p>Topic: " + mtnc["topic"] + " </p>"  
+        data += "<p>Messages: " + mtnc["text"] + " </p>"  
+        data += "<hr class=\"bg-light\">";
+        // console.log(mtnc["dateTime"]);
+      }
+    } else {
+      console.log("No messages");
+    }
+  }).catch(function(error) {
+    console.log("Error getting user data:", error);
+  });
+  maintenance.innerHTML = data;
+}
 
   </script>
 
