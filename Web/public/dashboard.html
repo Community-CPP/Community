@@ -213,31 +213,29 @@
 </div>
 
   <!-- Message Modal -->
-  <div class="modal fade" id="MessageModal" tabindex="-1" role="dialog" aria-labelledby="MessageModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content bg-dark text-white">
+  <div class="modal fade" id="privateMessageModal" tabindex="-1" role="dialog" aria-labelledby="privateMessageModalLabel" aria-hidden="true" style="color:white">
+    <div class="modal-dialog " role="document" >
+      <div class="modal-content bg-dark" >
         <div class="modal-header">
-          <h5 class="modal-title" id="MessageModalLabel">Send a Message</h5>
+          <h5 class="modal-title" id="privateMessageModalLabel">Messages</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-          <div class="row p-2">
-            <label for="messageSubjectInput">Subject</label>
-            <input type="text" class="form-control p-1" id="messageSubjectInput">
+        <div class="container formContainer">
+          <div class="formWrapper bg-dark text-white">
+            <div class="row align-middle justify-content-center align-items-center">
+              <div class="col">
+                <br/>
+              </div>
+            </div>
+            <div class="row d-flex justify-content-center text-danger">
+              <label class="errorLabel" id="createError" hidden="true"></label>
+            </div>
+            
+            <div id="userMsg"></div>
+        </br><br/>
           </div>
-          <div class="row p-2">
-            <label for="messageTextArea">Message</label>
-            <textarea class="form-control" id="messageTextArea" rows="3"></textarea>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary">
-            <svg class="bi bi-envelope-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M.05 3.555L8 8.414l7.95-4.859A2 2 0 0014 2H2A2 2 0 00.05 3.555zM16 4.697l-5.875 3.59L16 11.743V4.697zm-.168 8.108L9.157 8.879 8 9.586l-1.157-.707-6.675 3.926A2 2 0 002 14h12a2 2 0 001.832-1.195zM0 11.743l5.875-3.456L0 4.697v7.046z"/>
-            </svg>
-          </button>
         </div>
       </div>
     </div>
@@ -329,6 +327,40 @@
         }
         getMessages(msgType);
       }
+
+    async function getMessages(msgType) {
+      var msg = document.getElementById("messages");
+      var data = "";
+      var name = "";
+      var userUID = "";
+      // var commUID = localStorage.getItem("currentCommunity")
+      var commUID = currentComm;
+      console.log("this community: " + commUID);
+      var i = 0;
+      await db.collection("communities").doc(commUID).collection(msgType).get().then(function(snapshot) {
+          snapshot.forEach(async function(doc) {
+            if(JSON.stringify(doc.data()) != '{}') { //might want to change the condition if the database for communities doesn't have the collection for messages yet
+              userUID = doc.data()['senderId'];
+              await getUser(userUID).then(function(val) {
+                if(val != name)
+                {
+                  name = val;
+                  data += "<li><button id=\"sender" + i + "\" onClick=\"showMessages('" + doc.data()['senderId'] + "','" + msgType + "','" + commUID +"')\" class=\"linkBtn\" data-toggle=\"modal\" data-target=\"#privateMessageModal\">" + name + "</button></li>";
+                  msg.innerHTML = data;
+                  i++;
+                }
+              });
+            } else {
+              console.log("No Data");
+              data += "<h6> No Messages </h6>";
+              msg.innerHTML = data;
+            }
+          });
+        })
+        .catch(function(error) {
+          console.log("Error getting documents: ", error);
+        });
+    }
 
       
 

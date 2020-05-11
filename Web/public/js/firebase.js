@@ -150,10 +150,11 @@ async function showCommunity(communityList) {
 }
 
 async function btnInfo(id) {
-      currentComm = id;
       var commUID = document.getElementById(id).value;
+      currentComm = commUID;
       getCommunityData(commUID);
       getMessages("publicMessages");
+      hasMaintenance();
 }
 
 
@@ -360,42 +361,10 @@ async function getUser(userUID) {
   return name;
 }
 
-async function getMessages(msgType) {
-  var msg = document.getElementById("messages");
-  var data = "";
-  var name = "";
-  var userUID = "";
-  // var commUID = localStorage.getItem("currentCommunity")
-  var commUID = currentComm;
-  console.log("this community: " + commUID);
-  var i = 0;
-  await db.collection("communities").doc(commUID).collection(msgType).get().then(function(snapshot) {
-      snapshot.forEach(async function(doc) {
-        if(JSON.stringify(doc.data()) != '{}') { //might want to change the condition if the database for communities doesn't have the collection for messages yet
-          userUID = doc.data()['senderId'];
-          await getUser(userUID).then(function(val) {
-            if(val != name)
-            {
-              name = val;
-              data += "<li><button id=\"sender" + i + "\" onClick=\"showMessages('" + doc.data()['senderId'] + "','" + msgType + "','" + commUID +"')\" class=\"linkBtn\">" + name + "</button></li>";
-              msg.innerHTML = data;
-              i++;
-            }
-          });
-        } else {
-          console.log("No Data");
-          data += "<h6> No Messages </h6>";
-          msg.innerHTML = data;
-        }
-      });
-    })
-    .catch(function(error) {
-      console.log("Error getting documents: ", error);
-    });
-}
 
 async function showMessages(userUID, msgType, commUID) {
   var arr = [];
+  document.getElementById("userMsg").innerHTML = "";
   await db.collection("users").doc(userUID).get().then(function(doc) {
     if (doc.exists) {
       arr = doc.data()[msgType]
@@ -432,6 +401,7 @@ async function getUserMsg(msgType, commUID, msgUID) {
 }
 
 async function hasMaintenance() {
+  document.getElementById("userMaintenance").innerHTML = "";
   var tenantID = "";
   var name ="";
   await db.collection("communities").doc(currentComm).get().then(async function(doc) {
