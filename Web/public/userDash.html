@@ -724,6 +724,9 @@
     .catch(function(error) {
       // error adding maintenance
     });
+    setTimeout(function(){
+      window.parent.location = window.parent.location.href;
+         }, 1000);
     // window.parent.location = window.parent.location.href;
    }
 
