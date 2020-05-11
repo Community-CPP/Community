@@ -104,7 +104,11 @@
       <div class="row cardRow">
         <div class="card w-100 tallcard2  ">
           <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Pay Rent<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">+</button></h5>
+          <div class="card-body">
+            
+            <div id="userPayment"></div>
 
+          </div>
         </div>
       </div>
     </div>
@@ -179,19 +183,21 @@
     <div class="modal-content bg-dark" >
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModal2Label">Payment Methods</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+6
+        <button type="button"   class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
             <div class="card-body">
               <div class="bg-dark shadow-sm pt-4 pl-2 pr-2 pb-2">
+                
                   <!-- Credit card form tabs -->
                   <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
                       <li class="nav-item"> <a data-toggle="pill" href="#credit-card" class="nav-link active "> <i class="fas fa-credit-card mr-2"></i> Credit Card </a> </li>
                       <li class="nav-item"> <a data-toggle="pill" href="#paypal" class="nav-link "> <i class="fab fa-paypal mr-2"></i> Paypal </a> </li>
                       <li class="nav-item"> <a data-toggle="pill" href="#net-banking" class="nav-link "> <i class="fas fa-mobile-alt mr-2"></i> Net Banking </a> </li>
                   </ul>
-              </div>
+                  <input type="number" name="amount" placeholder="$ Enter Amount" name="quantity" min="1" max="3000" required class="form-control "></br>
               <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
               <div class="tab-content">
                   <!-- credit card info-->
@@ -220,7 +226,7 @@
                                       </label> <input type="text" required class="form-control"> </div>
                               </div>
                           </div>
-                          <div class="card-footer"> <button type="button" class="subscribe btn btn-primary btn-block shadow-sm"> Confirm Payment </button>
+                          <div class="card-footer"> <button type="button" onclick="schedulePayment();return false;"class="subscribe btn btn-primary btn-block shadow-sm"> Confirm Payment </button>
                       </form>
                   </div>
               </div> <!-- End -->
@@ -243,7 +249,7 @@
                           <option>Bank 3</option>
                       </select> </div>
                   <div class="form-group">
-                      <p> <button type="button" class="btn btn-primary "><i class="fas fa-mobile-alt mr-2"></i> Proceed Pyment</button> <button type="button" class="btn btn-primary "style="float: right"><i class="fas fa-mobile-alt mr-2"></i> Add Bank Account</button></p>
+                      <p> <button type="button" class="btn btn-primary " onclick="schedulePayment();return false;"><i class="fas fa-mobile-alt mr-2"></i> Proceed Pyment</button> <button type="button" class="btn btn-primary "style="float: right"><i class="fas fa-mobile-alt mr-2"></i> Add Bank Account</button></p>
                   </div>
                   <p class="text-muted">Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
               </div>
@@ -728,7 +734,21 @@
       window.parent.location = window.parent.location.href;
          }, 1000);
    }
-
+   function schedulePayment() {
+    var dateTime = document.getElementById('dateTime').value;
+    var amount = document.getElementById('amount').value;
+    //var text = document.getElementById('paymentOption').value;
+    var newMaintenance  = {dateTime: dateTime, text: text, topic: topic, status: "pending"};
+    db.collection("users").doc(currentUser.uid).update({
+      payment: firebase.firestore.FieldValue.arrayUnion(newPayment),
+    })
+    .catch(function(error) {
+      // error adding maintenance
+    });
+    setTimeout(function(){
+      window.parent.location = window.parent.location.href;
+         }, 1000);
+   }
   //might not need this after firebase.js has been refactored (adding current community to user class)
   async function getUser(userUID) {
   var name = "";
@@ -826,6 +846,29 @@ async function showMaintenance() {
         data += "<p>" + mtnc["dateTime"] + " - [" + mtnc["status"] + "]</p>";
         data += "<p>Topic: " + mtnc["topic"] + " </p>"  
         data += "<p>Messages: " + mtnc["text"] + " </p>"  
+        data += "<hr class=\"bg-light\">";
+        // console.log(mtnc["dateTime"]);
+      }
+    } else {
+      console.log("No messages");
+    }
+  }).catch(function(error) {
+    console.log("Error getting user data:", error);
+  });
+  maintenance.innerHTML = data;
+}
+async function showPayment() {
+  var mtnc;
+  var payment = document.getElementById("userPayment");
+  var data = "";
+  await db.collection("users").doc(currentUser.uid).get().then(function(doc) {
+    if (doc.exists) {
+      for(var i = 0; i < doc.data()["payment"].length; i++)
+      {
+        mtnc = doc.data()["payment"][i];
+        data += "<p>" + mtnc["dateTime"] + " - [" + mtnc["status"] + "]</p>";
+        data += "<p>Amount: " + mtnc["amount"] + " </p>"  
+   
         data += "<hr class=\"bg-light\">";
         // console.log(mtnc["dateTime"]);
       }
