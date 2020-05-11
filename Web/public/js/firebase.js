@@ -7,6 +7,8 @@ firebase.initializeApp(firebaseConfig);
 
 /////////ATHENTICATION//////////
 
+var currentComm;
+
 // sign out
 async function signOut() {
   await firebase.auth().signOut().then(function() {
@@ -67,6 +69,7 @@ async function getCommunities() {
     await db.collection("users").doc(user.uid).get().then(function(doc) {
       if (doc.exists) {
         communities = doc.data()['communities'];
+        currentComm = communities[0];
         getCommunityData(communities[0]);
         showCommunity(communities);
       } else {
@@ -146,6 +149,7 @@ async function showCommunity(communityList) {
 }
 
 async function btnInfo(id) {
+      currentComm = id;
       var commUID = document.getElementById(id).value;
       getCommunityData(commUID);
       getMessages("publicMessages");
@@ -360,7 +364,8 @@ async function getMessages(msgType) {
   var data = "";
   var name = "";
   var userUID = "";
-  var commUID = localStorage.getItem("currentCommunity")
+  // var commUID = localStorage.getItem("currentCommunity")
+  var commUID = currentComm;
   console.log("this community: " + commUID);
   var i = 0;
   await db.collection("communities").doc(commUID).collection(msgType).get().then(function(snapshot) {
@@ -406,12 +411,17 @@ async function showMessages(userUID, msgType, commUID) {
 }
 
 async function getUserMsg(msgType, commUID, msgUID) {
+  var modal = getElementById("userMsg");
+  var data = "";
   await db.collection("communities").doc(commUID).collection(msgType).doc(msgUID).get().then(function(doc) {
     if (doc.exists) {
       console.log(doc.data()); //was thinking of putting this on a modal of some sort instead of showing
+      data += "<p>Subject: " + doc.data()["subject"] + " </p>"
+      data += "<p>Message: " + doc.data()["message"] + " </p>"
       // console.log(doc.data()["subject"]);
       // console.log(doc.data()["message"]);
       // console.log(doc.data()["isRead"]);
+      modal.innerHTML += data;
     } else {
       console.log("No");
     }
