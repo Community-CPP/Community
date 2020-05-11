@@ -89,6 +89,7 @@ async function getCommunityData(commUID) {
       showTokens(commUID);
       getMessages("publicMessages");
       hasMaintenance();
+      hasRent();
       console.log(doc.data);
     } else {
       console.log("No such document!");
@@ -155,6 +156,7 @@ async function btnInfo(id) {
       getCommunityData(commUID);
       getMessages("publicMessages");
       hasMaintenance();
+      hasRent();
 }
 
 
@@ -406,16 +408,11 @@ async function hasMaintenance() {
   var name ="";
   await db.collection("communities").doc(currentComm).get().then(async function(doc) {
     if (doc.exists) {
-
-      // console.log("ASDASDASDASDAS" + doc.data()["tenants"].length)
       for(var i = 0; i < doc.data()["tenants"].length; i++) {
         tenantID = doc.data()["tenants"][i];
         await db.collection("users").doc(tenantID).get().then(function(doc) {
           name = doc.data()["first"] + " " + doc.data()["last"];
-          
-          // console.log(typeof doc.data()["maintenance"] === "undefined");
           if(typeof doc.data()["maintenance"] !== "undefined") {
-            // console.log(name);
             showMaintenance(name, tenantID)
           }
         });
@@ -450,4 +447,50 @@ async function showMaintenance(name, tenantID) {
     console.log("Error getting user data:", error);
   });
   maintenance.innerHTML = data;
+}
+
+async function hasRent() {
+  document.getElementById("userMaintenance").innerHTML = "";
+  var tenantID = "";
+  var name ="";
+  await db.collection("communities").doc(currentComm).get().then(async function(doc) {
+    if (doc.exists) {
+      for(var i = 0; i < doc.data()["tenants"].length; i++) {
+        tenantID = doc.data()["tenants"][i];
+        await db.collection("users").doc(tenantID).get().then(function(doc) {
+          name = doc.data()["first"] + " " + doc.data()["last"];
+          if(typeof doc.data()["payment"] !== "undefined") {
+            showPayment(name, tenantID)
+          }
+        });
+      }
+    } else {
+      console.log("No messages");
+    }
+  }).catch(function(error) {
+    console.log("Error getting user data:", error);
+  });
+}
+
+async function showPayment(name, tenantID) {
+  var pmnt;
+  var payment = document.getElementById("userPayment");
+  var data = "";
+  await db.collection("users").doc(tenantID).get().then(function(doc) {
+    if (doc.exists) {
+      for(var i = 0; i < doc.data()["payment"].length; i++)
+      {
+        pmnt = doc.data()["payment"][i];
+        data += "<p>- " + name + " -</p>"
+        data += "<p>" + pmnt["dateTime"] + "</p>";
+        data += "<p>Amount: $" + pmnt["amount"] + " </p>"  
+        data += "<hr class=\"bg-light\">";
+      }
+    } else {
+      console.log("No messages");
+    }
+  }).catch(function(error) {
+    console.log("Error getting user data:", error);
+  });
+  payment.innerHTML = data;
 }
