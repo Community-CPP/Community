@@ -88,6 +88,7 @@ async function getCommunityData(commUID) {
       showCommunityInfo(commUID);
       showTokens(commUID);
       getMessages("publicMessages");
+      hasMaintenance();
       console.log(doc.data);
     } else {
       console.log("No such document!");
@@ -411,7 +412,7 @@ async function showMessages(userUID, msgType, commUID) {
 }
 
 async function getUserMsg(msgType, commUID, msgUID) {
-  var modal = getElementById("userMsg");
+  var modal = document.getElementById("userMsg");
   var data = "";
   await db.collection("communities").doc(commUID).collection(msgType).doc(msgUID).get().then(function(doc) {
     if (doc.exists) {
@@ -428,4 +429,55 @@ async function getUserMsg(msgType, commUID, msgUID) {
   }).catch(function(error) {
     console.log("Error getting user data:", error);
   });
+}
+
+async function hasMaintenance() {
+  var tenantID = "";
+  var name ="";
+  await db.collection("communities").doc(currentComm).get().then(async function(doc) {
+    if (doc.exists) {
+
+      // console.log("ASDASDASDASDAS" + doc.data()["tenants"].length)
+      for(var i = 0; i < doc.data()["tenants"].length; i++) {
+        tenantID = doc.data()["tenants"][i];
+        await db.collection("users").doc(tenantID).get().then(function(doc) {
+          name = doc.data()["first"] + " " + doc.data()["last"];
+          
+          // console.log(typeof doc.data()["maintenance"] === "undefined");
+          if(typeof doc.data()["maintenance"] !== "undefined") {
+            // console.log(name);
+            showMaintenance(name, tenantID)
+          }
+        });
+      }
+    } else {
+      console.log("No messages");
+    }
+  }).catch(function(error) {
+    console.log("Error getting user data:", error);
+  });
+}
+
+async function showMaintenance(name, tenantID) {
+  var mtnc;
+  var maintenance = document.getElementById("userMaintenance");
+  var data = "";
+  await db.collection("users").doc(tenantID).get().then(function(doc) {
+    if (doc.exists) {
+      for(var i = 0; i < doc.data()["maintenance"].length; i++)
+      {
+        mtnc = doc.data()["maintenance"][i];
+        data += "<p>- " + name + " -</p>"
+        data += "<p>" + mtnc["dateTime"] + " - " + mtnc["status"] + "</p>";
+        data += "<p>Topic: " + mtnc["topic"] + " </p>"  
+        data += "<p>Messages: " + mtnc["text"] + " </p>"  
+        data += "<hr class=\"bg-light\">";
+      }
+    } else {
+      console.log("No messages");
+    }
+  }).catch(function(error) {
+    console.log("Error getting user data:", error);
+  });
+  maintenance.innerHTML = data;
 }
