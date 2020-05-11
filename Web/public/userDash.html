@@ -316,7 +316,7 @@
         </br>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" onclick="scheduleMaintenance();window.location.reload();">Schedule Maintenance</button>
+            <button type="button" class="btn btn-primary" onclick="scheduleMaintenance();return false">Schedule Maintenance</button>
           </div>
         </div>
       </div>
@@ -727,7 +727,6 @@
     setTimeout(function(){
       window.parent.location = window.parent.location.href;
          }, 1000);
-    // window.parent.location = window.parent.location.href;
    }
 
   //might not need this after firebase.js has been refactored (adding current community to user class)
