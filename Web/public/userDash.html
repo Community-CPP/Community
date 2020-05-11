@@ -341,11 +341,17 @@
           <div class="row d-flex justify-content-center text-danger">
             <label class="errorLabel" id="createError" hidden="true"></label>
           </div>
-          <label for="name">Subject</label>
+          
+          <div id="userMsg"></div>
+
+
+
+
+          <!-- <label for="name">Subject</label>
           <textarea id="subjectPrivateText" rows="1" cols="50"></textarea>
           <br/>
           <label for="name">Message</label>
-          <textarea id="privateText" rows="7" cols="50"></textarea>
+          <textarea id="privateText" rows="7" cols="50"></textarea> -->
       </br><br/>
         </div>
         <div class="modal-footer">
@@ -769,6 +775,7 @@ async function getMessages(msgType) {
 
 async function showMessages(userUID, msgType, commUID) {
   var arr = [];
+  document.getElementById("userMsg").innerHTML = "";
   await db.collection("users").doc(userUID).get().then(function(doc) {
     if (doc.exists) {
       arr = doc.data()[msgType]
@@ -785,9 +792,13 @@ async function showMessages(userUID, msgType, commUID) {
 }
 
 async function getUserMsg(msgType, commUID, msgUID) {
+  var modal = document.getElementById("userMsg");
+  var data = "";
   await db.collection("communities").doc(commUID).collection(msgType).doc(msgUID).get().then(function(doc) {
     if (doc.exists) {
       console.log(doc.data()); //was thinking of putting this on a modal of some sort instead of showing
+      data += "<p>Subject: " + doc.data()["subject"] + " </p>"
+      data += "<p>Message: " + doc.data()["message"] + " </p>"
       // console.log(doc.data()["subject"]);
       // console.log(doc.data()["message"]);
       // console.log(doc.data()["isRead"]);
@@ -797,6 +808,8 @@ async function getUserMsg(msgType, commUID, msgUID) {
   }).catch(function(error) {
     console.log("Error getting user data:", error);
   });
+  // console.log(data);
+  modal.innerHTML += data;
 }
 
 
