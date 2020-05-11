@@ -135,9 +135,9 @@
 
       <div class="row cardRow">
         <div class="card w-100 shortcard3 text-white">
-          <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Reminders<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#remindersModal">+</button></h5>
+          <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Under Construction</h5>
           <div class="card-body" id="tokensContainer">
-            <div id="userReminders"></div>
+
           </div>
         </div>
       </div>
@@ -197,7 +197,7 @@
                       <li class="nav-item"> <a data-toggle="pill" href="#paypal" class="nav-link "> <i class="fab fa-paypal mr-2"></i> Paypal </a> </li>
                       <li class="nav-item"> <a data-toggle="pill" href="#net-banking" class="nav-link "> <i class="fas fa-mobile-alt mr-2"></i> Net Banking </a> </li>
                   </ul>
-                  <input type="number" name="amount" placeholder="$ Enter Amount" name="quantity" min="1" max="3000" required class="form-control "></br>
+                  <input type="number" id="amount" placeholder="$ Enter Amount" name="quantity" min="1" max="3000" required class="form-control "></br>
               <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
               <div class="tab-content">
                   <!-- credit card info-->
@@ -328,70 +328,6 @@
       </div>
     </div>
   </div>
-    <!-- Reminders Modal -->
-    <div class="modal fade" id="remindersModal" tabindex="-1" role="dialog" aria-labelledby="remindersModalLabel" aria-hidden="true" style="color:white">
-      <div class="modal-dialog " role="document" >
-        <div class="modal-content bg-dark" >
-          <div class="modal-header">
-            <h5 class="modal-title" id="remindersModalLabel">Reminders</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="container formContainer">
-            <div class="formWrapper bg-dark text-white">
-              <div class="row align-middle justify-content-center align-items-center">
-                <div class="col">
-                  <label for="name">Pick a Date</label>
-                  <br/>
-                </div>
-              </div>
-              <div class="row d-flex justify-content-center">
-                <label class="errorLabel" id="createError" hidden="true"></label>
-              </div>
-              
-            
-              <div class="container1">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                        <input id="dateTime1" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" />
-                        <div id="calendarButton" class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                          <div  id="" class="input-group-text">
-                            <span class="input-group-addon">
-                              <span class="fa fa-calendar "></span>
-                            </span>
-                            </div>
-                        </div> 
-                      </div>
-                    </div>
-                    <select class="form-control" id="reminderTopic">
-                      <option value="" selected disabled>Select a Reminder</option>
-                      <option>Payments</option>
-                      <option>Maintenance</option>
-                      <option>Meeting</option>
-                      <option>Other</option>
-                  </select> 
-                    <br/>
-                    <label for="name">Notes</label>
-                    <textarea id="notes" rows="7" cols="49"></textarea>
-                  </div>
-                </div>
-              </div>
-              <div class="row d-flex justify-content-center">
-                <label class="errorLabel" id="createError" hidden="true"></label>
-              </div>
-             
-          </br>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" onclick="scheduleReminder();return false">Schedule Reminder</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
   <!-- Send Message -->
 <div class="modal fade" id="privateMessageModal" tabindex="-1" role="dialog" aria-labelledby="privateMessageModalLabel" aria-hidden="true" style="color:white">
@@ -415,6 +351,10 @@
           </div>
           
           <div id="userMsg"></div>
+
+
+
+
           <!-- <label for="name">Subject</label>
           <textarea id="subjectPrivateText" rows="1" cols="50"></textarea>
           <br/>
@@ -534,7 +474,6 @@
       var time = today.toLocaleTimeString().replace(/:\d+ /, ' ');
       var newDateTime = date+' '+time;
       var dateInput = document.getElementById('dateTime');
-      var dateInput = document.getElementById('dateTime1');
       dateInput.value =newDateTime;
 
       document.getElementById('tokenFeild').onclick = function() {
@@ -557,7 +496,6 @@
             listCommunities();
             showMaintenance();
             showPayment();
-            showReminders();
           }
         }
       });
@@ -794,27 +732,11 @@
       window.parent.location = window.parent.location.href;
          }, 1000);
    }
-   function scheduleReminder() {
-     console.log("ASDSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
-    var dateTime = document.getElementById('dateTime1').value;
-    var topic = document.getElementById('reminderTopic').value;
-    var text = document.getElementById('notes').value;
-    var newReminder  = {dateTime: dateTime, text: text, topic: topic};
-    db.collection("users").doc(currentUser.uid).update({
-      reminders: firebase.firestore.FieldValue.arrayUnion(newReminder),
-    })
-    .catch(function(error) {
-      // error adding maintenance
-    });
-    setTimeout(function(){
-      window.parent.location = window.parent.location.href;
-         }, 1000);
-   }
    function schedulePayment() {
     var dateTime = document.getElementById('dateTime').value;
     var amount = document.getElementById('amount').value;
     //var text = document.getElementById('paymentOption').value;
-    var newMaintenance  = {dateTime: dateTime, text: text, topic: topic, status: "Pending..."};
+    var newPayment  = {dateTime: dateTime, amount: amount, status: "Pending..."};
     db.collection("users").doc(currentUser.uid).update({
       payment: firebase.firestore.FieldValue.arrayUnion(newPayment),
     })
@@ -933,45 +855,20 @@ async function showMaintenance() {
   });
   maintenance.innerHTML = data;
 }
-
-async function showReminders() {
-  var rmnd;
-  var reminders = document.getElementById("userReminders");
-  var data = "";
-  await db.collection("users").doc(currentUser.uid).get().then(function(doc) {
-    if (doc.exists) {
-      for(var i = 0; i < doc.data()["reminders"].length; i++)
-      {
-        rmnd = doc.data()["reminders"][i];
-        data += "<p>" + rmnd["dateTime"] + "</p>";
-        data += "<p>Topic: " + rmnd["topic"] + " </p>"  
-        data += "<p>Notes: " + rmnd["text"] + " </p>"  
-        data += "<hr class=\"bg-light\">";
-      }
-    } else {
-      console.log("No notes");
-    }
-  }).catch(function(error) {
-    console.log("Error getting user data:", error);
-  });
-  reminders.innerHTML = data;
-}
-
 async function showPayment() {
-  var mtnc;
+  var pmnt;
   var payment = document.getElementById("userPayment");
   var data = "";
   await db.collection("users").doc(currentUser.uid).get().then(function(doc) {
     if (doc.exists) {
       for(var i = 0; i < doc.data()["payment"].length; i++)
       {
-        mtnc = doc.data()["payment"][i];
-        data += "<p>" + mtnc["dateTime"] + " - " + mtnc["status"] + "</p>";
-        data += "<p>Amount: " + mtnc["amount"] + " </p>"  
-   
+        pmnt = doc.data()["payment"][i];
+        data += "<p>" + pmnt["dateTime"] + " - " + pmnt["status"] + "</p>";
+        data += "<p>Amount: $" + pmnt["amount"] + " </p>"  
         data += "<hr class=\"bg-light\">";
-        // console.log(mtnc["dateTime"]);
       }
+      console.log(data);
     } else {
       console.log("No messages");
     }
