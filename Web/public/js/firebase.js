@@ -8,6 +8,8 @@ firebase.initializeApp(firebaseConfig);
 /////////ATHENTICATION//////////
 
 var currentComm;
+var recID = "";
+var recCommUID = "";
 
 // sign out
 async function signOut() {
@@ -121,7 +123,7 @@ async function showCommunityInfo(commUID) {
           userDoc.data()['first']+" "+userDoc.data()['last']+"</button>";
         body.innerHTML +=   "<div id=\"collapse"+i+"\" class=\"collapse\" data-parent=\"#accordion"+i+
           "\"><div class=\"d-flex justify-content-between\"><div class=\"col\"><p>Unit: "+userDoc.data()['unit']+"</p></div>"+
-          "<div class=\"col\"><svg type=\"button\" data-toggle=\"modal\" data-target=\"#MessageModal\" class=\"bi bi-chat-square-fill iconButton\" width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">"+
+          "<div class=\"col\"><svg type=\"button\" data-toggle=\"modal\" onClick=\"sendMessageInfo('" + doc.data()['tenants'][i] + "','" + commUID +"')\" data-target=\"#sendMessageModal\" class=\"bi bi-chat-square-fill iconButton\" width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">"+
           "<path fill-rule=\"evenodd\" d=\"M2 0a2 2 0 00-2 2v8a2 2 0 002 2h2.5a1 1 0 01.8.4l1.9 2.533a1 1 0 001.6 0l1.9-2.533a1 1 0 01.8-.4H14a2 2 0 002-2V2a2 2 0 00-2-2H2z\" clip-rule=\"evenodd\"/>"+
           "</svg></div></div></div>";
       });
@@ -130,8 +132,33 @@ async function showCommunityInfo(commUID) {
   });
 }
 
-function sendMessages(){
-  
+function sendMessageInfo(userID, commUID) {
+  recID = userID;
+  recCommUID = commUID;
+}
+
+async function sendMessages(){
+  var senderID = firebase.auth().currentUser.uid;
+  var subject = document.getElementById('subjectPrivateText').value;
+  var message = document.getElementById('privateText').value;
+  await db.collection("communities").doc(recCommUID).collection("privateMessages").add({
+    isRead: false, 
+    message: message, 
+    senderId: senderID, 
+    subject: subject,
+  }).then(function(docRef){
+    db.collection("users").doc(recID).update({
+      privateMessages: firebase.firestore.FieldValue.arrayUnion(docRef.id),
+    })
+    db.collection("users").doc(senderID).update({
+      privateMessages: firebase.firestore.FieldValue.arrayUnion(docRef.id),
+    })
+  }).catch(function(error) {
+    console.error("Error adding document: ", error);
+  });
+  setTimeout(function(){
+    window.parent.location = window.parent.location.href;
+        }, 1000);
 }
 
 
@@ -368,6 +395,41 @@ async function getUser(userUID) {
   return name;
 }
 
+async function getMessages(msgType) {
+  var msg = document.getElementById("messages");
+  msg.innerHTML = "";
+  var data = "";
+  var name = "";
+  var userUID = "";
+  var commUID = currentComm;
+  console.log("this community: " + commUID);
+  var i = 0;
+  await db.collection("communities").doc(commUID).collection(msgType).get().then(function(snapshot) {
+      snapshot.forEach(async function(doc) {
+        if(JSON.stringify(doc.data()) !== "'{}'") { //might want to change the condition if the database for communities doesn't have the collection for messages yet
+          userUID = doc.data()['senderId'];
+          // console.log(userUID);
+          await getUser(userUID).then(function(val) {
+            if(val != name)
+            {
+              name = val;
+              data += "<li><button id=\"sender" + i + "\" onClick=\"showMessages('" + doc.data()['senderId'] + "','" + msgType + "','" + commUID +"')\" class=\"linkBtn\" data-toggle=\"modal\" data-target=\"#privateMessageModal\">" + name + "</button></li>";
+              msg.innerHTML = data;
+              i++;
+            }
+          });
+        } else {
+          console.log("No Data");
+          data += "<h6> No Messages </h6>";
+          msg.innerHTML = data;
+        }
+      });
+    })
+    .catch(function(error) {
+      console.log("Error getting documents: ", error);
+    });
+}
+
 
 async function showMessages(userUID, msgType, commUID) {
   var arr = [];
@@ -391,8 +453,7 @@ async function getUserMsg(msgType, commUID, msgUID) {
   var modal = document.getElementById("userMsg");
   var data = "";
   await db.collection("communities").doc(commUID).collection(msgType).doc(msgUID).get().then(function(doc) {
-    if (doc.exists) {
-      console.log(doc.data()); //was thinking of putting this on a modal of some sort instead of showing
+    if (doc.exists) { //was thinking of putting this on a modal of some sort instead of showing
       data += "<p>Subject: " + doc.data()["subject"] + " </p>"
       data += "<p>Message: " + doc.data()["message"] + " </p>"
       data += "<hr class=\"bg-light\">";

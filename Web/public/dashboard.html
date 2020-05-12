@@ -233,7 +233,6 @@
             <div class="row d-flex justify-content-center text-danger">
               <label class="errorLabel" id="createError" hidden="true"></label>
             </div>
-            
             <div id="userMsg"></div>
         </br><br/>
           </div>
@@ -241,6 +240,42 @@
       </div>
     </div>
   </div>
+
+  <!-- send message modal -->
+  <div class="modal fade" id="sendMessageModal" tabindex="-1" role="dialog" aria-labelledby="sendMessageModalLabel" aria-hidden="true" style="color:white">
+    <div class="modal-dialog " role="document" >
+      <div class="modal-content bg-dark" >
+        <div class="modal-header">
+          <h5 class="modal-title" id="sendMessageModalLabel">Messages</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="container formContainer">
+          <div class="formWrapper bg-dark text-white">
+            <div class="row align-middle justify-content-center align-items-center">
+              <div class="col">
+                <br/>
+              </div>
+            </div>
+            <div class="row d-flex justify-content-center text-danger">
+              <label class="errorLabel" id="createError" hidden="true"></label>
+            </div>
+            <label for="name">Subject</label>
+            <textarea id="subjectPrivateText" rows="1" cols="50"></textarea>
+            <br/>
+            <label for="name">Message</label>
+            <textarea id="privateText" rows="7" cols="50"></textarea>
+        </br><br/>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="sendMessages();return false;">Send</button>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <!-- Token Unit Number Modal -->
   <div class="modal fade" id="UnitNumberModal" tabindex="-1" role="dialog" aria-labelledby="UnitNumberModalLabel" aria-hidden="true">
@@ -327,43 +362,7 @@
           msgType = "privateMessages";
         }
         getMessages(msgType);
-      }
-
-    async function getMessages(msgType) {
-      var msg = document.getElementById("messages");
-      var data = "";
-      var name = "";
-      var userUID = "";
-      // var commUID = localStorage.getItem("currentCommunity")
-      var commUID = currentComm;
-      console.log("this community: " + commUID);
-      var i = 0;
-      await db.collection("communities").doc(commUID).collection(msgType).get().then(function(snapshot) {
-          snapshot.forEach(async function(doc) {
-            if(JSON.stringify(doc.data()) != '{}') { //might want to change the condition if the database for communities doesn't have the collection for messages yet
-              userUID = doc.data()['senderId'];
-              await getUser(userUID).then(function(val) {
-                if(val != name)
-                {
-                  name = val;
-                  data += "<li><button id=\"sender" + i + "\" onClick=\"showMessages('" + doc.data()['senderId'] + "','" + msgType + "','" + commUID +"')\" class=\"linkBtn\" data-toggle=\"modal\" data-target=\"#privateMessageModal\">" + name + "</button></li>";
-                  msg.innerHTML = data;
-                  i++;
-                }
-              });
-            } else {
-              console.log("No Data");
-              data += "<h6> No Messages </h6>";
-              msg.innerHTML = data;
-            }
-          });
-        })
-        .catch(function(error) {
-          console.log("Error getting documents: ", error);
-        });
-    }
-
-      
+      }     
 
   </script>
 

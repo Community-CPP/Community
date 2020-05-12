@@ -717,6 +717,7 @@
         } else {
           msgType = "privateMessages";
         }
+        console.log(msgType);
         getMessages(msgType);
   }
 
@@ -792,6 +793,7 @@
 
     async function getMessages(msgType) {
       var msg = document.getElementById("messages");
+      msg.innerHTML = "";
       var data = "";
       var name = "";
       var userUID = "";
