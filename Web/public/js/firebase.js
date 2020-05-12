@@ -105,7 +105,7 @@ async function showCommunityInfo(commUID) {
   body.innerHTML = "";
 
   await db.collection('communities').doc(commUID).get().then(async function(doc){
-    body.innerHTML += "<h5><u><strong>"+doc.data()['name'].toUpperCase()+"</strong></u><h5/>";
+    body.innerHTML += "<h5><i><strong>"+doc.data()['name'].toUpperCase()+"</strong></i><h5/>";
     body.innerHTML += "<h7>"+doc.data()['street'].toUpperCase()+
       ", "+doc.data()['city'].toUpperCase()+", "+doc.data()['zip']+"</h7>";
     body.innerHTML += "<hr class=\"bg-light\">";
@@ -129,6 +129,11 @@ async function showCommunityInfo(commUID) {
     }
   });
 }
+
+function sendMessages(){
+  
+}
+
 
 async function showCommunity(communityList) {
   var comms = "<div class=\"buttonContainer\">";
@@ -390,9 +395,7 @@ async function getUserMsg(msgType, commUID, msgUID) {
       console.log(doc.data()); //was thinking of putting this on a modal of some sort instead of showing
       data += "<p>Subject: " + doc.data()["subject"] + " </p>"
       data += "<p>Message: " + doc.data()["message"] + " </p>"
-      // console.log(doc.data()["subject"]);
-      // console.log(doc.data()["message"]);
-      // console.log(doc.data()["isRead"]);
+      data += "<hr class=\"bg-light\">";
       modal.innerHTML += data;
     } else {
       console.log("No");
@@ -403,7 +406,7 @@ async function getUserMsg(msgType, commUID, msgUID) {
 }
 
 async function hasMaintenance() {
-  document.getElementById("userMaintenance").innerHTML = "";
+  var maintenance = document.getElementById("userMaintenance").innerHTML = "";
   var tenantID = "";
   var name ="";
   await db.collection("communities").doc(currentComm).get().then(async function(doc) {
@@ -450,7 +453,7 @@ async function showMaintenance(name, tenantID) {
 }
 
 async function hasRent() {
-  document.getElementById("userMaintenance").innerHTML = "";
+  var payment = document.getElementById("userPayment").innerHTML = "";
   var tenantID = "";
   var name ="";
   await db.collection("communities").doc(currentComm).get().then(async function(doc) {
