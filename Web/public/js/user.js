@@ -1,5 +1,5 @@
 class User {
-  constructor(UID,first,last,communities,category,currentCommunity) {
+  constructor(UID, first, last, communities, category, currentCommunity) {
     this.uid = UID;
     this.first = first;
     this.last = last;

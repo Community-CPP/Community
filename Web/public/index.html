@@ -1,323 +1,322 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <title>Log In</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
-            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" href="index.css">
-    </head>
+<head>
+  <title>Log In</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="index.css">
+</head>
 
-    <body>
-        
-        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="">Community</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">    
-                            <svg class="bi bi-info-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
-                                <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
-                                <circle cx="8" cy="4.5" r="1"/>
-                            </svg>
-                            Info
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a id="dropItem1" class="dropdown-item" href="#">About Us</a>
-                            <div class="dropdown-divider"></div>
-                            <a id="dropItem2" class="dropdown-item" href="https://github.com/Community-CPP/Community">Github</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    
-        <section class="messageSection">
-            <div class="container jumboContainer">
-                <div class="jumbotron bg-dark text-white">
-                    <h1 class="display-4">Welcome to Community</h1>
-                    <hr class="my-4">
-                    <p>Renters everywhere have had an experience where it was cumbersome to pay rent, schedule maintenance appointments, or simply communicate with management or other tenants. We believe this is unacceptable in modern day, high tech society where everybody has a computer in their pocket. We ultimately aim to make communication between tenant and management as easy and fast as possible by providing a fully featured application where tenants can schedule maintenance appointments, pay rent, and communicate with other tenants and management. Moreover, this application will allow management to more easily manage rental properties and tenants.</p>
-                    <hr/> 
-                    <button class="btn btn-primary float-right " data-toggle="modal" data-target="#exampleModal">Sign Up</button> 
-                    <button class="btn btn-primary float-right " onclick="goToDashIfLoggedIn()" data-toggle="modal" data-target="#exampleModal1">Log In</button> 
-                </div>
-            </div>
-        </section>
-        
-        <!-- Sign Up Modal-->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color:white">
-            <div class="modal-dialog " role="document" >
-              <div class="modal-content bg-dark" >
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Welcome to Community</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="container formContainer">
-                    <div class="formWrapper bg-dark text-white">
-                      <div class="row align-middle justify-content-center align-items-center">
-                        <div class="col">
-                          <label for="name">First Name</label>
-                          <input type="name" class="form-control" id="firstName">
-                          <label class="errorLabel" id="errorFirst" hidden='true'></label>
-                          <br/>
-                        </div>
-                        <div class="col">
-                          <label for="name">Last Name</label>
-                          <input type="name" class="form-control" id="lastName">
-                          <label class="errorLabel" id="errorLast" hidden='true'></label>
-                          <br/>
-                        </div>
-                      </div>
-                      <div class="row align-middle justify-content-center align-items-center">
-                        <div class="col">
-                          <label for="email">Email address</label>
-                          <input type="email" class="form-control" id="emailForm">
-                          <label class="errorLabel" id="emailError" hidden='true'></label>
-                          <br/>
-                        </div>
-                        <div class="col">
-                          <label for="password">Password</label>
-                          <input type="password" class="form-control" id="passwordForm">
-                          <label class="errorLabel" id="passwordError" hidden='true'></label>
-                          <br/>
-                        </div>
-                      </div>
-                      <div class="row align-middle justify-content-center align-items-center">
-                        <div class="col">
-                          <label for="createOrJoin">Create or Join a community:</label>
-                            <br/>
-                            <div class="d-flex justify-content-between btn-group btn-group-toggle" data-toggle="buttons">
-                              <label class="btn btn-secondary" id="createBtn" >
-                                <input type="radio" name="options" autocomplete="off"> Admin
-                              </label>
-                              <label class="btn btn-secondary" id="joinBtn" >
-                                <input type="radio" name="options" autocomplete="off"> Join
-                              </label>
-                            </div>
-                            <label class="errorLabel" id="toggleError" hidden='true'></label>
-                        </div>
-                        
-                      </div>
-                      <br/>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="submitSignUpForm();return false;">Sign Up</button>
-                        <div class="form-group" id="errorCont" hidden="true">
-                          <hr/>
-                          <div class="container signInErrorLabelContainer">
-                            <label class="errorLabel" id="signinError"></label>
-                          </div>
-                        </div>
-                      </div>
-                      <hr/>
-                      <label class="errorLabel" id="signinError" hidden="true"></label>
-                    </div>
-                  </div>
+<body>
 
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="">Community</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <svg class="bi bi-info-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd" />
+              <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z" />
+              <circle cx="8" cy="4.5" r="1" />
+            </svg>
+            Info
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a id="dropItem1" class="dropdown-item" href="#">About Us</a>
+            <div class="dropdown-divider"></div>
+            <a id="dropItem2" class="dropdown-item" href="https://github.com/Community-CPP/Community">Github</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="messageSection">
+    <div class="container jumboContainer">
+      <div class="jumbotron bg-dark text-white">
+        <h1 class="display-4">Welcome to Community</h1>
+        <hr class="my-4">
+        <p>Renters everywhere have had an experience where it was cumbersome to pay rent, schedule maintenance appointments, or simply communicate with management or other tenants. We believe this is unacceptable in modern day, high tech society
+          where everybody has a computer in their pocket. We ultimately aim to make communication between tenant and management as easy and fast as possible by providing a fully featured application where tenants can schedule maintenance
+          appointments, pay rent, and communicate with other tenants and management. Moreover, this application will allow management to more easily manage rental properties and tenants.</p>
+        <hr />
+        <button class="btn btn-primary float-right " data-toggle="modal" data-target="#exampleModal">Sign Up</button>
+        <button class="btn btn-primary float-right " onclick="goToDashIfLoggedIn()" data-toggle="modal" data-target="#exampleModal1">Log In</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sign Up Modal-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color:white">
+    <div class="modal-dialog " role="document">
+      <div class="modal-content bg-dark">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Welcome to Community</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="container formContainer">
+          <div class="formWrapper bg-dark text-white">
+            <div class="row align-middle justify-content-center align-items-center">
+              <div class="col">
+                <label for="name">First Name</label>
+                <input type="name" class="form-control" id="firstName">
+                <label class="errorLabel" id="errorFirst" hidden='true'></label>
+                <br />
+              </div>
+              <div class="col">
+                <label for="name">Last Name</label>
+                <input type="name" class="form-control" id="lastName">
+                <label class="errorLabel" id="errorLast" hidden='true'></label>
+                <br />
               </div>
             </div>
-          </div>
-
-          <!-- Login Modal-->
-          <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color:white">
-            <div class="modal-dialog " role="document" >
-              <div class="modal-content bg-dark" >
-                <div class="modal-header ">
-                  <h5 class="modal-title " id="exampleModalLabel">Login</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+            <div class="row align-middle justify-content-center align-items-center">
+              <div class="col">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="emailForm">
+                <label class="errorLabel" id="emailError" hidden='true'></label>
+                <br />
+              </div>
+              <div class="col">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="passwordForm">
+                <label class="errorLabel" id="passwordError" hidden='true'></label>
+                <br />
+              </div>
+            </div>
+            <div class="row align-middle justify-content-center align-items-center">
+              <div class="col">
+                <label for="createOrJoin">Create or Join a community:</label>
+                <br />
+                <div class="d-flex justify-content-between btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-secondary" id="createBtn">
+                    <input type="radio" name="options" autocomplete="off"> Admin
+                  </label>
+                  <label class="btn btn-secondary" id="joinBtn">
+                    <input type="radio" name="options" autocomplete="off"> Join
+                  </label>
                 </div>
-                <div class="container formContainer">
-                    <div class="row align-middle justify-content-center align-items-center">
-                      <div class="formWrapper bg-dark text-white">
-                        <form>
-                          <div class="form-group">
-                            <label for="email">Email address</label>
-                            <input type="email" class="form-control" id="emailForm0" aria-describedby="emailHelp">
-                          </div>
-                          <label class="errorLabel" id="emailError0" hidden='true'></label>
-                          <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="passwordForm0">
-                          </div>
-                          <label class="errorLabel" id="passwordError0" hidden='true'></label>
-                          <hr>
-                        </form>
-                      </div>
-                    </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" onclick="submitSignInForm();return false;">Log In</button>
-                  <div class="form-group" id="errorCont0" hidden="true">
-                    <hr/>
-                    <div class="container signInErrorLabelContainer">
-                      <label class="errorLabel" id="signinError0"></label>
-                    </div>
-                  </div>
+                <label class="errorLabel" id="toggleError" hidden='true'></label>
+              </div>
+
+            </div>
+            <br />
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" onclick="submitSignUpForm();return false;">Sign Up</button>
+              <div class="form-group" id="errorCont" hidden="true">
+                <hr />
+                <div class="container signInErrorLabelContainer">
+                  <label class="errorLabel" id="signinError"></label>
                 </div>
               </div>
             </div>
+            <hr />
+            <label class="errorLabel" id="signinError" hidden="true"></label>
           </div>
+        </div>
 
-          <!-- Firebase JS SDK -->
-        <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
-        <script src="js/firebase.js"></script>
+      </div>
+    </div>
+  </div>
 
-        <!-- bootstrap -->
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-        
-        <!-- custom scripts -->
-        <script type="text/javascript">
+  <!-- Login Modal-->
+  <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color:white">
+    <div class="modal-dialog " role="document">
+      <div class="modal-content bg-dark">
+        <div class="modal-header ">
+          <h5 class="modal-title " id="exampleModalLabel">Login</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="container formContainer">
+          <div class="row align-middle justify-content-center align-items-center">
+            <div class="formWrapper bg-dark text-white">
+              <form>
+                <div class="form-group">
+                  <label for="email">Email address</label>
+                  <input type="email" class="form-control" id="emailForm0" aria-describedby="emailHelp">
+                </div>
+                <label class="errorLabel" id="emailError0" hidden='true'></label>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" id="passwordForm0">
+                </div>
+                <label class="errorLabel" id="passwordError0" hidden='true'></label>
+                <hr>
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="submitSignInForm();return false;">Log In</button>
+            <div class="form-group" id="errorCont0" hidden="true">
+              <hr />
+              <div class="container signInErrorLabelContainer">
+                <label class="errorLabel" id="signinError0"></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-          async function goToDashIfLoggedIn() {
-            await firebase.auth().onAuthStateChanged(async function(user) {
-              if (user) {
-                var userType;
-                await db.collection('users').doc(user.uid).get().then(function(doc) {
-                  if(doc.exists) {
-                    userType = doc.data()['category']
-                  }
-                });
-                if(userType == "tenant")
-                  window.location.pathname = "userDash";
-                if(userType == "admin")
-                  window.location.pathname = "dashboard"; 
-              } 
-              else {
-                console.log("not signed in");
+    <!-- Firebase JS SDK -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
+    <script src="js/firebase.js"></script>
+
+    <!-- bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- custom scripts -->
+    <script type="text/javascript">
+      async function goToDashIfLoggedIn() {
+        await firebase.auth().onAuthStateChanged(async function(user) {
+          if (user) {
+            var userType;
+            await db.collection('users').doc(user.uid).get().then(function(doc) {
+              if (doc.exists) {
+                userType = doc.data()['category']
               }
             });
+            if (userType == "tenant")
+              window.location.pathname = "userDash";
+            if (userType == "admin")
+              window.location.pathname = "dashboard";
+          } else {
+            console.log("not signed in");
           }
+        });
+      }
 
-          async function submitSignInForm() {
-            // get elements
-            var email = document.getElementById('emailForm0').value;
-            var password = document.getElementById('passwordForm0').value;
-            var emailErrorLabel = document.getElementById('emailError0');
-            var passwordErrorLabel = document.getElementById('passwordError0');
-            var signinErrorLabel = document.getElementById('signinError0');
-            var signInErrorContainer = document.getElementById('errorCont0');
+      async function submitSignInForm() {
+        // get elements
+        var email = document.getElementById('emailForm0').value;
+        var password = document.getElementById('passwordForm0').value;
+        var emailErrorLabel = document.getElementById('emailError0');
+        var passwordErrorLabel = document.getElementById('passwordError0');
+        var signinErrorLabel = document.getElementById('signinError0');
+        var signInErrorContainer = document.getElementById('errorCont0');
 
-            //hide labels
-            emailErrorLabel.hidden = true;
-            passwordErrorLabel.hidden = true;
-            signInErrorContainer.hidden = true;
+        //hide labels
+        emailErrorLabel.hidden = true;
+        passwordErrorLabel.hidden = true;
+        signInErrorContainer.hidden = true;
 
-            // email error handling
-            if(email === '') {
-              emailErrorLabel.innerHTML = "Please enter an email";
-              emailErrorLabel.hidden = false;
-            }
+        // email error handling
+        if (email === '') {
+          emailErrorLabel.innerHTML = "Please enter an email";
+          emailErrorLabel.hidden = false;
+        }
 
-            // password error handling
-            if(password === '') {
-              passwordErrorLabel.innerHTML = "Please enter a password";
-              passwordErrorLabel.hidden = false;
-            }
+        // password error handling
+        if (password === '') {
+          passwordErrorLabel.innerHTML = "Please enter a password";
+          passwordErrorLabel.hidden = false;
+        }
 
-            // if form is not empty, attempt to sign in
-            if(emailErrorLabel.hidden && passwordErrorLabel.hidden) {
-                var promise = signIn(email,password);
-                promise.then(function () {
-                  setUser().then(function () {
-                    goToDashIfLoggedIn();
-                  });
-                }).catch(function(error) {
-                  // Handle Errors here.
-                  console.log(error.message);
-                  signinErrorLabel.innerHTML = error.message;
-                  signInErrorContainer.hidden = false;
-                });
-            }
+        // if form is not empty, attempt to sign in
+        if (emailErrorLabel.hidden && passwordErrorLabel.hidden) {
+          var promise = signIn(email, password);
+          promise.then(function() {
+            setUser().then(function() {
+              goToDashIfLoggedIn();
+            });
+          }).catch(function(error) {
+            // Handle Errors here.
+            console.log(error.message);
+            signinErrorLabel.innerHTML = error.message;
+            signInErrorContainer.hidden = false;
+          });
+        }
+      }
+
+      function submitSignUpForm() {
+
+        // get elements
+        var firstName = document.getElementById('firstName').value;
+        var lastName = document.getElementById('lastName').value;
+        var email = document.getElementById('emailForm').value;
+        var password = document.getElementById('passwordForm').value;
+        var creatIsToggled = document.getElementById('createBtn').classList.contains('active');
+        var joinIsToggled = document.getElementById('joinBtn').classList.contains('active');
+        var emailErrorLabel = document.getElementById('emailError');
+        var passwordErrorLabel = document.getElementById('passwordError');
+        var toggleErrorLabel = document.getElementById('toggleError');
+        var signinErrorLabel = document.getElementById('signinError');
+        var firstErrorLabel = document.getElementById('errorFirst');
+        var lastErrorLabel = document.getElementById('errorLast');
+
+        //hide labels
+        signinErrorLabel.hidden = true;
+        emailErrorLabel.hidden = true;
+        passwordErrorLabel.hidden = true;
+        toggleErrorLabel.hidden = true;
+        firstErrorLabel.hidden = true;
+        lastErrorLabel.hidden = true;
+
+        // first name error handling
+        if (firstName === '') {
+          firstErrorLabel.innerHTML = "Please enter your first name";
+          firstErrorLabel.hidden = false;
+        }
+
+        // last name error handling
+        if (lastName === '') {
+          lastErrorLabel.innerHTML = "Please enter your last name";
+          lastErrorLabel.hidden = false;
+        }
+
+        // email error handling
+        if (email === '') {
+          emailErrorLabel.innerHTML = "Please enter an email";
+          emailErrorLabel.hidden = false;
+        }
+
+        // password error handling
+        if (password === '') {
+          passwordErrorLabel.innerHTML = "Please enter a password";
+          passwordErrorLabel.hidden = false;
+        }
+
+        // toggle buttons error handling
+        if (!creatIsToggled && !joinIsToggled) {
+          toggleErrorLabel.innerHTML = "Please toggle a choice";
+          toggleErrorLabel.hidden = false;
+        }
+
+        // if forn is not empty, attempt to sign in
+        if (emailErrorLabel.hidden && passwordErrorLabel.hidden && toggleErrorLabel.hidden) {
+          var promise = createNewUser(email, password);
+          promise.catch(function(e) {
+            // failed sign up handling
+            signinErrorLabel.innerHTML = e;
+            signinErrorLabel.hidden = false;
+          });
+          if (signinErrorLabel.hidden) {
+            var category = "tenant";
+            if (creatIsToggled) category = "admin";
+            initializeNewUserData(firstName, lastName, category).then(function() {
+              setUser().then(function() {
+                goToDashIfLoggedIn();
+              });
+            });
           }
+        }
+      }
+    </script>
+</body>
 
-          function submitSignUpForm() {
-  
-            // get elements
-            var firstName = document.getElementById('firstName').value;
-            var lastName = document.getElementById('lastName').value;
-            var email = document.getElementById('emailForm').value;
-            var password = document.getElementById('passwordForm').value;
-            var creatIsToggled = document.getElementById('createBtn').classList.contains('active');
-            var joinIsToggled = document.getElementById('joinBtn').classList.contains('active');
-            var emailErrorLabel = document.getElementById('emailError');
-            var passwordErrorLabel = document.getElementById('passwordError');
-            var toggleErrorLabel = document.getElementById('toggleError');
-            var signinErrorLabel = document.getElementById('signinError');
-            var firstErrorLabel = document.getElementById('errorFirst');
-            var lastErrorLabel = document.getElementById('errorLast');
-
-            //hide labels
-            signinErrorLabel.hidden = true;
-            emailErrorLabel.hidden = true;
-            passwordErrorLabel.hidden = true;
-            toggleErrorLabel.hidden = true;
-            firstErrorLabel.hidden = true;
-            lastErrorLabel.hidden = true;
-
-            // first name error handling
-            if(firstName === '') {
-                firstErrorLabel.innerHTML = "Please enter your first name";
-                firstErrorLabel.hidden = false;
-            }
-
-            // last name error handling
-            if(lastName === '') {
-                lastErrorLabel.innerHTML = "Please enter your last name";
-                lastErrorLabel.hidden = false;
-            }
-
-            // email error handling
-            if(email === '') {
-                emailErrorLabel.innerHTML = "Please enter an email";
-                emailErrorLabel.hidden = false;
-            }
-
-            // password error handling
-            if(password === '') {
-                passwordErrorLabel.innerHTML = "Please enter a password";
-                passwordErrorLabel.hidden = false;
-            }
-
-            // toggle buttons error handling
-            if(!creatIsToggled && !joinIsToggled) {
-                toggleErrorLabel.innerHTML = "Please toggle a choice";
-                toggleErrorLabel.hidden = false;
-            }
-
-            // if forn is not empty, attempt to sign in
-            if(emailErrorLabel.hidden && passwordErrorLabel.hidden && toggleErrorLabel.hidden) {
-                var promise = createNewUser(email,password);
-                promise.catch(function(e){
-                    // failed sign up handling
-                    signinErrorLabel.innerHTML = e;
-                    signinErrorLabel.hidden = false;
-                });
-                if(signinErrorLabel.hidden) {
-                    var category = "tenant";
-                    if(creatIsToggled) category = "admin";
-                    initializeNewUserData(firstName,lastName,category).then(function() {
-                      setUser().then(function() {
-                        goToDashIfLoggedIn();
-                      });
-                    });
-                }
-              }
-            }
-            
-          </script>
-    </body>
 </html>
