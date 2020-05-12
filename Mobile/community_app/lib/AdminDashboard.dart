@@ -1,7 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:community_app/MyAccount.dart';
+import 'package:community_app/AdminAccount.dart';
 import 'package:community_app/ScheduleMaintenance.dart';
 import 'package:flutter/material.dart';
+import 'package:community_app/Notifications.dart';
+import 'package:community_app/ApartmentInfo.dart';
+import 'package:community_app/PaymentHistory.dart';
+import 'package:community_app/RepairHistory.dart';
+import 'package:community_app/Events.dart';
+import 'package:community_app/Settings.dart';
 import 'package:community_app/Login.dart';
 import 'package:flutter/cupertino.dart';
 import './payment.dart';
@@ -182,7 +188,7 @@ class _AdminDashboardState extends State<AdminDashboard>{
                     onTap: () {
                       Navigator.of(context).pop();
                       Navigator.push(context, new MaterialPageRoute(
-                          builder: (BuildContext context) => new MyAccount()));
+                          builder: (BuildContext context) => new AdminAccount()));
                     },
                   ),
                   new Divider(
@@ -280,7 +286,8 @@ class _AdminDashboardState extends State<AdminDashboard>{
                   GestureDetector(
                     onTap: ()
                     {
-
+                      Navigator.push(context, new MaterialPageRoute(
+                          builder: (BuildContext context) => new Notifications()));
                     },
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
@@ -304,7 +311,10 @@ class _AdminDashboardState extends State<AdminDashboard>{
                     )
                   ),
                   GestureDetector(
-                    onTap: () { },
+                    onTap: () {
+                      Navigator.push(context, new MaterialPageRoute(
+                          builder: (BuildContext context) => new AdminAccount()));
+                    },
 
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
@@ -330,7 +340,10 @@ class _AdminDashboardState extends State<AdminDashboard>{
 
                   ),
                   GestureDetector(
-                    onTap: () { },
+                    onTap: () {
+                      Navigator.push(context, new MaterialPageRoute(
+                          builder: (BuildContext context) => new ApartmentInfo()));
+                    },
 
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
@@ -355,7 +368,10 @@ class _AdminDashboardState extends State<AdminDashboard>{
                       ),
                   ),
                   GestureDetector(
-                    onTap: () { },
+                    onTap: () {
+                      Navigator.push(context, new MaterialPageRoute(
+                          builder: (BuildContext context) => new RepairHistory()));
+                    },
 
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
@@ -382,7 +398,10 @@ class _AdminDashboardState extends State<AdminDashboard>{
 
 
                   GestureDetector(
-                    onTap: () { },
+                    onTap: () {
+                      Navigator.push(context, new MaterialPageRoute(
+                          builder: (BuildContext context) => new PaymentHistory()));
+                    },
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Container(
@@ -409,7 +428,10 @@ class _AdminDashboardState extends State<AdminDashboard>{
 
 
                   GestureDetector(
-                    onTap: () { },
+                    onTap: () {
+                      Navigator.push(context, new MaterialPageRoute(
+                          builder: (BuildContext context) => new Events()));
+                    },
 
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
@@ -437,7 +459,10 @@ class _AdminDashboardState extends State<AdminDashboard>{
 
 
                   GestureDetector(
-                    onTap: () { },
+                    onTap: () {
+                      Navigator.push(context, new MaterialPageRoute(
+                          builder: (BuildContext context) => new Settings()));
+                    },
 
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
