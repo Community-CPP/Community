@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
   <title>Community-Dashboard</title>
   <meta charset="utf-8">
@@ -67,7 +65,6 @@
     </div>
   </nav>
   <div class="row mainRow">
-
     <!-- col 1 -->
     <div class="col">
       <div class="row cardRow">
@@ -78,7 +75,6 @@
           </div>
         </div>
       </div>
-
       <div class="row cardRow text-white">
         <div class="card w-100 shortcard1">
           <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Maintenance<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">+</button></h5>
@@ -90,7 +86,6 @@
         </div>
       </div>
     </div>
-
     <div class="col">
       <div class="row cardRow">
         <div class="card w-100 shortcard2 text-white">
@@ -100,7 +95,6 @@
         </div>
         </div>
       </div>
-
       <div class="row cardRow text-white">
         <div class="card w-100 tallcard2  ">
           <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Pay Rent<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">+</button></h5>
@@ -112,8 +106,6 @@
         </div>
       </div>
     </div>
-
-
     <div class="col">
       <div class="row cardRow">
         <div class="card w-100 tallcard3 text-white">
@@ -132,7 +124,6 @@
           </div>
         </div>
       </div>
-
       <div class="row cardRow">
         <div class="card w-100 shortcard3 text-white">
           <h5 class="header bg-dark text-white card-title p-1 d-flex justify-content-between">Reminders<button class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#remindersModal">+</button></h5>
@@ -143,7 +134,6 @@
       </div>
     </div>
   </div>
-
 <!-- Cash Token Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color:white">
   <div class="modal-dialog " role="document" >
@@ -167,7 +157,6 @@
           <div class="row d-flex justify-content-center text-danger">
             <label class="errorLabel" id="createError" hidden="true"></label>
           </div>
-
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" onclick="addCommunity();return false;">Cash Token</button>
@@ -176,21 +165,18 @@
     </div>
   </div>
 </div>
-
   <!-- Pay Rent Modal -->
 <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true" style="color:white">
   <div class="modal-dialog " role="document" >
     <div class="modal-content bg-dark" >
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModal2Label">Payment Methods</h5>
-6
         <button type="button"   class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
             <div class="card-body">
-              <div class="bg-dark shadow-sm pt-4 pl-2 pr-2 pb-2">
-                
+              <div class="bg-dark shadow-sm pt-4 pl-2 pr-2 pb-2">          
                   <!-- Credit card form tabs -->
                   <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
                       <li class="nav-item"> <a data-toggle="pill" href="#credit-card" class="nav-link active "> <i class="fas fa-credit-card mr-2"></i> Credit Card </a> </li>
@@ -229,7 +215,7 @@
                           <div class="card-footer"> <button type="button" onclick="schedulePayment();return false;"class="subscribe btn btn-primary btn-block shadow-sm"> Confirm Payment </button>
                       </form>
                   </div>
-              </div> <!-- End -->
+              </div>
               <!-- Paypal info -->
               <div id="paypal" class="tab-pane fade pt-3 text-muted">
                   <h6 class="pb-2" >Select your paypal account type</h6>
@@ -248,8 +234,7 @@
                           <option>Bank 2</option>
                           <option>Bank 3</option>
                       </select> </div>
-                  <div class="form-group">
-                  
+                  <div class="form-group">      
                       <p> <button type="button" class="btn btn-primary " onclick="schedulePayment();return false"><i class="fas fa-mobile-alt mr-2"></i> Proceed Pyment</button> <button type="button" class="btn btn-primary "style="float: right"><i class="fas fa-mobile-alt mr-2"></i> Add Bank Account</button></p>
                   </div>
                   <p class="text-muted">Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
@@ -263,7 +248,6 @@
     </div>
   </div>
 </div>
-
   <!-- Maintenance Modal -->
   <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModal1Label" aria-hidden="true" style="color:white">
     <div class="modal-dialog " role="document" >
@@ -285,8 +269,6 @@
             <div class="row d-flex justify-content-center">
               <label class="errorLabel" id="createError" hidden="true"></label>
             </div>
-            
-          
             <div class="container1">
               <div class="row">
                 <div class="col-sm-6">
@@ -318,8 +300,7 @@
             </div>
             <div class="row d-flex justify-content-center">
               <label class="errorLabel" id="createError" hidden="true"></label>
-            </div>
-           
+            </div>    
         </br>
           </div>
           <div class="modal-footer">
@@ -350,8 +331,6 @@
               <div class="row d-flex justify-content-center">
                 <label class="errorLabel" id="createError" hidden="true"></label>
               </div>
-              
-            
               <div class="container1">
                 <div class="row">
                   <div class="col-sm-6">
@@ -382,8 +361,7 @@
               </div>
               <div class="row d-flex justify-content-center">
                 <label class="errorLabel" id="createError" hidden="true"></label>
-              </div>
-             
+              </div>    
           </br>
             </div>
             <div class="modal-footer">
@@ -393,7 +371,6 @@
         </div>
       </div>
     </div>
-
   <!-- Send Message -->
 <div class="modal fade" id="privateMessageModal" tabindex="-1" role="dialog" aria-labelledby="privateMessageModalLabel" aria-hidden="true" style="color:white">
   <div class="modal-dialog " role="document" >
@@ -414,7 +391,6 @@
           <div class="row d-flex justify-content-center text-danger">
             <label class="errorLabel" id="createError" hidden="true"></label>
           </div>
-          
           <div id="userMsg"></div>
           <!-- <label for="name">Subject</label>
           <textarea id="subjectPrivateText" rows="1" cols="50"></textarea>
@@ -423,9 +399,7 @@
           <textarea id="privateText" rows="7" cols="50"></textarea> -->
       </br><br/>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onclick="submitCreateForm();return false;">Submit Message</button>
-        </div>
+       
       </div>
     </div>
   </div>
@@ -441,7 +415,6 @@
       </div>
       <div class="container formContainer">
         <div class="formWrapper bg-dark text-white">
-    
             <div id="carouselExampleIndicators" class="carousel slide " data-ride="carousel">
               <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0"  class="active"></li>
@@ -449,7 +422,6 @@
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
               </ol>
               <div class="carousel-inner">
-
                 <div class="carousel-item active">
                 </br><h2 class ="h2carousel">Team Leader</h2>
                      <a href="https://github.com/pedro12133"><div class="card1 bg-dark justify-content-center align-items-center">
@@ -462,7 +434,6 @@
                     </div>
                     </br>
                 </div>
-
                 <div class="carousel-item">
                   </br><h2 class="h2carousel">Middle and Back End</h2>
                   <a href="https://www.linkedin.com/in/hengalvin/"><div class="card1 bg-dark justify-content-center align-items-center">
@@ -487,7 +458,6 @@
                     </div>
                     </br>
                 </div>
-
               </div>
               <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -510,7 +480,6 @@
 <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
 <script src="js/firebase.js"></script>
 <script src="js/user.js"></script>
-
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -519,7 +488,6 @@
   <script type="text/javascript">
     // User object of current signed in user (see js/user.js)
     var currentUser;
-
     // fires when window loads
     window.onload = async function() {
       await firebase.auth().onAuthStateChanged(function(user) {
@@ -532,24 +500,20 @@
           console.log("not signed in");
         }
       });
-
       var today = new Date();
       var date = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
       var time = today.toLocaleTimeString().replace(/:\d+ /, ' ');
       var newDateTime = date+' '+time;
       var dateInput = document.getElementById('dateTime');
       var dateInput1 = document.getElementById('dateTime1');
-      var dateInput2 = document.getElementById('dateTime2');
-      
+      var dateInput2 = document.getElementById('dateTime2'); 
       dateInput.value =newDateTime;
       dateInput1.value =newDateTime;
       //dateInput2.value =newDateTime;
-
       document.getElementById('tokenFeild').onclick = function() {
         document.getElementById('tokenStatusMessage').hidden = true;
       };
     }
-
     // initializes currentUser
     async function setUserData(uid) {
       await db.collection('users').doc(uid).get().then(function(doc) {
@@ -571,11 +535,9 @@
       });
       getMessages("publicMessages");
     }
-
     async function listCommunities() {
       var body = document.getElementById('cardBody0');
       body.innerHTML = "";
-
       if(currentUser.communities.length > 0) {
         for(var i = 0; i < currentUser.communities.length; i++) {
           await db.collection('communities')
@@ -602,13 +564,11 @@
           this.style.opacity = .5;
         };
         loadCommunityInfo(currentUser.communities[0]);
-
       }
       else {
         body.innerHTML += "No communities added yet."
       }
     }
-
     function reloadCommunityWidgets(element,commID) {
       currentUser.currentCommunity = commID;
       getMessages("publicMessages");
@@ -624,7 +584,6 @@
           this.style.opacity = 1;
         };
       }
-
       element.onmouseover = function() {
         this.style.opacity = .5;
       };
@@ -632,7 +591,6 @@
         this.style.opacity = .5;
       };
     console.log(commID);
-
       //reload info widget
       loadCommunityInfo(commID);
     }
@@ -640,14 +598,16 @@
     async function loadCommunityInfo(commID) {
       var body = document.getElementById('infoCardBody');
       body.innerHTML = "";
-
       await db.collection('communities').doc(commID).get().then(function(doc){
         console.log(doc.data())
-        body.innerHTML += "<h5><u><strong>"+doc.data()['name'].toUpperCase()+"</strong></u><h5/>";
-        body.innerHTML += "<h7>"+doc.data()['street'].toUpperCase()+
-          ", "+doc.data()['city'].toUpperCase()+", "+doc.data()['zip']+"</h7>";
+        var str=doc.data()['street'];
+        var array=str.split(" ");
+        console.log(array);
+        body.innerHTML += "<h5 ><strong><i>"+doc.data()['name'].toUpperCase()+"<i></strong><h5/>";
+        body.innerHTML += "<h7>"+array[0].toUpperCase()+" "+array[1].charAt(0).toUpperCase()
+          +array[1].slice(1)+", "+doc.data()['city'].charAt(0).toUpperCase() + 
+          doc.data()['city'].slice(1)+", "+doc.data()['zip']+"</h7>";
         body.innerHTML += "<hr class=\"bg-light\">";
-
       });
 
     }
@@ -906,8 +866,9 @@ async function getUserMsg(msgType, commUID, msgUID) {
   await db.collection("communities").doc(commUID).collection(msgType).doc(msgUID).get().then(function(doc) {
     if (doc.exists) {
       console.log(doc.data()); //was thinking of putting this on a modal of some sort instead of showing
-      data += "<p>Subject: " + doc.data()["subject"] + " </p>"
-      data += "<p>Message: " + doc.data()["message"] + " </p>"
+      data += "<p><big><b><i>Subject: </b></i></big>" + doc.data()["subject"] + " </p>"
+      data += "<p><big><b><i>Message: </b></i></big>" + doc.data()["message"] + " </p>"
+      data+="<hr class=\"bg-light\">";
     } else {
       console.log("No");
     }
