@@ -399,7 +399,6 @@
           <textarea id="privateText" rows="7" cols="50"></textarea> -->
       </br><br/>
         </div>
-       
       </div>
     </div>
   </div>
@@ -468,7 +467,6 @@
                 <span class="sr-only">Next</span>
               </a>
             </div>
-
         </div>
       </div>
     </div>
@@ -609,16 +607,13 @@
           doc.data()['city'].slice(1)+", "+doc.data()['zip']+"</h7>";
         body.innerHTML += "<hr class=\"bg-light\">";
       });
-
     }
-
     // add community
     async function addCommunity() {
       var token = document.getElementById('tokenFeild').value;
       validateToken(token);
       document.getElementById('tokenFeild').value = "";
     }
-
     // validates and cashes token if valid
     async function validateToken(token) {
       var tokenIsValid = false;
@@ -659,7 +654,6 @@
         tokenExpired = false;
       return !tokenExpired;
     }
-
     // update community tenant list
     async function updateCommunityTenants(commID,tenantID) {
       var tenantIDs = [];
@@ -680,7 +674,6 @@
       }
 
     }
-
     // update communities in user profile
     async function updateUserCommunities(commUID) {
       var communities = [];
@@ -751,7 +744,7 @@
     var dateTime = document.getElementById('dateTime').value;
     var topic = document.getElementById('maintenanceTopic').value;
     var text = document.getElementById('privateText').value;
-    var newMaintenance  = {dateTime: dateTime, text: text, topic: topic, status: "pending"};
+    var newMaintenance  = {dateTime: dateTime, text: text, topic: topic, status: "Pending..."};
     db.collection("users").doc(currentUser.uid).update({
       maintenance: firebase.firestore.FieldValue.arrayUnion(newMaintenance),
     })
@@ -865,7 +858,7 @@ async function getUserMsg(msgType, commUID, msgUID) {
   var data = "";
   await db.collection("communities").doc(commUID).collection(msgType).doc(msgUID).get().then(function(doc) {
     if (doc.exists) {
-      console.log(doc.data()); //was thinking of putting this on a modal of some sort instead of showing
+      console.log(doc.data());
       data += "<p><big><b><i>Subject: </b></i></big>" + doc.data()["subject"] + " </p>"
       data += "<p><big><b><i>Message: </b></i></big>" + doc.data()["message"] + " </p>"
       data+="<hr class=\"bg-light\">";
@@ -948,9 +941,7 @@ async function showPayment() {
   });
   payment.innerHTML = data;
 }
-
   </script>
-
 </body>
 
 </html>
